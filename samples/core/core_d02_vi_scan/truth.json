@@ -1,0 +1,39 @@
+{
+  "doc_id": "core_d02_vi_scan",
+  "set": "core",
+  "document_type": "discharge_summary",
+  "language": "vi",
+  "file": "document.png",
+  "variant": "scan",
+  "pages": 1,
+  "fields": {
+    "hospital_name": "Bệnh viện Đa khoa Phước Hưng Long",
+    "patient_name": "Trần Văn Hùng",
+    "admission_date": "2024-03-12",
+    "discharge_date": "2024-03-17",
+    "diagnosis": {
+      "primary": {
+        "description": "Viêm ruột thừa cấp",
+        "icd10_code": "K35.8"
+      },
+      "secondary": []
+    },
+    "procedures_performed": [
+      {
+        "name": "Phẫu thuật nội soi cắt ruột thừa",
+        "date": null,
+        "code": null
+      }
+    ],
+    "attending_physician": "Lê Minh Khoa",
+    "discharge_instructions": "Kiêng vận động mạnh trong 4 tuần. Thay băng vết mổ cách ngày tại cơ sở y tế gần nhất. Tái khám sau 7 ngày hoặc khi có dấu hiệu bất thường.",
+    "department": "Ngoại tổng hợp",
+    "discharge_status": null,
+    "follow_up_date": null,
+    "sick_leave_from": "2024-03-17",
+    "sick_leave_to": "2024-03-31"
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "VN 'Giấy ra viện' (MOH form 01/BV-01) as a scan: 'Vào viện lúc ... ngày 12 tháng 03 năm 2024', ICD in 'K35.8 - Viêm ruột thừa cấp', single procedure without a date, 'Ghi chú' = instructions, home-rest dates = sick leave, Trưởng khoa = attending."
+}

@@ -1,0 +1,91 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set ms = d.money_style %}
+{% set accent = d.accent | default("#0b6e8a") %}
+{% block style %}
+  .band { background: {{ accent }}; height: 5mm; margin: -13mm -15mm 6mm; }
+  .head { display: flex; align-items: center; gap: 5mm; border-bottom: 2px solid {{ accent }}; padding-bottom: 4mm; }
+  .head .fac { flex: 1; }
+  .head .fac .nm { font-size: 17pt; font-weight: bold; color: {{ accent }}; }
+  .doc-title { text-align: right; }
+  .doc-title .t { font-size: 15pt; font-weight: bold; letter-spacing: .06em; }
+  .meta td { padding: 1.5mm 2mm; }
+  .meta { margin: 5mm 0 4mm; border: 1px solid #999; }
+  .meta .lbl { color: #555; width: 30mm; }
+  .items th { background: {{ accent }}; color: #fff; border-color: {{ accent }}; }
+  .items tr:nth-child(even) td { background: #f5f8f9; }
+  .summary { width: 92mm; margin-left: auto; margin-top: 4mm; }
+  .summary td { padding: 1.2mm 2mm; }
+  .summary .gt td { border-top: 2px solid #222; border-bottom: 2px solid #222; font-weight: bold; font-size: 12pt; }
+  .summary .ins td { color: #333; font-style: italic; }
+  .summary .pp td { font-weight: bold; background: #eef3f5; }
+  .pay { margin-top: 6mm; border: 1px dashed #777; padding: 3mm 4mm; width: 100mm; }
+  .notes { margin-top: 6mm; font-size: 8.5pt; color: #333; }
+  .notes p { margin: 1mm 0; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="band"></div>
+  <div class="head">
+    {{ m.logo(d.facility.logo.kind, accent, d.facility.logo.initials | default("")) }}
+    <div class="fac">
+      <div class="nm">{{ d.facility.name }}</div>
+      <div class="small">{{ d.facility.address }}</div>
+      <div class="small">Tel: {{ d.facility.phone }} &nbsp;|&nbsp; {{ d.facility.tax_label | default("Tax ID") }}: {{ d.facility.tax_code }}</div>
+    </div>
+    <div class="doc-title">
+      <div class="t">{{ d.title | default("RECEIPT") }}</div>
+      <div class="small">{{ d.subtitle | default("Original") }}</div>
+    </div>
+  </div>
+
+  <table class="meta">
+    <tr><td class="lbl">Patient Name</td><td class="b">{{ d.patient_name }}</td>
+        <td class="lbl">Receipt No.</td><td class="b">{{ d.invoice_number }}</td></tr>
+    {% for row in d.patient_info | batch(2) %}
+    <tr>{% for lbl, val in row %}<td class="lbl">{{ lbl }}</td><td>{{ val }}</td>{% endfor %}</tr>
+    {% endfor %}
+    <tr><td class="lbl">Date of Issue</td><td>{{ d.date | fdate(d.date_fmt) }}</td>
+        <td class="lbl">Currency</td><td>{{ d.currency_note }}</td></tr>
+  </table>
+
+  <table class="grid items">
+    <tr><th style="width:9mm">No.</th>{% if d.show_codes %}<th style="width:20mm">Code</th>{% endif %}
+        <th>Description</th><th style="width:14mm">Qty</th><th style="width:28mm">Unit Price</th><th style="width:30mm">Amount</th></tr>
+    {% for it in d["items"] %}
+    <tr><td class="ctr">{{ loop.index }}</td>{% if d.show_codes %}<td class="small">{{ it.code | default("") }}</td>{% endif %}
+        <td>{{ it.description }}</td><td class="ctr">{{ it.quantity | fqty }}</td>
+        <td class="num">{{ it.unit_price | money(ms) }}</td><td class="num">{{ it.total | money(ms) }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <table class="summary">
+    {% if d.subtotal is not none %}<tr><td>{{ d.labels.subtotal | default("Subtotal") }}</td><td class="num">{{ d.subtotal | money(ms) }}</td></tr>{% endif %}
+    {% if d.discount_total is not none %}<tr><td>{{ d.labels.discount | default("Discount") }}</td><td class="num">-{{ d.discount_total | money(ms) }}</td></tr>{% endif %}
+    {% if d.tax_amount is not none %}<tr><td>{{ d.labels.tax | default("VAT") }}</td><td class="num">{{ d.tax_amount | money(ms) }}</td></tr>{% endif %}
+    <tr class="gt"><td>{{ d.labels.grand_total | default("TOTAL") }}</td><td class="num">{{ d.currency_symbol | default("") }}{{ d.grand_total | money(ms) }}</td></tr>
+    {% if d.insurance_covered_amount is not none %}<tr class="ins"><td>{{ d.labels.insurance }}</td><td class="num">-{{ d.insurance_covered_amount | money(ms) }}</td></tr>{% endif %}
+    {% if d.patient_payable is not none %}<tr class="pp"><td>{{ d.labels.payable | default("Amount Paid by Patient") }}</td><td class="num">{{ d.patient_payable | money(ms) }}</td></tr>{% endif %}
+  </table>
+
+  <div class="pay">
+    <div><span class="muted">Payment Method:</span> <b>{{ d.payment_label }}</b></div>
+    {% for lbl, val in d.payment_details | default([]) %}<div class="small"><span class="muted">{{ lbl }}:</span> {{ val }}</div>{% endfor %}
+  </div>
+
+  <div class="row" style="margin-top: 8mm">
+    <div class="grow notes">
+      {% for n in d.footnotes | default([]) %}<p>{{ n }}</p>{% endfor %}
+    </div>
+    <div class="sigbox" style="width: 60mm">
+      <div class="role">Cashier</div>
+      {{ m.signature(d.sig_variant | default(0)) }}
+      <div class="name">{{ d.cashier }}</div>
+      {% if d.stamp %}{{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, style="left: -12mm; top: -6mm", size=130) }}{% endif %}
+    </div>
+  </div>
+
+  <div class="footer"><span>{{ d.facility.name }} &middot; {{ d.facility.website | default("") }}</span>
+    <span>Computer-generated receipt. Please retain for insurance claims.</span></div>
+</div>
+{% endblock %}

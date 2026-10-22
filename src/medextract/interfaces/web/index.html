@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>medextract</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1d2330; --muted: #677085; --line: #e3e6ec;
+    --accent: #2f6fde; --ok: #1f9d55; --warn: #d98a00; --bad: #d33c3c; --chip: #eef1f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12151b; --panel: #1a1f27; --ink: #e6e9ef; --muted: #9aa3b5; --line: #2a313c;
+            --accent: #6d9cff; --ok: #3ccf7a; --warn: #f0b23c; --bad: #ff6b6b; --chip: #232a35; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.45 "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  header { display: flex; align-items: baseline; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 18px; margin: 0; }
+  header span { color: var(--muted); }
+  main { display: grid; grid-template-columns: minmax(320px, 42%) 1fr; gap: 16px; padding: 16px 24px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; padding: 12px 16px; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+  #drop { border: 2px dashed var(--line); border-radius: 10px; padding: 22px; text-align: center; cursor: pointer; color: var(--muted); }
+  #drop.over { border-color: var(--accent); color: var(--accent); }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+  select, button { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  #preview { margin-top: 14px; }
+  #preview img, #preview iframe { width: 100%; border: 1px solid var(--line); border-radius: 6px; }
+  #preview iframe { height: 70vh; }
+  .summary { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .badge { padding: 3px 10px; border-radius: 999px; background: var(--chip); font-weight: 600; }
+  .muted { color: var(--muted); }
+  .issues { list-style: none; padding: 0; margin: 0 0 14px; }
+  .issues li { padding: 6px 10px; border-left: 4px solid var(--muted); background: var(--chip); border-radius: 4px; margin-bottom: 6px; }
+  .issues li.error { border-color: var(--bad); } .issues li.warning { border-color: var(--warn); } .issues li.info { border-color: var(--accent); }
+  .issues code { font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 7px 6px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; color: var(--muted); font-weight: 600; }
+  td.name { white-space: nowrap; font-weight: 600; }
+  td.name .req { color: var(--accent); }
+  .null { color: var(--muted); font-style: italic; }
+  .bar { width: 90px; height: 8px; background: var(--chip); border-radius: 4px; overflow: hidden; display: inline-block; vertical-align: middle; }
+  .bar > i { display: block; height: 100%; }
+  .conf { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ev { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .trace { font-size: 12px; color: var(--warn); margin-top: 2px; }
+  table.sub { font-size: 12.5px; margin-top: 2px; }
+  table.sub th, table.sub td { padding: 3px 5px; }
+  .error-box { color: var(--bad); font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<header><h1>medextract</h1><span>Medical document → structured claim data, with confidence and validation</span></header>
+<main>
+  <section class="panel">
+    <div id="drop">Drop a PDF / PNG / JPEG here, or click to choose<input id="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.tif,.tiff" hidden></div>
+    <div class="controls">
+      <label>Type <select id="type">
+        <option value="">auto-detect</option><option>receipt</option><option>discharge_summary</option><option>lab_report</option><option>prescription</option>
+      </select></label>
+      <button id="go" class="primary" disabled>Extract</button>
+      <span id="status" class="muted"></span>
+    </div>
+    <div id="preview"></div>
+  </section>
+  <section class="panel" id="result"><p class="muted">Results appear here. Fields with low confidence are highlighted so an assessor knows what to double-check.</p></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+let current = null, required = {};
+fetch("/api/types").then(r => r.json()).then(t => { for (const [k, v] of Object.entries(t)) required[k] = new Set(v.required); });
+
+const drop = $("drop");
+drop.onclick = () => $("file").click();
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove("over"); if (e.dataTransfer.files[0]) pick(e.dataTransfer.files[0]); };
+$("file").onchange = (e) => e.target.files[0] && pick(e.target.files[0]);
+
+function pick(f) {
+  current = f; $("go").disabled = false; drop.textContent = f.name;
+  const url = URL.createObjectURL(f);
+  $("preview").innerHTML = f.type === "application/pdf" ? `<iframe src="${url}"></iframe>` : `<img src="${url}" alt="">`;
+}
+
+$("go").onclick = async () => {
+  const fd = new FormData();
+  fd.append("file", current); fd.append("verbose", "true");
+  if ($("type").value) fd.append("type", $("type").value);
+  $("go").disabled = true; $("status").innerHTML = '<span class="spinner"></span> extracting…';
+  try {
+    const r = await fetch("/api/extract", { method: "POST", body: fd });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.message || j.detail || r.statusText);
+    render(j); $("status").textContent = "";
+  } catch (e) {
+    $("result").innerHTML = `<p class="error-box">${esc(e.message)}</p>`; $("status").textContent = "";
+  } finally { $("go").disabled = false; }
+};
+
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const color = (c) => c >= 0.85 ? "var(--ok)" : c >= 0.6 ? "var(--warn)" : "var(--bad)";
+const confCell = (c) => `<span class="conf"><span class="bar"><i style="width:${Math.round(c * 100)}%;background:${color(c)}"></i></span> ${c.toFixed(2)}</span>`;
+
+function value(v) {
+  if (v === null || v === undefined) return '<span class="null">null</span>';
+  if (Array.isArray(v)) {
+    if (!v.length) return '<span class="null">[] (none listed)</span>';
+    const cols = Object.keys(v[0]);
+    return `<div class="scroll"><table class="sub"><tr>${cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>${
+      v.map(row => `<tr>${cols.map(c => `<td>${row[c] === null ? '<span class="null">–</span>' : esc(row[c])}</td>`).join("")}</tr>`).join("")}</table></div>`;
+  }
+  if (typeof v === "object") {
+    const dx = (d) => d ? `${esc(d.description ?? "")}${d.icd10_code ? ` <b>${esc(d.icd10_code)}</b>` : ""}` : '<span class="null">null</span>';
+    return `<div>Primary: ${dx(v.primary)}</div>${(v.secondary || []).length ? `<div>Secondary: ${v.secondary.map(dx).join("; ")}</div>` : ""}`;
+  }
+  return esc(v);
+}
+
+function render(j) {
+  const req = required[j.document_type] || new Set();
+  const meta = j.meta || {}, cls = j.classification || {};
+  const cost = meta.total_cost_usd !== undefined ? `$${meta.total_cost_usd.toFixed(4)}` : "";
+  const ms = (meta.calls || []).reduce((a, c) => a + c.latency_ms, 0);
+  let html = `<div class="summary"><span class="badge">${esc(j.document_type)}</span>${confCell(j.confidence)}
+    <span class="muted">${esc(cls.language || "")} · ${meta.page_count || "?"} page(s) · ${cost} · ${(ms / 1000).toFixed(1)} s</span></div>`;
+  if (j.validation_errors.length) {
+    html += `<ul class="issues">${j.validation_errors.map(i => `<li class="${i.severity}"><code>${esc(i.code)}</code> ${esc(i.message)}</li>`).join("")}</ul>`;
+  } else html += `<p class="muted">No validation issues.</p>`;
+  html += `<div class="scroll"><table><tr><th>Field</th><th>Value</th><th>Confidence</th></tr>`;
+  for (const [name, f] of Object.entries(j.fields)) {
+    const trace = (f.trace || []).map(t => t.reason).join(", ");
+    html += `<tr><td class="name">${esc(name)}${req.has(name) ? ' <span class="req" title="required by the brief">★</span>' : ""}</td>
+      <td>${value(f.value)}${f.evidence ? `<div class="ev">“${esc(f.evidence)}”${f.page ? ` · p${f.page}` : ""}</div>` : ""}${trace ? `<div class="trace">${esc(trace)}</div>` : ""}</td>
+      <td>${confCell(f.confidence)}<div class="ev">${esc(f.status || "")}</div></td></tr>`;
+  }
+  $("result").innerHTML = html + "</table></div>";
+}
+</script>
+</body>
+</html>

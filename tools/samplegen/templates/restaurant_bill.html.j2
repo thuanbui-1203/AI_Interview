@@ -1,0 +1,43 @@
+{% extends "_base.html.j2" %}
+{# Out-of-scope control document: a restaurant bill that shares receipt vocabulary (items, total, payment). #}
+{% block style %}
+  body { font-family: "Courier New", monospace; font-size: 11pt; background: #e9e6df; }
+  .page { background: #e9e6df; display: flex; justify-content: center; padding-top: 18mm; }
+  .slip { width: 82mm; background: #fff; padding: 7mm 6mm 10mm; box-shadow: 0 0 2mm rgba(0,0,0,.25); align-self: flex-start; }
+  .c { text-align: center; }
+  .nm { font-size: 15pt; font-weight: bold; letter-spacing: .08em; }
+  hr { border: none; border-top: 1px dashed #333; margin: 2.5mm 0; }
+  .it { display: flex; justify-content: space-between; }
+  .it .q { width: 7mm; }
+  .it .d { flex: 1; }
+  .big { font-size: 13pt; font-weight: bold; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="slip">
+    <div class="c nm">{{ d.name }}</div>
+    <div class="c small">{{ d.address }}</div>
+    <div class="c small">Tel {{ d.phone }}</div>
+    <hr>
+    <div class="small">Table: {{ d.table }} &nbsp; Guests: {{ d.guests }}</div>
+    <div class="small">Server: {{ d.server }}</div>
+    <div class="small">Check #{{ d.check_no }} &nbsp; {{ d.date | fdate("%d %b %Y") }} {{ d.time }}</div>
+    <hr>
+    {% for it in d["items"] %}
+    <div class="it"><span class="q">{{ it.quantity | fqty }}</span><span class="d">{{ it.description }}</span><span>{{ it.total | money("en2") }}</span></div>
+    {% endfor %}
+    <hr>
+    <div class="it"><span>Subtotal</span><span>{{ d.subtotal | money("en2") }}</span></div>
+    <div class="it"><span>Service charge 10%</span><span>{{ d.service | money("en2") }}</span></div>
+    <div class="it"><span>VAT 7%</span><span>{{ d.vat | money("en2") }}</span></div>
+    <hr>
+    <div class="it big"><span>TOTAL {{ d.currency }}</span><span>{{ d.total | money("en2") }}</span></div>
+    <hr>
+    <div class="it"><span>{{ d.payment_label }}</span><span>{{ d.total | money("en2") }}</span></div>
+    <div class="small">Card: **** **** **** {{ d.card_last4 }} &nbsp; Auth: {{ d.auth }}</div>
+    <hr>
+    <div class="c">Thank you &amp; see you again!</div>
+    <div class="c small">Tips are appreciated but never expected</div>
+  </div>
+</div>
+{% endblock %}

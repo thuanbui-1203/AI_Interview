@@ -1,0 +1,48 @@
+{
+  "doc_id": "core_p02_vi",
+  "set": "core",
+  "document_type": "prescription",
+  "language": "vi",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "doctor_name": "Võ Thị Thanh Hà",
+    "patient_name": "Phạm Gia Huy",
+    "date": "2026-05-20",
+    "medications": [
+      {
+        "name": "Cefuroxim 500mg (Zinnat)",
+        "dosage": "1 viên",
+        "frequency": "Ngày uống 2 lần",
+        "duration": "7 ngày",
+        "quantity": 14.0
+      },
+      {
+        "name": "Paracetamol 500mg (Panadol)",
+        "dosage": "1 viên",
+        "frequency": "Ngày uống 3 lần",
+        "duration": null,
+        "quantity": 10.0
+      },
+      {
+        "name": "Alpha chymotrypsin 4200 IU",
+        "dosage": "2 viên",
+        "frequency": "Ngày ngậm 2 lần",
+        "duration": "5 ngày",
+        "quantity": 20.0
+      }
+    ],
+    "facility_name": "Phòng khám Đa khoa Vạn Lộc Xanh",
+    "diagnosis": {
+      "primary": {
+        "description": "Viêm họng cấp",
+        "icd10_code": "J02.9"
+      },
+      "secondary": []
+    }
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "VN 'ĐƠN THUỐC': usage on the line below each drug ('Ngày uống 2 lần, mỗi lần 1 viên'), 'SL: 14 Viên' quantities, diagnosis 'J02.9 - Viêm họng cấp'; one drug has no duration."
+}

@@ -1,0 +1,66 @@
+{
+  "doc_id": "stress_s13_lab_invalid_date",
+  "set": "stress",
+  "document_type": "lab_report",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "lab_name": "Saltmarsh Valley Pathology",
+    "patient_name": "Ahmad Faizal",
+    "date": null,
+    "tests": [
+      {
+        "test_name": "Total Cholesterol",
+        "result": "6.2",
+        "unit": "mmol/L",
+        "reference_range": "< 5.5",
+        "flag": "high",
+        "flag_source": "printed"
+      },
+      {
+        "test_name": "HDL Cholesterol",
+        "result": "0.9",
+        "unit": "mmol/L",
+        "reference_range": "> 1.0",
+        "flag": "low",
+        "flag_source": "printed"
+      },
+      {
+        "test_name": "LDL Cholesterol (calc.)",
+        "result": "4.1",
+        "unit": "mmol/L",
+        "reference_range": "< 3.5",
+        "flag": "high",
+        "flag_source": "printed"
+      },
+      {
+        "test_name": "Triglycerides",
+        "result": "1.6",
+        "unit": "mmol/L",
+        "reference_range": "< 2.0",
+        "flag": "normal",
+        "flag_source": "printed"
+      },
+      {
+        "test_name": "HbA1c",
+        "result": "6.1",
+        "unit": "%",
+        "reference_range": "4.0 - 6.0",
+        "flag": "high",
+        "flag_source": "printed"
+      }
+    ],
+    "ordering_physician": "Dr. Megan Ashworth",
+    "collection_date": "2024-02-29"
+  },
+  "expected_issues": [
+    "DATE_INVALID",
+    "REQUIRED_FIELD_MISSING"
+  ],
+  "low_confidence_fields": [
+    "date"
+  ],
+  "notes": "Report date printed as the impossible '31/02/2024' -> truth date null (DATE_INVALID, and the required 'date' is then missing); collection date 29/02/2024 is a real leap-day date."
+}

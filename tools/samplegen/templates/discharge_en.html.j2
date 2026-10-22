@@ -1,0 +1,101 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#24427a") %}
+{% set df = d.date_fmt | default("%d %B %Y") %}
+{% set plan = d.page_plan | default([["patient", "diagnosis", "procedures", "course", "condition", "meds", "instructions", "followup", "signature"]]) %}
+{% block style %}
+  body { font-size: 10pt; line-height: 1.3; }
+  .lh { display: flex; gap: 5mm; align-items: center; }
+  .lh .nm { font-size: 16pt; font-weight: bold; color: {{ accent }}; }
+  .lh .info { flex: 1; }
+  .lh .pg { text-align: right; font-size: 9pt; }
+  .rule { height: 3px; background: linear-gradient(90deg, {{ accent }}, #9db3d9); margin: 3mm 0 4mm; }
+  .ttl { font-size: 15pt; font-weight: bold; text-align: center; letter-spacing: .08em; margin-bottom: 4mm; }
+  .cont { font-size: 9pt; color: #555; margin-bottom: 3mm; }
+  h3 { font-size: 10.5pt; color: {{ accent }}; border-bottom: 1px solid {{ accent }}; margin: 3.5mm 0 1.5mm; padding-bottom: .5mm; text-transform: none; }
+  .pt td { border: 1px solid #aaa; padding: 1mm 2mm; }
+  .pt .lbl { background: #eef2f8; width: 34mm; color: #333; }
+  .grid th { background: #eef2f8; }
+  p { margin: 1.5mm 0; text-align: justify; }
+  ul { margin: 1mm 0; padding-left: 6mm; }
+{% endblock %}
+
+{% macro section(key) %}
+  {% if key == "patient" %}
+  <table class="pt">
+    <tr><td class="lbl">Patient Name</td><td class="b">{{ d.patient_name }}</td><td class="lbl">MRN</td><td>{{ d.mrn }}</td></tr>
+    <tr><td class="lbl">Date of Birth</td><td>{{ d.dob }}</td><td class="lbl">Sex</td><td>{{ d.sex }}</td></tr>
+    <tr><td class="lbl">Admission Date</td><td>{{ d.admission | fdate(df) }}</td><td class="lbl">Discharge Date</td><td>{{ d.discharge | fdate(df) }}</td></tr>
+    <tr><td class="lbl">Department</td><td>{{ d.department }}</td><td class="lbl">Ward / Bed</td><td>{{ d.ward }}</td></tr>
+  </table>
+  {% elif key == "diagnosis" %}
+  <h3>Diagnoses</h3>
+  <table class="grid">
+    <tr><th style="width:30mm">Type</th><th>Diagnosis</th><th style="width:26mm">ICD-10</th></tr>
+    <tr><td>Principal</td><td>{{ d.diagnosis.primary[0] }}</td><td class="ctr">{{ d.diagnosis.primary[1] or "" }}</td></tr>
+    {% for desc, code in d.diagnosis.secondary %}
+    <tr><td>Secondary</td><td>{{ desc }}</td><td class="ctr">{{ code or "" }}</td></tr>
+    {% endfor %}
+  </table>
+  {% elif key == "procedures" %}
+  <h3>Procedures Performed</h3>
+  {% if d.procedures %}
+  <table class="grid">
+    <tr><th>Procedure</th><th style="width:34mm">Date</th><th style="width:26mm">Code</th></tr>
+    {% for p in d.procedures %}
+    <tr><td>{{ p.name }}</td><td class="ctr">{{ p.date | fdate(df) }}</td><td class="ctr">{{ p.code or "" }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>{{ d.no_procedures_text }}</p>
+  {% endif %}
+  {% elif key == "course" %}
+  <h3>Hospital Course</h3>
+  {% for para in d.course %}<p>{{ para }}</p>{% endfor %}
+  {% elif key == "condition" %}
+  <h3>Condition at Discharge</h3>
+  <p><b>{{ d.status_label }}</b>{% if d.condition_note %} &mdash; {{ d.condition_note }}{% endif %}</p>
+  {% elif key == "meds" %}
+  <h3>Discharge Medications</h3>
+  <ul>{% for med in d.discharge_meds %}<li>{{ med }}</li>{% endfor %}</ul>
+  {% elif key == "instructions" %}
+  <h3>Discharge Instructions</h3>
+  <p>{{ d.instructions }}</p>
+  {% elif key == "followup" %}
+  <h3>Follow-up</h3>
+  <p>{% if d.follow_up_date %}Follow-up appointment: {{ d.follow_up_date | fdate(df) }} &mdash; {{ d.follow_up_where }}{% else %}{{ d.follow_up_where }}{% endif %}</p>
+  {% elif key == "signature" %}
+  <div class="row" style="margin-top: 5mm">
+    <div class="grow small muted" style="padding-top: 18mm">Copies: Patient &middot; General Practitioner &middot; Medical Records</div>
+    <div class="sigbox" style="width: 72mm">
+      <div class="role">Attending Physician</div>
+      {{ m.signature(d.sig_variant | default(2)) }}
+      <div class="name">{{ d.attending_physician }}</div>
+      <div class="small">{{ d.attending_title }}</div>
+      <div class="small">Signed electronically on {{ d.discharge | fdate(df) }}</div>
+      {% if d.stamp %}{{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, color=d.stamp.color | default("#24427a"), style="left: -26mm; top: -4mm", size=120, rotate=-10) }}{% endif %}
+    </div>
+  </div>
+  {% endif %}
+{% endmacro %}
+
+{% block body %}
+{% for keys in plan %}
+<div class="page">
+  <div class="lh">
+    {{ m.logo(d.facility.logo.kind, accent, d.facility.logo.initials | default(""), size=52 if loop.first else 34) }}
+    <div class="info">
+      <div class="nm" {% if not loop.first %}style="font-size:11pt"{% endif %}>{{ d.facility.name }}</div>
+      {% if loop.first %}<div class="small">{{ d.facility.address }} &middot; Tel {{ d.facility.phone }}</div>{% endif %}
+    </div>
+    {% if plan | length > 1 %}<div class="pg">Page {{ loop.index }} of {{ plan | length }}<br>MRN {{ d.mrn }}</div>{% endif %}
+  </div>
+  <div class="rule"></div>
+  {% if loop.first %}<div class="ttl">{{ d.title | default("DISCHARGE SUMMARY") }}</div>
+  {% else %}<div class="cont">Discharge Summary (continued) &mdash; Patient: {{ d.patient_name }}</div>{% endif %}
+  {% for key in keys %}{{ section(key) }}{% endfor %}
+  <div class="footer"><span>{{ d.facility.name }} &middot; Confidential medical information</span>
+    <span>{% if plan | length > 1 %}Page {{ loop.index }}/{{ plan | length }}{% else %}Form MR-DS-04{% endif %}</span></div>
+</div>
+{% endfor %}
+{% endblock %}

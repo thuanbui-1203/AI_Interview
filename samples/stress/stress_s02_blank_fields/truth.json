@@ -1,0 +1,55 @@
+{
+  "doc_id": "stress_s02_blank_fields",
+  "set": "stress",
+  "document_type": "receipt",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "currency": "USD",
+    "hospital_name": "Brightwater Walk-in Clinic",
+    "patient_name": null,
+    "date": "2024-11-26",
+    "items": [
+      {
+        "description": "Urgent care visit - level 2",
+        "quantity": 1.0,
+        "unit_price": 125.0,
+        "total": 125.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Wound cleaning and dressing",
+        "quantity": 1.0,
+        "unit_price": 40.0,
+        "total": 40.0,
+        "category": "procedure"
+      },
+      {
+        "description": "Tetanus booster (Tdap) vaccine",
+        "quantity": 1.0,
+        "unit_price": 65.0,
+        "total": 65.0,
+        "category": "drug"
+      }
+    ],
+    "grand_total": 230.0,
+    "payment_method": null,
+    "invoice_number": "BW-24-11873",
+    "subtotal": null,
+    "discount_total": null,
+    "tax_amount": null,
+    "insurance_covered_amount": null,
+    "patient_payable": null,
+    "amount_in_words": null
+  },
+  "expected_issues": [
+    "REQUIRED_FIELD_MISSING"
+  ],
+  "low_confidence_fields": [
+    "patient_name",
+    "payment_method"
+  ],
+  "notes": "Hallucination trap: 'Patient name: ____' and 'Payment method: ____' are labelled but blank -> null, never a guess like 'Cash'."
+}

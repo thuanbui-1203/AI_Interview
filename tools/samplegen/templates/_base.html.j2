@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{ doc.language if doc.language != 'mixed' else 'en' }}">
+<head>
+<meta charset="utf-8">
+<title>{{ doc.doc_id }}</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; color: #1d1d1f; }
+  body { font-family: {{ d.font | default("Arial, sans-serif") | safe }}; font-size: 10.5pt; line-height: 1.35; }
+  .page { width: 210mm; height: 296.6mm; padding: 13mm 15mm 12mm; position: relative; overflow: hidden; break-after: page; }
+  .page:last-child { break-after: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  .grid td, .grid th { border: 1px solid #555; padding: 3px 6px; vertical-align: top; }
+  .grid th { background: #ececec; font-weight: bold; text-align: center; }
+  .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ctr { text-align: center; }
+  .muted { color: #666; }
+  .small { font-size: 8.5pt; }
+  .tiny { font-size: 7.5pt; }
+  .b { font-weight: bold; }
+  .upper-label { letter-spacing: .04em; }
+  .row { display: flex; gap: 8mm; }
+  .grow { flex: 1; }
+  .sigbox { text-align: center; position: relative; min-height: 34mm; }
+  .sigbox .role { font-weight: bold; }
+  .sigbox .hint { font-style: italic; font-size: 8.5pt; color: #444; }
+  .sigbox .name { font-weight: bold; margin-top: 2mm; }
+  .stamp { position: absolute; mix-blend-mode: multiply; opacity: .82; pointer-events: none; }
+  .footer { position: absolute; left: 15mm; right: 15mm; bottom: 8mm; font-size: 7.5pt; color: #666;
+            border-top: 1px solid #bbb; padding-top: 2mm; display: flex; justify-content: space-between; }
+  .hand { font-family: {{ d.hand_font | default("'Segoe Script', 'Ink Free', cursive") | safe }}; color: #1b2f8f; }
+  .blank { display: inline-block; min-width: 45mm; border-bottom: 1px dotted #333; }
+  {% block style %}{% endblock %}
+</style>
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
+</html>

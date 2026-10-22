@@ -1,0 +1,79 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#9b1c1c") %}
+{% block style %}
+  body { font-size: 10.5pt; }
+  .frame { border: 3px double {{ accent }}; padding: 6mm 7mm; height: 268mm; position: relative; }
+  .head { display: flex; gap: 5mm; align-items: flex-start; }
+  .head .mid { flex: 1; text-align: center; }
+  .head .mid .t { color: {{ accent }}; font-size: 17pt; font-weight: bold; }
+  .head .mid .s { font-style: italic; font-size: 9.5pt; }
+  .head .right { width: 52mm; font-size: 10pt; }
+  .head .right b { color: {{ accent }}; }
+  .party { border-top: 1px solid {{ accent }}; margin-top: 4mm; padding-top: 2mm; }
+  .party div { margin: 1mm 0; }
+  .grid th { background: #fbeaea; }
+  .tot td { border: 1px solid #555; padding: 1.5mm 2mm; }
+  .words { margin-top: 2mm; }
+  .sigs { display: flex; justify-content: space-between; margin-top: 8mm; text-align: center; }
+  .sigs > div { width: 75mm; }
+  .esig { border: 1.5px solid #2a8a3a; color: #2a8a3a; padding: 2mm 3mm; font-size: 8.5pt; text-align: left; margin: 2mm auto 0; width: 64mm; background: #f2faf3; }
+  .lookup { position: absolute; bottom: 6mm; left: 7mm; right: 7mm; font-size: 8pt; color: #555; text-align: center; border-top: 1px dashed #999; padding-top: 2mm; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="frame">
+    <div class="head">
+      {{ m.logo(d.facility.logo.kind, accent, size=60) }}
+      <div class="mid">
+        <div class="t">HÓA ĐƠN GIÁ TRỊ GIA TĂNG</div>
+        <div class="s">(Bản thể hiện của hóa đơn điện tử)</div>
+        <div class="s">{{ d.date | fdate("Ngày %d tháng %m năm %Y") }}</div>
+        <div class="small">Mã của cơ quan thuế: {{ d.tax_authority_code }}</div>
+      </div>
+      <div class="right">
+        <div>Ký hiệu: <b>{{ d.series }}</b></div>
+        <div>Số: <b>{{ d.invoice_number }}</b></div>
+      </div>
+    </div>
+
+    <div class="party">
+      <div>Đơn vị bán hàng: <b>{{ d.facility.name }}</b></div>
+      <div>Mã số thuế: <b>{{ d.facility.tax_code }}</b></div>
+      <div>Địa chỉ: {{ d.facility.address }}</div>
+      <div>Điện thoại: {{ d.facility.phone }} &nbsp;&nbsp; Số tài khoản: {{ d.facility.bank }}</div>
+    </div>
+    <div class="party">
+      <div>Họ tên người mua hàng: <b>{{ d.patient_name }}</b></div>
+      <div>Tên đơn vị: {{ d.buyer_company }}</div>
+      <div>Mã số thuế: {{ d.buyer_tax_code }}</div>
+      <div>Địa chỉ: {{ d.buyer_address }}</div>
+      <div>Hình thức thanh toán: {{ d.payment_label }} &nbsp;&nbsp; Đồng tiền thanh toán: VND</div>
+    </div>
+
+    <table class="grid" style="margin-top:3mm">
+      <tr><th style="width:10mm">STT</th><th>Tên hàng hóa, dịch vụ</th><th style="width:14mm">ĐVT</th><th style="width:16mm">Số lượng</th>
+          <th style="width:26mm">Đơn giá</th><th style="width:30mm">Thành tiền</th></tr>
+      <tr class="tiny muted"><td class="ctr">1</td><td class="ctr">2</td><td class="ctr">3</td><td class="ctr">4</td><td class="ctr">5</td><td class="ctr">6 = 4 x 5</td></tr>
+      {% for it in d["items"] %}
+      <tr><td class="ctr">{{ loop.index }}</td><td>{{ it.description }}</td><td class="ctr">{{ it.unit }}</td><td class="ctr">{{ it.quantity | fqty }}</td>
+          <td class="num">{{ it.unit_price | money("vn") }}</td><td class="num">{{ it.total | money("vn") }}</td></tr>
+      {% endfor %}
+    </table>
+    <table class="tot">
+      <tr><td style="width:70%">Cộng tiền hàng:</td><td class="num">{{ d.subtotal | money("vn") }}</td></tr>
+      <tr><td>Thuế suất GTGT: {{ d.vat_rate }} &nbsp;&nbsp;&nbsp; Tiền thuế GTGT:</td><td class="num">{{ d.tax_amount | money("vn") }}</td></tr>
+      <tr class="b"><td>Tổng tiền thanh toán:</td><td class="num">{{ d.grand_total | money("vn") }}</td></tr>
+    </table>
+    <div class="words">Số tiền viết bằng chữ: <i>{{ d.amount_in_words }}</i></div>
+
+    <div class="sigs">
+      <div><div class="b">Người mua hàng</div><div class="hint">(Chữ ký số (nếu có))</div></div>
+      <div><div class="b">Người bán hàng</div><div class="hint">(Chữ ký điện tử, chữ ký số)</div>
+        <div class="esig">&#10004; Signature Valid<br>Ký bởi: {{ d.facility.name | upper }}<br>Ký ngày: {{ d.date | fdate("%d/%m/%Y") }}</div></div>
+    </div>
+    <div class="lookup">Tra cứu hóa đơn tại: {{ d.lookup_url }} &middot; Mã tra cứu: {{ d.lookup_code }}<br>
+      (Cần kiểm tra, đối chiếu khi lập, giao, nhận hóa đơn)</div>
+  </div>
+</div>
+{% endblock %}

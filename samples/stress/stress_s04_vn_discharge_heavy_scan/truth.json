@@ -1,0 +1,42 @@
+{
+  "doc_id": "stress_s04_vn_discharge_heavy_scan",
+  "set": "stress",
+  "document_type": "discharge_summary",
+  "language": "vi",
+  "file": "document.png",
+  "variant": "scan",
+  "pages": 1,
+  "fields": {
+    "hospital_name": "Bệnh viện Đa khoa Hòa Mỹ Trung",
+    "patient_name": "Huỳnh Thị Kim Loan",
+    "admission_date": "2025-11-03",
+    "discharge_date": "2025-11-10",
+    "diagnosis": {
+      "primary": {
+        "description": "Viêm phổi",
+        "icd10_code": "J18.9"
+      },
+      "secondary": [
+        {
+          "description": "Đái tháo đường type 2",
+          "icd10_code": "E11.9"
+        }
+      ]
+    },
+    "procedures_performed": [],
+    "attending_physician": "Phan Thanh Tùng",
+    "discharge_instructions": "Uống thuốc theo đơn, kiểm tra đường huyết hằng ngày, tái khám sau 10 ngày.",
+    "department": "Nội tổng hợp",
+    "discharge_status": null,
+    "follow_up_date": null,
+    "sick_leave_from": null,
+    "sick_leave_to": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [
+    "discharge_instructions",
+    "diagnosis",
+    "attending_physician"
+  ],
+  "notes": "Heavy scan of a hand-completed Giấy ra viện: handwriting-font values on printed labels, red stamps overlapping the diagnosis/notes area, 2-3 deg skew, noise and JPEG artifacts. 'Điều trị nội khoa' -> procedures []."
+}

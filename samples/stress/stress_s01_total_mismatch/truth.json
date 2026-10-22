@@ -1,0 +1,70 @@
+{
+  "doc_id": "stress_s01_total_mismatch",
+  "set": "stress",
+  "document_type": "receipt",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "currency": "USD",
+    "hospital_name": "Kestrel Bay Medical Center",
+    "patient_name": "Carlos Mendoza",
+    "date": "2025-04-17",
+    "items": [
+      {
+        "description": "Orthopaedic consultation",
+        "quantity": 1.0,
+        "unit_price": 150.0,
+        "total": 150.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Comprehensive metabolic panel",
+        "quantity": 1.0,
+        "unit_price": 220.0,
+        "total": 220.0,
+        "category": "lab"
+      },
+      {
+        "description": "MRI right knee without contrast",
+        "quantity": 1.0,
+        "unit_price": 1450.0,
+        "total": 1450.0,
+        "category": "imaging"
+      },
+      {
+        "description": "Physiotherapy session (45 min)",
+        "quantity": 3.0,
+        "unit_price": 85.0,
+        "total": 285.0,
+        "category": "procedure"
+      },
+      {
+        "description": "Hinged knee brace",
+        "quantity": 1.0,
+        "unit_price": 120.0,
+        "total": 120.0,
+        "category": "consumable"
+      }
+    ],
+    "grand_total": 2580.0,
+    "payment_method": "card",
+    "invoice_number": "KB-OP-250417-0093",
+    "subtotal": null,
+    "discount_total": null,
+    "tax_amount": null,
+    "insurance_covered_amount": null,
+    "patient_payable": null,
+    "amount_in_words": null
+  },
+  "expected_issues": [
+    "TOTAL_MISMATCH",
+    "LINE_MATH_MISMATCH"
+  ],
+  "low_confidence_fields": [
+    "grand_total",
+    "items[3].total"
+  ],
+  "notes": "Items sum to 2,225.00 but TOTAL DUE is 2,580.00 (+16%); physiotherapy row prints 285.00 for 3 x 85.00. Truth keeps the printed (wrong) numbers."
+}

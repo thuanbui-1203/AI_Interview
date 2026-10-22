@@ -1,0 +1,49 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#7a3b12") %}
+{# A printed prescription pad completed by hand. Cells listed in med.smudged are rendered unreadable. #}
+{% macro cell(med, key) -%}
+  {%- if key in med.smudged | default([]) -%}<span class="smudge"><span>{{ med[key] }}</span></span>
+  {%- else -%}{{ med[key] }}{%- endif -%}
+{%- endmacro %}
+{% block style %}
+  body { font-family: Georgia, "Times New Roman", serif; background: #fffdf6; }
+  .page { background: #fffdf6; }
+  .pad { border: 1.5px solid {{ accent }}; height: 268mm; padding: 7mm 9mm; position: relative; }
+  .hd { text-align: center; border-bottom: 1.5px solid {{ accent }}; padding-bottom: 3mm; }
+  .hd .fn { font-size: 15pt; color: {{ accent }}; font-weight: bold; letter-spacing: .05em; }
+  .hd .dn { font-size: 12.5pt; font-weight: bold; margin-top: 1mm; }
+  .fl { margin: 4mm 0; font-size: 11pt; }
+  .fl .hand { font-size: 16pt; }
+  .rx { font-size: 30pt; color: {{ accent }}; font-weight: bold; margin-top: 2mm; }
+  .med { font-size: 14.5pt; line-height: 1.5; margin: 0 0 5mm 4mm; padding-bottom: 1.5mm; border-bottom: 1px solid #c9d6e8; }
+  .smudge { position: relative; display: inline-block; }
+  .smudge > span { filter: blur(5px); opacity: .7; }
+  .smudge::after { content: ""; position: absolute; left: -4mm; right: -4mm; top: -2mm; bottom: -2mm; border-radius: 50%;
+                   background: radial-gradient(ellipse at center, rgba(27,47,143,.7) 0%, rgba(27,47,143,.45) 45%, rgba(27,47,143,0) 72%); }
+  .sig { position: absolute; right: 12mm; bottom: 16mm; width: 70mm; text-align: center; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="pad">
+    <div class="hd">
+      <div class="fn">{{ d.facility.name }}</div>
+      <div class="small">{{ d.facility.address }} &middot; Tel {{ d.facility.phone }}</div>
+      <div class="dn">{{ d.doctor_name }}</div>
+      <div class="small">{{ d.doctor_quals }} &middot; {{ d.doctor_reg }}</div>
+    </div>
+    <div class="fl">Patient's name: <span class="hand">{{ d.patient_name }}</span>
+      <span style="float:right">Date: <span class="hand">{{ d.date | fdate(d.date_fmt) }}</span></span></div>
+    <div class="fl">Age: <span class="hand">{{ d.age }}</span> &nbsp;&nbsp; Dx: <span class="hand">{{ d.diagnosis.primary[0] }}</span></div>
+    <div class="rx">R<sub style="font-size:16pt">x</sub></div>
+    {% for med in d.medications %}
+    <div class="med hand">{{ loop.index }}. {{ cell(med, "name") }} &mdash; {{ cell(med, "dosage") }} {{ cell(med, "frequency") }} &times; {{ cell(med, "duration") }} &nbsp; #{{ med.quantity | fqty }}</div>
+    {% endfor %}
+    <div class="sig">
+      {{ m.signature(2, width=140) }}
+      <div class="small">Signature</div>
+    </div>
+    <div class="tiny muted" style="position:absolute; left: 9mm; bottom: 6mm">Not valid without doctor's signature &middot; Pad No. {{ d.rx_no }}</div>
+  </div>
+</div>
+{% endblock %}

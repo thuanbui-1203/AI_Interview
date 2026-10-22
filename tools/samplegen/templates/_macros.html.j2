@@ -1,0 +1,75 @@
+{# Reusable letterhead / stamp / signature pieces (all inline SVG, no external assets). #}
+
+{% macro logo(kind="cross", color="#0b6e8a", initials="", size=56) -%}
+<svg width="{{ size }}" height="{{ size }}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  {% if kind == "cross" %}
+    <circle cx="32" cy="32" r="30" fill="none" stroke="{{ color }}" stroke-width="3"/>
+    <path d="M26 14h12v12h12v12H38v12H26V38H14V26h12z" fill="{{ color }}"/>
+  {% elif kind == "leaf" %}
+    <path d="M32 4C14 18 10 38 32 60 54 38 50 18 32 4z" fill="{{ color }}"/>
+    <path d="M32 14v40M32 30l-9-7M32 40l10-8" stroke="#fff" stroke-width="2.5" fill="none"/>
+  {% elif kind == "shield" %}
+    <path d="M32 3l25 9v18c0 16-11 27-25 31C18 57 7 46 7 30V12z" fill="{{ color }}"/>
+    <path d="M28 18h8v10h10v8H36v10h-8V36H18v-8h10z" fill="#fff"/>
+  {% elif kind == "hex" %}
+    <path d="M32 3l26 15v28L32 61 6 46V18z" fill="none" stroke="{{ color }}" stroke-width="4"/>
+    <circle cx="32" cy="32" r="9" fill="{{ color }}"/>
+    <path d="M32 12v8M32 44v8M14 22l7 4M43 38l7 4M14 42l7-4M43 26l7-4" stroke="{{ color }}" stroke-width="3"/>
+  {% else %}
+    <rect x="4" y="4" width="56" height="56" rx="12" fill="{{ color }}"/>
+    <text x="32" y="41" font-size="24" font-family="Arial" font-weight="bold" fill="#fff" text-anchor="middle">{{ initials }}</text>
+  {% endif %}
+</svg>
+{%- endmacro %}
+
+{% macro stamp(top, bottom="", center=[], color="#c8102e", size=150, rotate=-14, style="") -%}
+<svg class="stamp" style="{{ style }}; transform: rotate({{ rotate }}deg)" width="{{ size }}" height="{{ size }}"
+     viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  {# Top text runs over a 240 deg arc, bottom text over a 90 deg arc; long text is squeezed to fit. #}
+  <defs>
+    <path id="arcTop{{ size }}{{ rotate }}" d="M 39.4 135 A 70 70 0 1 1 160.6 135"/>
+    <path id="arcBot{{ size }}{{ rotate }}" d="M 49 151 A 72 72 0 0 0 151 151"/>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="none" stroke="{{ color }}" stroke-width="5"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="{{ color }}" stroke-width="1.6"/>
+  <circle cx="100" cy="100" r="50" fill="none" stroke="{{ color }}" stroke-width="1.6"/>
+  <text font-family="Arial" font-weight="bold" font-size="14" fill="{{ color }}" letter-spacing="1">
+    <textPath href="#arcTop{{ size }}{{ rotate }}" startOffset="50%" text-anchor="middle"
+      {% if top | length > 27 %}textLength="280" lengthAdjust="spacingAndGlyphs"{% endif %}>{{ top }}</textPath>
+  </text>
+  {% if bottom %}
+  <text font-family="Arial" font-weight="bold" font-size="11" fill="{{ color }}">
+    <textPath href="#arcBot{{ size }}{{ rotate }}" startOffset="50%" text-anchor="middle"
+      {% if bottom | length > 14 %}textLength="112" lengthAdjust="spacingAndGlyphs"{% endif %}>{{ bottom }}</textPath>
+  </text>
+  {% endif %}
+  <path d="M100 58l4 9 10 1-7.5 6.5 2.5 10-9-5.5-9 5.5 2.5-10L86 68l10-1z" fill="{{ color }}"/>
+  {% for line in center %}
+  <text x="100" y="{{ 102 + loop.index0 * 15 }}" font-family="Arial" font-weight="bold" font-size="12.5"
+        fill="{{ color }}" text-anchor="middle">{{ line }}</text>
+  {% endfor %}
+</svg>
+{%- endmacro %}
+
+{% macro signature(variant=0, color="#1b2f8f", width=150) -%}
+{% set paths = [
+  "M5 45 C 20 5, 30 60, 45 30 S 70 10, 80 40 S 105 55, 115 20 C 120 10, 130 50, 145 35",
+  "M8 40 Q 25 0 35 38 T 60 30 Q 70 10 85 42 L 95 22 Q 110 50 125 18 Q 135 40 148 30",
+  "M4 30 C 14 50, 24 0, 40 34 C 50 54, 60 6, 72 30 C 80 44, 96 12, 104 36 C 112 54, 132 10, 146 26",
+] %}
+<svg width="{{ width }}" height="50" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg">
+  <path d="{{ paths[variant % 3] }}" fill="none" stroke="{{ color }}" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M15 52 L 135 46" stroke="{{ color }}" stroke-width="1.4" fill="none"/>
+</svg>
+{%- endmacro %}
+
+{% macro barcode(seed="12345", width=150, height=34) -%}
+<svg width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg">
+  {% set ns = namespace(x=2) %}
+  {% for ch in (seed * 4)[:40] %}
+    {% set w = (ch | int(3)) % 3 + 1 %}
+    <rect x="{{ ns.x }}" y="0" width="{{ w }}" height="{{ height }}" fill="#111"/>
+    {% set ns.x = ns.x + w + 1 + ((ch | int(1)) % 2) %}
+  {% endfor %}
+</svg>
+{%- endmacro %}

@@ -1,0 +1,48 @@
+{
+  "doc_id": "core_p01_en",
+  "set": "core",
+  "document_type": "prescription",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "doctor_name": "Dr. Hannah Okafor",
+    "patient_name": "Liam Patel",
+    "date": "2026-03-11",
+    "medications": [
+      {
+        "name": "Amoxicillin 500 mg capsule",
+        "dosage": "1 capsule",
+        "frequency": "three times daily",
+        "duration": "7 days",
+        "quantity": 21.0
+      },
+      {
+        "name": "Ibuprofen 400 mg tablet",
+        "dosage": "1 tablet",
+        "frequency": "every 8 hours as needed for pain",
+        "duration": "5 days",
+        "quantity": 15.0
+      },
+      {
+        "name": "Fluticasone propionate 50 mcg nasal spray",
+        "dosage": "2 sprays each nostril",
+        "frequency": "once daily",
+        "duration": "14 days",
+        "quantity": 1.0
+      }
+    ],
+    "facility_name": "Willowmere Medical Centre",
+    "diagnosis": {
+      "primary": {
+        "description": "Acute bacterial sinusitis",
+        "icd10_code": "J01.90"
+      },
+      "secondary": []
+    }
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "Typed EN prescription, 3 medications with '#21' style quantities, diagnosis with ICD-10 in parentheses."
+}

@@ -1,0 +1,53 @@
+{
+  "doc_id": "core_d01_en",
+  "set": "core",
+  "document_type": "discharge_summary",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "hospital_name": "Northbridge Valley General Hospital",
+    "patient_name": "Margaret A. Collins",
+    "admission_date": "2025-05-03",
+    "discharge_date": "2025-05-09",
+    "diagnosis": {
+      "primary": {
+        "description": "Lobar pneumonia, right lower lobe",
+        "icd10_code": "J18.1"
+      },
+      "secondary": [
+        {
+          "description": "Type 2 diabetes mellitus without complications",
+          "icd10_code": "E11.9"
+        },
+        {
+          "description": "Essential (primary) hypertension",
+          "icd10_code": "I10"
+        }
+      ]
+    },
+    "procedures_performed": [
+      {
+        "name": "Flexible bronchoscopy with bronchoalveolar lavage",
+        "date": "2025-05-05",
+        "code": "31624"
+      },
+      {
+        "name": "Ultrasound-guided right thoracentesis",
+        "date": "2025-05-06",
+        "code": "32555"
+      }
+    ],
+    "attending_physician": "Dr. Robert Lindqvist",
+    "discharge_instructions": "Complete the full course of antibiotics. Rest at home and increase activity gradually. Check blood glucose twice daily and keep a log. Return to the Emergency Department for fever above 38.5 C, shortness of breath or chest pain.",
+    "department": "Pulmonology",
+    "discharge_status": "improved",
+    "follow_up_date": "2025-05-20",
+    "sick_leave_from": null,
+    "sick_leave_to": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "EN discharge summary: principal + 2 secondary ICD-10 diagnoses, 2 dated procedures with codes, attending physician, follow-up date. Discharge medications are not procedures."
+}

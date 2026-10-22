@@ -1,0 +1,60 @@
+[project]
+name = "medextract"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Thuan Bui", email = "thuanbui.dev@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=1.17,<2",
+    "fastapi>=0.158.2",
+    "jinja2>=3.1.6",
+    "pillow>=13.0.0",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.1",
+    "pymupdf>=2.0",
+    "python-multipart>=0.0.32",
+    "rich>=15.0.0",
+    "typer>=0.27.3",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+medextract = "medextract:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "numpy>=2.5.4",
+    "opencv-python-headless>=5.0.0.93",
+    "playwright>=1.64.0",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.1",
+]
+
+[tool.ruff]
+line-length = 130
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "RUF", "PLR1730"]
+# Generic[...] is kept on pydantic models on purpose (PEP 695 generics + pydantic schema names are less predictable).
+ignore = ["UP046", "E501", "RUF001", "RUF002", "RUF003"]  # RUF00x: dashes/spaces/quotes in parsers are deliberate
+
+[tool.ruff.lint.isort]
+known-first-party = ["medextract", "tools", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: calls the real Anthropic API (needs ANTHROPIC_API_KEY, costs money)"]
+
+[tool.ruff.lint.per-file-ignores]
+# the sample generator is a standalone dev script that puts tools/ on sys.path before importing itself
+"tools/samplegen/generate.py" = ["E402"]
+"tests/unit/test_samplegen.py" = ["E402"]

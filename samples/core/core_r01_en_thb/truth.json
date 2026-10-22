@@ -1,0 +1,85 @@
+{
+  "doc_id": "core_r01_en_thb",
+  "set": "core",
+  "document_type": "receipt",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "currency": "THB",
+    "hospital_name": "Chao Phraya Meridian Hospital",
+    "patient_name": "Pimchanok Srisawat",
+    "date": "2025-08-14",
+    "items": [
+      {
+        "description": "Consultation fee - Internal Medicine (Dr. Kittipong Wongsuwan)",
+        "quantity": 1.0,
+        "unit_price": 1200.0,
+        "total": 1200.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Ward room - Standard single, per night",
+        "quantity": 2.0,
+        "unit_price": 3500.0,
+        "total": 7000.0,
+        "category": "room"
+      },
+      {
+        "description": "Nursing care fee, per day",
+        "quantity": 2.0,
+        "unit_price": 800.0,
+        "total": 1600.0,
+        "category": "other"
+      },
+      {
+        "description": "Complete Blood Count (CBC)",
+        "quantity": 1.0,
+        "unit_price": 450.0,
+        "total": 450.0,
+        "category": "lab"
+      },
+      {
+        "description": "Chest X-ray PA view",
+        "quantity": 1.0,
+        "unit_price": 900.0,
+        "total": 900.0,
+        "category": "imaging"
+      },
+      {
+        "description": "Ceftriaxone 1 g injection",
+        "quantity": 4.0,
+        "unit_price": 380.0,
+        "total": 1520.0,
+        "category": "drug"
+      },
+      {
+        "description": "IV set and medical supplies",
+        "quantity": 1.0,
+        "unit_price": 650.0,
+        "total": 650.0,
+        "category": "consumable"
+      },
+      {
+        "description": "Corporate discount 10% (Siam Northstar Trading Co., Ltd.)",
+        "quantity": null,
+        "unit_price": null,
+        "total": -1332.0,
+        "category": "discount"
+      }
+    ],
+    "grand_total": 12827.16,
+    "payment_method": "card",
+    "invoice_number": "INV-CPM-2508-01472",
+    "subtotal": 11988.0,
+    "discount_total": null,
+    "tax_amount": 839.16,
+    "insurance_covered_amount": 10000.0,
+    "patient_payable": 2827.16,
+    "amount_in_words": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "EN private hospital receipt in THB: discount row (negative), VAT 7% as tax_amount, insurer direct billing -> insurance_covered_amount and patient_payable, card payment."
+}

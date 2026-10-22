@@ -1,0 +1,64 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set ms = d.money_style %}
+{% set accent = d.accent | default("#2f6b3a") %}
+{% block style %}
+  body { font-size: 11pt; }
+  .card { border: 2px solid {{ accent }}; border-radius: 4mm; padding: 8mm 10mm; margin-top: 4mm; height: 200mm; position: relative; }
+  .hdr { text-align: center; }
+  .hdr .nm { font-size: 18pt; font-weight: bold; color: {{ accent }}; margin-top: 1mm; }
+  .hdr .addr { font-size: 9pt; }
+  .ttl { margin: 6mm 0 4mm; text-align: center; font-size: 14pt; font-weight: bold; letter-spacing: .3em;
+         border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 1.5mm 0; }
+  .line { margin: 2.2mm 0; }
+  .line .lbl { display: inline-block; width: 38mm; }
+  .fill { font-weight: bold; }
+  .items { margin-top: 5mm; }
+  .items th { background: #f0f3ef; }
+  .tot td { font-weight: bold; font-size: 12.5pt; border-top: 2px solid #222; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="card">
+    <div class="hdr">
+      {{ m.logo(d.facility.logo.kind, accent, d.facility.logo.initials | default(""), size=50) }}
+      <div class="nm">{{ d.facility.name }}</div>
+      <div class="addr">{{ d.facility.address }}</div>
+      <div class="addr">Tel {{ d.facility.phone }} &middot; {{ d.facility.tax_label | default("Reg. No.") }} {{ d.facility.tax_code }}</div>
+    </div>
+    <div class="ttl">{{ d.title | default("OFFICIAL RECEIPT") }}</div>
+
+    <div class="row">
+      <div class="grow">
+        <div class="line"><span class="lbl">Receipt No.:</span><span class="fill">{{ d.invoice_number }}</span></div>
+        <div class="line"><span class="lbl">Patient name:</span>{% if d.patient_name %}<span class="fill">{{ d.patient_name }}</span>{% else %}<span>________________________</span>{% endif %}</div>
+        {% for lbl, val in d.patient_info | default([]) %}<div class="line"><span class="lbl">{{ lbl }}:</span>{{ val }}</div>{% endfor %}
+      </div>
+      <div style="width: 60mm">
+        <div class="line"><span class="lbl" style="width:16mm">Date:</span><span class="fill">{{ d.date | fdate(d.date_fmt) }}</span></div>
+        <div class="line"><span class="lbl" style="width:16mm">Time:</span>{{ d.time | default("") }}</div>
+      </div>
+    </div>
+
+    <table class="grid items">
+      <tr><th>Description of service</th><th style="width:14mm">Qty</th><th style="width:26mm">Unit ({{ d.currency }})</th><th style="width:28mm">Amount ({{ d.currency }})</th></tr>
+      {% for it in d["items"] %}
+      <tr><td>{{ it.description }}</td><td class="ctr">{{ it.quantity | fqty }}</td>
+          <td class="num">{{ it.unit_price | money(ms) }}</td><td class="num">{{ it.total | money(ms) }}</td></tr>
+      {% endfor %}
+      <tr class="tot"><td colspan="3" style="text-align:right">{{ d.labels.grand_total | default("TOTAL") }} {{ d.currency }}</td>
+          <td class="num">{{ d.grand_total | money(ms) }}</td></tr>
+    </table>
+
+    <div class="line" style="margin-top:6mm"><span class="lbl">Payment method:</span>{% if d.payment_label %}<span class="fill">{{ d.payment_label }}</span>{% else %}<span>________________</span>{% endif %}</div>
+    <div class="line"><span class="lbl">Received by:</span>{{ d.cashier }}</div>
+
+    <div class="sigbox" style="position:absolute; right: 10mm; bottom: 8mm; width: 60mm">
+      <div class="role">Authorised signature</div>
+      {{ m.signature(d.sig_variant | default(1)) }}
+      {% if d.stamp %}{{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, color=d.stamp.color | default("#1f4fa8"), style="left: -6mm; top: -8mm", size=120, rotate=9) }}{% endif %}
+    </div>
+    <div class="small muted" style="position:absolute; left: 10mm; bottom: 8mm; width: 90mm">{{ d.thanks | default("Thank you. Get well soon!") }}</div>
+  </div>
+</div>
+{% endblock %}

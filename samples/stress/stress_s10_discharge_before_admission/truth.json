@@ -1,0 +1,49 @@
+{
+  "doc_id": "stress_s10_discharge_before_admission",
+  "set": "stress",
+  "document_type": "discharge_summary",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "hospital_name": "Redfern Hills Community Hospital",
+    "patient_name": "Daniel Whitaker",
+    "admission_date": "2025-10-14",
+    "discharge_date": "2025-10-04",
+    "diagnosis": {
+      "primary": {
+        "description": "Upper gastrointestinal haemorrhage",
+        "icd10_code": "K92.2"
+      },
+      "secondary": [
+        {
+          "description": "Duodenal ulcer, chronic",
+          "icd10_code": "K26.7"
+        }
+      ]
+    },
+    "procedures_performed": [
+      {
+        "name": "Oesophagogastroduodenoscopy (OGD) with adrenaline injection",
+        "date": null,
+        "code": null
+      }
+    ],
+    "attending_physician": "Dr. Priya Natarajan",
+    "discharge_instructions": "Avoid NSAIDs and alcohol. Take pantoprazole before breakfast and dinner. Seek urgent care for black stools, vomiting blood or dizziness.",
+    "department": "Gastroenterology",
+    "discharge_status": "improved",
+    "follow_up_date": null,
+    "sick_leave_from": null,
+    "sick_leave_to": null
+  },
+  "expected_issues": [
+    "DISCHARGE_BEFORE_ADMISSION"
+  ],
+  "low_confidence_fields": [
+    "admission_date",
+    "discharge_date"
+  ],
+  "notes": "Discharge date (04 Oct 2025) is printed before the admission date (14 Oct 2025); truth keeps both as printed. The procedure has no printed date."
+}

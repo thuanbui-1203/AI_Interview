@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.env
+*.egg-info/
+dist/
+build/
+# local scratch output (committed results live in results/)
+out/

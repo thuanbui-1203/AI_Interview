@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "documents": [
+    {
+      "id": "core_r01_en_thb",
+      "set": "core",
+      "type": "receipt",
+      "language": "en",
+      "variant": "clean",
+      "file": "core/core_r01_en_thb/document.pdf",
+      "truth": "core/core_r01_en_thb/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_r02_vi_vnd",
+      "set": "core",
+      "type": "receipt",
+      "language": "vi",
+      "variant": "clean",
+      "file": "core/core_r02_vi_vnd/document.pdf",
+      "truth": "core/core_r02_vi_vnd/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_r03_en_sgd_scan",
+      "set": "core",
+      "type": "receipt",
+      "language": "en",
+      "variant": "scan",
+      "file": "core/core_r03_en_sgd_scan/document.png",
+      "truth": "core/core_r03_en_sgd_scan/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_d01_en",
+      "set": "core",
+      "type": "discharge_summary",
+      "language": "en",
+      "variant": "clean",
+      "file": "core/core_d01_en/document.pdf",
+      "truth": "core/core_d01_en/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_d02_vi_scan",
+      "set": "core",
+      "type": "discharge_summary",
+      "language": "vi",
+      "variant": "scan",
+      "file": "core/core_d02_vi_scan/document.png",
+      "truth": "core/core_d02_vi_scan/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_d03_en_conservative",
+      "set": "core",
+      "type": "discharge_summary",
+      "language": "en",
+      "variant": "clean",
+      "file": "core/core_d03_en_conservative/document.pdf",
+      "truth": "core/core_d03_en_conservative/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_l01_en",
+      "set": "core",
+      "type": "lab_report",
+      "language": "en",
+      "variant": "clean",
+      "file": "core/core_l01_en/document.pdf",
+      "truth": "core/core_l01_en/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_l02_vi",
+      "set": "core",
+      "type": "lab_report",
+      "language": "vi",
+      "variant": "clean",
+      "file": "core/core_l02_vi/document.pdf",
+      "truth": "core/core_l02_vi/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_p01_en",
+      "set": "core",
+      "type": "prescription",
+      "language": "en",
+      "variant": "clean",
+      "file": "core/core_p01_en/document.pdf",
+      "truth": "core/core_p01_en/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "core_p02_vi",
+      "set": "core",
+      "type": "prescription",
+      "language": "vi",
+      "variant": "clean",
+      "file": "core/core_p02_vi/document.pdf",
+      "truth": "core/core_p02_vi/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "stress_s01_total_mismatch",
+      "set": "stress",
+      "type": "receipt",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s01_total_mismatch/document.pdf",
+      "truth": "stress/stress_s01_total_mismatch/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "TOTAL_MISMATCH",
+        "LINE_MATH_MISMATCH"
+      ]
+    },
+    {
+      "id": "stress_s02_blank_fields",
+      "set": "stress",
+      "type": "receipt",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s02_blank_fields/document.pdf",
+      "truth": "stress/stress_s02_blank_fields/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "REQUIRED_FIELD_MISSING"
+      ]
+    },
+    {
+      "id": "stress_s03_vn_einvoice_words",
+      "set": "stress",
+      "type": "receipt",
+      "language": "vi",
+      "variant": "clean",
+      "file": "stress/stress_s03_vn_einvoice_words/document.pdf",
+      "truth": "stress/stress_s03_vn_einvoice_words/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "AMOUNT_IN_WORDS_MISMATCH"
+      ]
+    },
+    {
+      "id": "stress_s04_vn_discharge_heavy_scan",
+      "set": "stress",
+      "type": "discharge_summary",
+      "language": "vi",
+      "variant": "scan",
+      "file": "stress/stress_s04_vn_discharge_heavy_scan/document.png",
+      "truth": "stress/stress_s04_vn_discharge_heavy_scan/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "stress_s05_handwritten_rx",
+      "set": "stress",
+      "type": "prescription",
+      "language": "en",
+      "variant": "handwriting",
+      "file": "stress/stress_s05_handwritten_rx/document.png",
+      "truth": "stress/stress_s05_handwritten_rx/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "stress_s06_lab_wrong_flag",
+      "set": "stress",
+      "type": "lab_report",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s06_lab_wrong_flag/document.pdf",
+      "truth": "stress/stress_s06_lab_wrong_flag/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "LAB_FLAG_INCONSISTENT"
+      ]
+    },
+    {
+      "id": "stress_s07_receipt_photo",
+      "set": "stress",
+      "type": "receipt",
+      "language": "en",
+      "variant": "photo",
+      "file": "stress/stress_s07_receipt_photo/document.png",
+      "truth": "stress/stress_s07_receipt_photo/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "stress_s08_restaurant",
+      "set": "stress",
+      "type": null,
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s08_restaurant/document.pdf",
+      "truth": "stress/stress_s08_restaurant/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "NOT_MEDICAL_DOCUMENT_SUSPECTED"
+      ]
+    },
+    {
+      "id": "stress_s09_rx_future_date",
+      "set": "stress",
+      "type": "prescription",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s09_rx_future_date/document.pdf",
+      "truth": "stress/stress_s09_rx_future_date/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "DATE_IN_FUTURE",
+        "DATE_AMBIGUOUS_ORDER"
+      ]
+    },
+    {
+      "id": "stress_s10_discharge_before_admission",
+      "set": "stress",
+      "type": "discharge_summary",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s10_discharge_before_admission/document.pdf",
+      "truth": "stress/stress_s10_discharge_before_admission/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "DISCHARGE_BEFORE_ADMISSION"
+      ]
+    },
+    {
+      "id": "stress_s11_prompt_injection",
+      "set": "stress",
+      "type": "receipt",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s11_prompt_injection/document.pdf",
+      "truth": "stress/stress_s11_prompt_injection/truth.json",
+      "pages": 1,
+      "expected_issues": []
+    },
+    {
+      "id": "stress_s12_multipage_discharge",
+      "set": "stress",
+      "type": "discharge_summary",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s12_multipage_discharge/document.pdf",
+      "truth": "stress/stress_s12_multipage_discharge/truth.json",
+      "pages": 3,
+      "expected_issues": [
+        "PROCEDURE_DATE_OUT_OF_STAY"
+      ]
+    },
+    {
+      "id": "stress_s13_lab_invalid_date",
+      "set": "stress",
+      "type": "lab_report",
+      "language": "en",
+      "variant": "clean",
+      "file": "stress/stress_s13_lab_invalid_date/document.pdf",
+      "truth": "stress/stress_s13_lab_invalid_date/truth.json",
+      "pages": 1,
+      "expected_issues": [
+        "DATE_INVALID",
+        "REQUIRED_FIELD_MISSING"
+      ]
+    }
+  ]
+}

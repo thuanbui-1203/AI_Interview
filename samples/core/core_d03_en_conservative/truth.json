@@ -1,0 +1,38 @@
+{
+  "doc_id": "core_d03_en_conservative",
+  "set": "core",
+  "document_type": "discharge_summary",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "hospital_name": "Harbourview Lakes Hospital",
+    "patient_name": "James O'Connell",
+    "admission_date": "2026-01-14",
+    "discharge_date": "2026-01-16",
+    "diagnosis": {
+      "primary": {
+        "description": "Acute gastroenteritis, presumed infectious",
+        "icd10_code": "A09"
+      },
+      "secondary": [
+        {
+          "description": "Dehydration, moderate",
+          "icd10_code": "E86.0"
+        }
+      ]
+    },
+    "procedures_performed": [],
+    "attending_physician": "Dr. Aisha Rahman",
+    "discharge_instructions": "Drink at least 2 litres of fluid a day and use oral rehydration salts after each loose stool. Wash hands carefully and avoid preparing food for others for 48 hours after symptoms stop. See your GP if vomiting persists for more than 24 hours or if you notice blood in the stool.",
+    "department": "General Medicine",
+    "discharge_status": "improved",
+    "follow_up_date": null,
+    "sick_leave_from": null,
+    "sick_leave_to": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "EN discharge with conservative treatment only: procedures section printed as 'None' -> []; discharge_status improved; no follow-up date."
+}

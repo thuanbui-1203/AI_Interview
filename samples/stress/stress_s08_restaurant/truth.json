@@ -1,0 +1,15 @@
+{
+  "doc_id": "stress_s08_restaurant",
+  "set": "stress",
+  "document_type": null,
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {},
+  "expected_issues": [
+    "NOT_MEDICAL_DOCUMENT_SUSPECTED"
+  ],
+  "low_confidence_fields": [],
+  "notes": "Out-of-scope control: a restaurant bill with items, total and card payment. Must be flagged as non-medical (closest type at low confidence); no field truth."
+}

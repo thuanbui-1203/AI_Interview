@@ -1,0 +1,60 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#006d5b") %}
+{% block style %}
+  body { font-family: Arial, sans-serif; font-size: 10.5pt; }
+  .lh { display: flex; gap: 4mm; align-items: center; border-bottom: 2px solid {{ accent }}; padding-bottom: 3mm; }
+  .lh .nm { font-size: 15pt; font-weight: bold; color: {{ accent }}; }
+  .lh .r { margin-left: auto; font-size: 9pt; text-align: right; }
+  .ttl { text-align: center; font-size: 16pt; font-weight: bold; margin: 5mm 0 1mm; color: {{ accent }}; }
+  .code { text-align: center; font-size: 9pt; margin-bottom: 4mm; }
+  .kv { display: grid; grid-template-columns: 1.3fr 1fr; row-gap: 1.2mm; margin-bottom: 4mm; }
+  .grid th { background: #e3f1ee; }
+  .grp td { background: #f4f8f7; font-weight: bold; }
+  .sigs { display: flex; justify-content: space-between; margin-top: 8mm; text-align: center; }
+  .sigs > div { width: 70mm; position: relative; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="lh">
+    {{ m.logo(d.facility.logo.kind, accent, size=52) }}
+    <div>
+      <div class="nm">{{ d.facility.name }}</div>
+      <div class="small">{{ d.facility.address }}</div>
+      <div class="small">ĐT: {{ d.facility.phone }} &middot; MST: {{ d.facility.tax_code }}</div>
+    </div>
+    <div class="r">{{ d.facility.accreditation }}<br>Mã phiếu: <b>{{ d.lab_no }}</b></div>
+  </div>
+  <div class="ttl">PHIẾU KẾT QUẢ XÉT NGHIỆM</div>
+  <div class="code">{{ d.subtitle }}</div>
+
+  <div class="kv">
+    <div>Họ tên người bệnh: <b>{{ d.patient_name }}</b></div><div>Năm sinh: {{ d.dob }} &nbsp;&nbsp; Giới tính: {{ d.sex }}</div>
+    <div>Địa chỉ: {{ d.patient_address }}</div><div>Số thẻ BHYT: {{ d.insurance_card }}</div>
+    <div>Bác sĩ chỉ định: {{ d.ordering_physician }}</div><div>Khoa/Phòng: {{ d.ward }}</div>
+    <div>Chẩn đoán: {{ d.diagnosis_text }}</div><div>Mẫu bệnh phẩm: {{ d.specimen }}</div>
+    <div>Thời gian lấy mẫu: {{ d.collection_time }} {{ d.collection_date | fdate("%d/%m/%Y") }}</div><div>Tình trạng mẫu: Đạt</div>
+  </div>
+
+  <table class="grid">
+    <tr><th style="width:10mm">STT</th><th>Tên xét nghiệm</th><th style="width:26mm">Kết quả</th><th style="width:22mm">Đơn vị</th><th style="width:32mm">Trị số bình thường</th></tr>
+    {% set ns = namespace(i=0) %}
+    {% for sec in d.sections %}
+    <tr class="grp"><td colspan="5">{{ sec.name }}</td></tr>
+    {% for t in sec.tests %}{% set ns.i = ns.i + 1 %}
+    <tr><td class="ctr">{{ ns.i }}</td><td>{{ t.test_name }}</td><td class="ctr b">{{ t.result }}</td>
+        <td class="ctr">{{ t.unit or "" }}</td><td class="ctr">{{ t.reference_range or "" }}</td></tr>
+    {% endfor %}
+    {% endfor %}
+  </table>
+  <div class="small" style="margin-top:2mm"><i>Ghi chú: Kết quả chỉ có giá trị trên mẫu bệnh phẩm được xét nghiệm.</i></div>
+
+  <div style="text-align:right; margin-top: 5mm; font-style: italic">{{ d.date | fdate("%H giờ %M, ngày %d tháng %m năm %Y") }}</div>
+  <div class="sigs">
+    <div><div class="b">NGƯỜI THỰC HIỆN</div>{{ m.signature(2, width=120) }}<div>{{ d.technologist }}</div></div>
+    <div><div class="b">TRƯỞNG KHOA XÉT NGHIỆM</div>{{ m.signature(0, width=120) }}<div class="b">{{ d.pathologist }}</div>
+      {{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, style="left: -14mm; top: -2mm", size=125, rotate=-16) }}</div>
+  </div>
+  <div class="footer"><span>{{ d.facility.name }} &middot; Tra cứu kết quả: {{ d.facility.website }}</span><span>Trang 1/1</span></div>
+</div>
+{% endblock %}

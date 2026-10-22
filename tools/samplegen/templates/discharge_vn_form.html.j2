@@ -1,0 +1,74 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{# Bộ Y tế "Giấy ra viện" layout. With d.handwriting the filled-in values use a script font, as on a hand-completed form. #}
+{% macro v(text) -%}<span class="val{% if d.handwriting %} hand{% endif %}">{{ text }}</span>{%- endmacro %}
+{% block style %}
+  body { font-family: "Times New Roman", serif; font-size: 12.5pt; line-height: 1.55; }
+  .top { display: flex; justify-content: space-between; }
+  .top .l { text-align: center; width: 80mm; font-size: 11pt; }
+  .top .r { text-align: center; width: 95mm; font-size: 11pt; }
+  .ul { display: inline-block; border-bottom: 1px solid #000; padding: 0 6mm 0.5mm; }
+  .ms { text-align: right; font-size: 10pt; margin-top: 2mm; }
+  .ttl { text-align: center; font-size: 19pt; font-weight: bold; margin: 5mm 0 4mm; letter-spacing: .05em; }
+  .ln { margin: 1.4mm 0; }
+  .val { font-weight: bold; }
+  .val.hand { font-weight: normal; font-size: 13.5pt; }
+  .sigs { display: flex; justify-content: space-between; margin-top: 6mm; text-align: center; }
+  .sigs > div { width: 80mm; position: relative; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="top">
+    <div class="l">
+      <div>{{ d.facility.authority }}</div>
+      <div class="b"><span class="ul">{{ d.facility.name }}</span></div>
+      <div class="small">{{ d.facility.address }}</div>
+      <div class="small">Khoa: {{ v(d.department) }}</div>
+    </div>
+    <div class="r">
+      <div class="b">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+      <div class="b"><span class="ul">Độc lập - Tự do - Hạnh phúc</span></div>
+      <div class="ms">MS: 01/BV-01 &nbsp; Số lưu trữ: {{ d.record_no }}<br>Mã Y tế: {{ d.medical_id }}</div>
+    </div>
+  </div>
+
+  <div class="ttl">GIẤY RA VIỆN</div>
+
+  <div class="ln">- Họ tên người bệnh: {{ v(d.patient_name) }} &nbsp;&nbsp; Ngày sinh: {{ v(d.dob) }} &nbsp;&nbsp; Nam/Nữ: {{ v(d.sex) }}</div>
+  <div class="ln">- Dân tộc: {{ v(d.ethnicity) }} &nbsp;&nbsp;&nbsp; Nghề nghiệp: {{ v(d.occupation) }}</div>
+  <div class="ln">- Mã số BHXH/Thẻ BHYT số: {{ v(d.insurance_card) }}</div>
+  <div class="ln">- Địa chỉ: {{ v(d.patient_address) }}</div>
+  <div class="ln">- Vào viện lúc: {{ v(d.admission | fdate("%H giờ %M phút, ngày %d tháng %m năm %Y")) }}</div>
+  <div class="ln">- Ra viện lúc: {{ v(d.discharge | fdate("%H giờ %M phút, ngày %d tháng %m năm %Y")) }}</div>
+  <div class="ln">- Chẩn đoán: {{ v(d.diagnosis.primary[1] ~ " - " ~ d.diagnosis.primary[0]) }}
+    {% for desc, code in d.diagnosis.secondary %}; {{ v((code ~ " - " if code else "") ~ desc) }}{% endfor %}</div>
+  <div class="ln">- Phương pháp điều trị: {{ v(d.procedures | map(attribute="name") | join("; ") if d.procedures else d.treatment_text) }}</div>
+  <div class="ln">- Ghi chú: {{ v(d.instructions) }}</div>
+  {% if d.sick_leave_from %}
+  <div class="ln">- Nghỉ ngơi tại nhà từ ngày {{ v(d.sick_leave_from | fdate("%d/%m/%Y")) }} đến ngày {{ v(d.sick_leave_to | fdate("%d/%m/%Y")) }}</div>
+  {% endif %}
+
+  <div class="sigs">
+    <div>
+      <div class="i" style="font-style: italic">{{ d.discharge | fdate("Ngày %d tháng %m năm %Y") }}</div>
+      <div class="b">THỦ TRƯỞNG ĐƠN VỊ</div>
+      <div class="hint" style="font-style: italic; font-size: 10pt">(Ký tên, đóng dấu)</div>
+      {{ m.signature(1, width=130) }}
+      <div class="b">{{ d.director }}</div>
+      {{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, size=d.stamp.size | default(150), rotate=d.stamp.rotate | default(-12),
+                 style=d.stamp.style | default("left: 14mm; top: 4mm")) }}
+    </div>
+    <div>
+      <div style="font-style: italic">{{ d.discharge | fdate("Ngày %d tháng %m năm %Y") }}</div>
+      <div class="b">TRƯỞNG KHOA</div>
+      <div class="hint" style="font-style: italic; font-size: 10pt">(Ký, ghi rõ họ tên)</div>
+      {{ m.signature(0, width=130) }}
+      <div class="b">{{ v(d.attending_physician) }}</div>
+    </div>
+  </div>
+  {% if d.extra_stamp %}
+  {{ m.stamp(d.extra_stamp.top, d.extra_stamp.bottom, d.extra_stamp.center, size=d.extra_stamp.size, rotate=d.extra_stamp.rotate, style=d.extra_stamp.style) }}
+  {% endif %}
+  <div class="footer" style="font-family: Arial"><span>{{ d.facility.name }}</span><span>Người bệnh mang theo giấy này khi tái khám</span></div>
+</div>
+{% endblock %}

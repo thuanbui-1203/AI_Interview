@@ -1,0 +1,46 @@
+{
+  "doc_id": "stress_s09_rx_future_date",
+  "set": "stress",
+  "document_type": "prescription",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "doctor_name": "Dr. Edward Vance",
+    "patient_name": "Chloe Martin",
+    "date": "2027-04-03",
+    "medications": [
+      {
+        "name": "Cetirizine 10 mg tablet",
+        "dosage": "1 tablet",
+        "frequency": "once daily at night",
+        "duration": "30 days",
+        "quantity": 30.0
+      },
+      {
+        "name": "Mometasone furoate 50 mcg nasal spray",
+        "dosage": "2 sprays each nostril",
+        "frequency": "once daily",
+        "duration": "30 days",
+        "quantity": 1.0
+      }
+    ],
+    "facility_name": "Pennant Lane Surgery",
+    "diagnosis": {
+      "primary": {
+        "description": "Allergic rhinitis",
+        "icd10_code": "J30.4"
+      },
+      "secondary": []
+    }
+  },
+  "expected_issues": [
+    "DATE_IN_FUTURE",
+    "DATE_AMBIGUOUS_ORDER"
+  ],
+  "low_confidence_fields": [
+    "date"
+  ],
+  "notes": "Prescription dated '03/04/2027': in the future, and day/month order is ambiguous. Truth reads it day-first (UK practice) as 2027-04-03."
+}

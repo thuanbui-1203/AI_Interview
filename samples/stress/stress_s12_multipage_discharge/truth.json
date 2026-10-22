@@ -1,0 +1,62 @@
+{
+  "doc_id": "stress_s12_multipage_discharge",
+  "set": "stress",
+  "document_type": "discharge_summary",
+  "language": "en",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 3,
+  "fields": {
+    "hospital_name": "Bramblewood University Hospital",
+    "patient_name": "Thomas Eriksen",
+    "admission_date": "2025-07-01",
+    "discharge_date": "2025-07-08",
+    "diagnosis": {
+      "primary": {
+        "description": "Acute calculous cholecystitis",
+        "icd10_code": "K80.0"
+      },
+      "secondary": [
+        {
+          "description": "Choledocholithiasis without cholangitis",
+          "icd10_code": "K80.5"
+        },
+        {
+          "description": "Obesity, unspecified",
+          "icd10_code": "E66.9"
+        }
+      ]
+    },
+    "procedures_performed": [
+      {
+        "name": "ERCP with sphincterotomy and stone extraction",
+        "date": "2025-07-02",
+        "code": null
+      },
+      {
+        "name": "Laparoscopic cholecystectomy",
+        "date": "2025-07-04",
+        "code": null
+      },
+      {
+        "name": "Removal of surgical drain and wound review",
+        "date": "2025-07-15",
+        "code": null
+      }
+    ],
+    "attending_physician": "Mr. Oliver Hartley",
+    "discharge_instructions": "Keep the wounds clean and dry; you may shower after 48 hours. Do not lift anything heavier than 5 kg for 4 weeks. Return for removal of the surgical drain and wound review on the date booked. Seek urgent care for fever, yellowing of the skin or eyes, or increasing abdominal pain.",
+    "department": "Hepatobiliary Surgery",
+    "discharge_status": "improved",
+    "follow_up_date": "2025-08-19",
+    "sick_leave_from": null,
+    "sick_leave_to": null
+  },
+  "expected_issues": [
+    "PROCEDURE_DATE_OUT_OF_STAY"
+  ],
+  "low_confidence_fields": [
+    "procedures_performed"
+  ],
+  "notes": "3-page discharge summary ('Page x of 3'): diagnoses on p1, procedures on p2 (drain removal dated 15 Jul 2025, after the 08 Jul discharge), instructions and signature on p3."
+}

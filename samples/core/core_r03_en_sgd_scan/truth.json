@@ -1,0 +1,57 @@
+{
+  "doc_id": "core_r03_en_sgd_scan",
+  "set": "core",
+  "document_type": "receipt",
+  "language": "en",
+  "file": "document.png",
+  "variant": "scan",
+  "pages": 1,
+  "fields": {
+    "currency": "SGD",
+    "hospital_name": "Larkspur Family Clinic",
+    "patient_name": "Tan Wei Ling",
+    "date": "2026-02-09",
+    "items": [
+      {
+        "description": "General consultation",
+        "quantity": 1.0,
+        "unit_price": 45.0,
+        "total": 45.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Rapid strep throat swab test",
+        "quantity": 1.0,
+        "unit_price": 28.0,
+        "total": 28.0,
+        "category": "lab"
+      },
+      {
+        "description": "Amoxicillin 500 mg capsules",
+        "quantity": 21.0,
+        "unit_price": 0.6,
+        "total": 12.6,
+        "category": "drug"
+      },
+      {
+        "description": "Paracetamol 500 mg tablets",
+        "quantity": 20.0,
+        "unit_price": 0.15,
+        "total": 3.0,
+        "category": "drug"
+      }
+    ],
+    "grand_total": 88.6,
+    "payment_method": "cash",
+    "invoice_number": "LFC-26-00318",
+    "subtotal": null,
+    "discount_total": null,
+    "tax_amount": null,
+    "insurance_covered_amount": null,
+    "patient_payable": null,
+    "amount_in_words": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "Small EN clinic receipt in SGD, cash, 4 items, delivered as a scanned PNG (no text layer)."
+}

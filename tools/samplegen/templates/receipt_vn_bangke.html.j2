@@ -1,0 +1,78 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% block style %}
+  body { font-family: "Times New Roman", serif; font-size: 10.5pt; line-height: 1.3; }
+  .grid td, .grid th { padding: 2px 5px; }
+  .top { display: flex; justify-content: space-between; }
+  .top .l { text-align: center; width: 92mm; }
+  .top .r { text-align: right; font-size: 10pt; }
+  .ttl { text-align: center; font-size: 15pt; font-weight: bold; margin: 6mm 0 1mm; }
+  .sub { text-align: center; font-style: italic; margin-bottom: 4mm; }
+  h4 { margin: 3mm 0 1.5mm; font-size: 11.5pt; }
+  .kv { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; row-gap: 1mm; }
+  .grid td, .grid th { border-color: #222; }
+  .grp td { font-weight: bold; font-style: italic; background: #f6f6f6; }
+  .sum { margin-top: 3mm; }
+  .sum div { margin: 1.2mm 0; }
+  .sigs { display: flex; justify-content: space-between; margin-top: 6mm; text-align: center; }
+  .sigs > div { width: 56mm; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="top">
+    <div class="l">
+      <div>{{ d.facility.authority }}</div>
+      <div class="b">{{ d.facility.name }}</div>
+      <div class="small">{{ d.facility.address }}</div>
+      <div class="small">MST: {{ d.facility.tax_code }} &middot; ĐT: {{ d.facility.phone }}</div>
+    </div>
+    <div class="r">
+      <div>Mẫu số: 01/KBCB</div>
+      <div>Mã số người bệnh: {{ d.patient_code }}</div>
+      <div>Số khám bệnh: {{ d.invoice_number }}</div>
+      {{ m.barcode(d.patient_code, width=120, height=26) }}
+    </div>
+  </div>
+
+  <div class="ttl">{{ d.title }}</div>
+  <div class="sub">({{ d.subtitle }})</div>
+
+  <h4>I. Phần hành chính</h4>
+  <div class="kv">
+    <div>(1) Họ tên người bệnh: <b>{{ d.patient_name }}</b></div><div>Ngày sinh: {{ d.dob }} &nbsp; Giới tính: {{ d.sex }}</div>
+    <div>(2) Địa chỉ: {{ d.patient_address }}</div><div>(3) Mã thẻ BHYT: {{ d.insurance_card }}</div>
+    <div>(4) Nơi ĐK KCB ban đầu: {{ d.primary_care }}</div><div>(5) Đến khám: {{ d.visit_time }}</div>
+    <div>(6) Chẩn đoán: {{ d.diagnosis_text }}</div><div>(7) Mức hưởng BHYT: {{ d.coverage_rate }}</div>
+  </div>
+
+  <h4>II. Phần chi phí khám bệnh, chữa bệnh</h4>
+  <table class="grid">
+    <tr><th style="width:10mm">STT</th><th>Nội dung</th><th style="width:15mm">ĐVT</th><th style="width:16mm">Số lượng</th>
+        <th style="width:26mm">Đơn giá (đồng)</th><th style="width:30mm">Thành tiền (đồng)</th></tr>
+    {% for grp in d.groups %}
+    <tr class="grp"><td colspan="6">{{ grp.label }}</td></tr>
+    {% for it in grp["items"] %}
+    <tr><td class="ctr">{{ it.no }}</td><td>{{ it.description }}</td><td class="ctr">{{ it.unit }}</td>
+        <td class="ctr">{{ it.quantity | fqty }}</td><td class="num">{{ it.unit_price | money("vn") }}</td><td class="num">{{ it.total | money("vn") }}</td></tr>
+    {% endfor %}
+    {% endfor %}
+    <tr><td colspan="5" class="b" style="text-align:right">Tổng cộng</td><td class="num b">{{ d.grand_total | money("vn") }}</td></tr>
+  </table>
+
+  <div class="sum">
+    <div>Tổng chi phí lần khám bệnh: <b>{{ d.grand_total | money("vn") }}</b> đồng</div>
+    <div>Trong đó: Quỹ BHYT trả: <b>{{ d.insurance_covered_amount | money("vn") }}</b> đồng; &nbsp; Người bệnh trả: <b>{{ d.patient_payable | money("vn") }}</b> đồng</div>
+    <div>Bằng chữ: <i>{{ d.amount_in_words }}</i></div>
+    <div>Hình thức thanh toán: <b>{{ d.payment_label }}</b></div>
+  </div>
+
+  <div style="text-align:right; margin-top: 4mm; font-style: italic">{{ d.place }}, {{ d.date | fdate("ngày %d tháng %m năm %Y") }}</div>
+  <div class="sigs">
+    <div><div class="b">NGƯỜI LẬP BẢNG KÊ</div><div class="hint">(Ký, ghi rõ họ tên)</div>{{ m.signature(0, width=120) }}<div>{{ d.cashier }}</div></div>
+    <div style="position:relative"><div class="b">KẾ TOÁN VIỆN PHÍ</div><div class="hint">(Ký, ghi rõ họ tên)</div>{{ m.signature(2, width=120) }}<div>{{ d.accountant }}</div>
+      {{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, style="position:absolute; left: 4mm; top: 2mm", size=125, rotate=-8) }}</div>
+    <div><div class="b">NGƯỜI BỆNH</div><div class="hint">(Ký, ghi rõ họ tên)</div>{{ m.signature(1, width=120) }}<div>{{ d.patient_name }}</div></div>
+  </div>
+  <div class="footer"><span>{{ d.facility.name }}</span><span>In lúc {{ d.printed_at }} &middot; Trang 1/1</span></div>
+</div>
+{% endblock %}

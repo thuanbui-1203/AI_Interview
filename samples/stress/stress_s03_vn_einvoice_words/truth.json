@@ -1,0 +1,62 @@
+{
+  "doc_id": "stress_s03_vn_einvoice_words",
+  "set": "stress",
+  "document_type": "receipt",
+  "language": "vi",
+  "file": "document.pdf",
+  "variant": "clean",
+  "pages": 1,
+  "fields": {
+    "currency": "VND",
+    "hospital_name": "Bệnh viện Mắt Ánh Dương Xanh",
+    "patient_name": "Đỗ Minh Quân",
+    "date": "2025-07-25",
+    "items": [
+      {
+        "description": "Khám chuyên khoa mắt",
+        "quantity": 1.0,
+        "unit_price": 300000.0,
+        "total": 300000.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Đo khúc xạ máy",
+        "quantity": 1.0,
+        "unit_price": 150000.0,
+        "total": 150000.0,
+        "category": "procedure"
+      },
+      {
+        "description": "Chụp cắt lớp võng mạc (OCT)",
+        "quantity": 1.0,
+        "unit_price": 600000.0,
+        "total": 600000.0,
+        "category": "imaging"
+      },
+      {
+        "description": "Thuốc nhỏ mắt Natri hyaluronat 0,18% 10ml",
+        "quantity": 2.0,
+        "unit_price": 95000.0,
+        "total": 190000.0,
+        "category": "drug"
+      }
+    ],
+    "grand_total": 1302000.0,
+    "payment_method": "bank_transfer",
+    "invoice_number": "00004127",
+    "subtotal": 1240000.0,
+    "discount_total": null,
+    "tax_amount": 62000.0,
+    "insurance_covered_amount": null,
+    "patient_payable": null,
+    "amount_in_words": "Một triệu ba trăm hai mươi nghìn đồng"
+  },
+  "expected_issues": [
+    "AMOUNT_IN_WORDS_MISMATCH"
+  ],
+  "low_confidence_fields": [
+    "amount_in_words",
+    "grand_total"
+  ],
+  "notes": "VN VAT e-invoice (Ký hiệu/Số/MST): 'Tổng tiền thanh toán' 1.302.000 but 'Số tiền viết bằng chữ' reads 1.320.000 (tampering signal)."
+}

@@ -1,0 +1,63 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#1f6f5c") %}
+{% block style %}
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; }
+  .lh { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid {{ accent }}; padding-bottom: 3mm; }
+  .doc .dn { font-size: 16pt; font-weight: bold; color: {{ accent }}; }
+  .fac { text-align: right; font-size: 9pt; }
+  .fac .fn { font-size: 12pt; font-weight: bold; }
+  .pt { margin: 5mm 0 3mm; display: grid; grid-template-columns: 1fr 1fr; row-gap: 1.5mm; }
+  .pt span.l { color: #555; display: inline-block; width: 25mm; }
+  .rx { font-family: "Times New Roman", serif; font-size: 34pt; font-weight: bold; color: {{ accent }}; margin: 2mm 0 1mm; }
+  .meds th { background: #e7f2ef; text-align: left; }
+  .meds td { height: 11mm; vertical-align: middle; }
+  .meta { margin-top: 5mm; }
+  .sig { position: absolute; right: 15mm; bottom: 28mm; width: 72mm; text-align: center; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="lh">
+    <div class="doc">
+      <div class="dn">{{ d.doctor_name }}</div>
+      <div>{{ d.doctor_quals }}</div>
+      <div class="small">{{ d.doctor_reg }}</div>
+    </div>
+    <div style="display:flex; gap: 3mm; align-items: center">
+      <div class="fac">
+        <div class="fn">{{ d.facility.name }}</div>
+        <div>{{ d.facility.address }}</div>
+        <div>Tel {{ d.facility.phone }}</div>
+      </div>
+      {{ m.logo(d.facility.logo.kind, accent, d.facility.logo.initials | default(""), size=50) }}
+    </div>
+  </div>
+
+  <div class="pt">
+    <div><span class="l">Patient:</span><b>{{ d.patient_name }}</b></div>
+    <div><span class="l">Date:</span><b>{{ d.date | fdate(d.date_fmt) }}</b></div>
+    <div><span class="l">DOB / Age:</span>{{ d.dob }}</div>
+    <div><span class="l">Patient ID:</span>{{ d.patient_id }}</div>
+    <div><span class="l">Address:</span>{{ d.patient_address }}</div>
+    <div><span class="l">Allergies:</span>{{ d.allergies }}</div>
+  </div>
+  <div><span class="muted">Diagnosis:</span> <b>{{ d.diagnosis.primary[0] }}{% if d.diagnosis.primary[1] %} ({{ d.diagnosis.primary[1] }}){% endif %}</b></div>
+
+  <div class="rx">R<sub style="font-size:18pt">x</sub></div>
+  <table class="grid meds">
+    <tr><th style="width:8mm">#</th><th>Medication</th><th style="width:30mm">Dose</th><th style="width:40mm">Frequency</th><th style="width:22mm">Duration</th><th style="width:15mm">Qty</th></tr>
+    {% for med in d.medications %}
+    <tr><td class="ctr">{{ loop.index }}</td><td class="b">{{ med.name }}</td><td>{{ med.dosage }}</td><td>{{ med.frequency }}</td><td>{{ med.duration }}</td><td class="ctr">#{{ med.quantity | fqty }}</td></tr>
+    {% endfor %}
+  </table>
+  <div class="meta small">Substitution permitted: {{ d.substitution | default("Yes") }} &nbsp;&middot;&nbsp; Refills: {{ d.refills | default("0") }}</div>
+  <div class="meta small muted">{{ d.note | default("") }}</div>
+
+  <div class="sig">
+    {{ m.signature(d.sig_variant | default(1)) }}
+    <div class="b">{{ d.doctor_name }}</div>
+    <div class="small">Prescriber signature</div>
+  </div>
+  <div class="footer"><span>{{ d.facility.name }} &middot; Prescription valid for 30 days from date of issue</span><span>Rx No. {{ d.rx_no }}</span></div>
+</div>
+{% endblock %}

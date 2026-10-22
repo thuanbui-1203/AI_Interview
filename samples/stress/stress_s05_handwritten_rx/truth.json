@@ -1,0 +1,50 @@
+{
+  "doc_id": "stress_s05_handwritten_rx",
+  "set": "stress",
+  "document_type": "prescription",
+  "language": "en",
+  "file": "document.png",
+  "variant": "handwriting",
+  "pages": 1,
+  "fields": {
+    "doctor_name": "Dr. Samuel Reyes",
+    "patient_name": "Olivia Bennett",
+    "date": "2026-07-02",
+    "medications": [
+      {
+        "name": "Azithromycin 500 mg",
+        "dosage": "1 tab",
+        "frequency": "once daily",
+        "duration": "3 days",
+        "quantity": 3.0
+      },
+      {
+        "name": "Prednisolone 5 mg",
+        "dosage": null,
+        "frequency": "every morning",
+        "duration": "5 days",
+        "quantity": 30.0
+      },
+      {
+        "name": "Salbutamol inhaler 100 mcg",
+        "dosage": "2 puffs",
+        "frequency": "every 6 hours as needed",
+        "duration": "1 month",
+        "quantity": 1.0
+      }
+    ],
+    "facility_name": "Cedar Hollow Family Practice",
+    "diagnosis": {
+      "primary": {
+        "description": "Acute bronchitis",
+        "icd10_code": null
+      },
+      "secondary": []
+    }
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [
+    "medications[1].dosage"
+  ],
+  "notes": "Handwriting-style prescription pad (Segoe Script) scanned; the Prednisolone dose is smudged by an ink blot -> dosage null in truth, never guessed."
+}

@@ -1,0 +1,64 @@
+{
+  "doc_id": "stress_s07_receipt_photo",
+  "set": "stress",
+  "document_type": "receipt",
+  "language": "en",
+  "file": "document.png",
+  "variant": "photo",
+  "pages": 1,
+  "fields": {
+    "currency": "MYR",
+    "hospital_name": "Kinabalu Heights Specialist Centre",
+    "patient_name": "Nur Aisyah binti Rahman",
+    "date": "2025-12-03",
+    "items": [
+      {
+        "description": "Specialist consultation - ENT",
+        "quantity": 1.0,
+        "unit_price": 180.0,
+        "total": 180.0,
+        "category": "consultation"
+      },
+      {
+        "description": "Diagnostic nasoendoscopy",
+        "quantity": 1.0,
+        "unit_price": 350.0,
+        "total": 350.0,
+        "category": "procedure"
+      },
+      {
+        "description": "Pure tone audiometry",
+        "quantity": 1.0,
+        "unit_price": 120.0,
+        "total": 120.0,
+        "category": "lab"
+      },
+      {
+        "description": "Amoxicillin/clavulanate 625 mg tablets",
+        "quantity": 14.0,
+        "unit_price": 3.5,
+        "total": 49.0,
+        "category": "drug"
+      },
+      {
+        "description": "Saline nasal spray 30 ml",
+        "quantity": 1.0,
+        "unit_price": 38.5,
+        "total": 38.5,
+        "category": "drug"
+      }
+    ],
+    "grand_total": 737.5,
+    "payment_method": "e_wallet",
+    "invoice_number": "KHSC-OR-25-120377",
+    "subtotal": null,
+    "discount_total": null,
+    "tax_amount": null,
+    "insurance_covered_amount": null,
+    "patient_payable": null,
+    "amount_in_words": null
+  },
+  "expected_issues": [],
+  "low_confidence_fields": [],
+  "notes": "Phone photo of a receipt: perspective warp, table background, shadow gradient, JPEG q40. Values are all readable; tests robustness, not nulls."
+}

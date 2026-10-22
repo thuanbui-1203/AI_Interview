@@ -1,0 +1,60 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% block style %}
+  body { font-family: "Times New Roman", serif; font-size: 12.5pt; line-height: 1.45; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .top .l { display: flex; gap: 3mm; align-items: center; }
+  .top .l .nm { font-weight: bold; font-size: 13pt; }
+  .top .r { text-align: right; font-size: 10.5pt; }
+  .ttl { text-align: center; font-size: 22pt; font-weight: bold; margin: 6mm 0 4mm; letter-spacing: .1em; }
+  .ln { margin: 1mm 0; }
+  .meds { margin: 4mm 0 0 0; }
+  .med { margin: 2.5mm 0; }
+  .med .n { display: flex; justify-content: space-between; font-weight: bold; }
+  .med .u { font-style: italic; margin-left: 7mm; }
+  .bottom { display: flex; justify-content: space-between; margin-top: 8mm; }
+  .bottom .advice { width: 95mm; font-size: 11.5pt; }
+  .bottom .sg { width: 70mm; text-align: center; position: relative; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="top">
+    <div class="l">
+      {{ m.logo(d.facility.logo.kind, d.facility.logo.color, size=48) }}
+      <div><div class="small">{{ d.facility.authority }}</div><div class="nm">{{ d.facility.name }}</div>
+        <div class="small">{{ d.facility.address }}</div><div class="small">ĐT: {{ d.facility.phone }}</div></div>
+    </div>
+    <div class="r">Mã đơn thuốc: {{ d.rx_no }}<br>Mã BN: {{ d.patient_id }}<br>{{ m.barcode(d.patient_id, width=110, height=24) }}</div>
+  </div>
+
+  <div class="ttl">ĐƠN THUỐC</div>
+  <div class="ln">Họ tên: <b>{{ d.patient_name }}</b> &nbsp;&nbsp;&nbsp; Ngày sinh: {{ d.dob }} &nbsp;&nbsp;&nbsp; Giới tính: {{ d.sex }}</div>
+  <div class="ln">Địa chỉ: {{ d.patient_address }}</div>
+  <div class="ln">Số thẻ BHYT (nếu có): {{ d.insurance_card }}</div>
+  <div class="ln">Chẩn đoán: <b>{{ d.diagnosis.primary[1] }} - {{ d.diagnosis.primary[0] }}</b>{% for desc, code in d.diagnosis.secondary %}; {{ code }} - {{ desc }}{% endfor %}</div>
+
+  <div class="meds">
+    <div class="b" style="text-decoration: underline">Thuốc điều trị:</div>
+    {% for med in d.medications %}
+    <div class="med">
+      <div class="n"><span>{{ loop.index }}. {{ med.name }}</span><span>SL: {{ med.quantity | fqty }} {{ med.unit }}</span></div>
+      <div class="u">{{ med.frequency }}, mỗi lần {{ med.dosage }}{% if med.note %}, {{ med.note }}{% endif %}{% if med.duration %}. Dùng {{ med.duration }}{% endif %}.</div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="ln" style="margin-top:3mm">Cộng khoản: {{ d.medications | length }} loại thuốc</div>
+
+  <div class="bottom">
+    <div class="advice"><b>Lời dặn:</b> {{ d.advice }}<br><br><i>Tái khám: {{ d.revisit_text }}</i><br>
+      <span class="small">Khám lại xin mang theo đơn này.</span></div>
+    <div class="sg">
+      <div style="font-style: italic">{{ d.date | fdate("Ngày %d tháng %m năm %Y") }}</div>
+      <div class="b">BÁC SĨ KHÁM BỆNH</div>
+      <div class="small" style="font-style: italic">(Ký, ghi rõ họ tên)</div>
+      {{ m.signature(1, width=130) }}
+      <div class="b">{{ d.doctor_name }}</div>
+    </div>
+  </div>
+  <div class="footer" style="font-family: Arial"><span>{{ d.facility.name }}</span><span>Đơn thuốc có giá trị sử dụng trong 05 ngày kể từ ngày kê</span></div>
+</div>
+{% endblock %}

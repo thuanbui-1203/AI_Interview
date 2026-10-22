@@ -1,0 +1,69 @@
+{% extends "_base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{% set accent = d.accent | default("#5b2a86") %}
+{% set df = d.date_fmt | default("%d-%b-%Y") %}
+{% block style %}
+  body { font-family: Calibri, "Segoe UI", Arial, sans-serif; font-size: 10.5pt; }
+  .lh { display: flex; align-items: center; gap: 5mm; }
+  .lh .nm { font-size: 18pt; font-weight: bold; color: {{ accent }}; }
+  .lh .acc { margin-left: auto; text-align: right; font-size: 8.5pt; color: #444; }
+  .ttl { background: {{ accent }}; color: #fff; text-align: center; font-weight: bold; letter-spacing: .12em; padding: 1.5mm; margin: 4mm 0; }
+  .pi { display: grid; grid-template-columns: 30mm 1fr 34mm 1fr; border: 1px solid #999; padding: 2mm 3mm; row-gap: 1mm; }
+  .pi .l { color: #555; }
+  .res { margin-top: 4mm; }
+  .res th { text-align: left; border-bottom: 2px solid #333; padding: 1.5mm 2mm; }
+  .res td { padding: 1.3mm 2mm; border-bottom: 1px solid #ddd; }
+  .res .sec td { font-weight: bold; color: {{ accent }}; border-bottom: 1px solid {{ accent }}; padding-top: 3mm; }
+  .res .ab { font-weight: bold; }
+  .flag { font-weight: bold; text-align: center; }
+  .endrep { text-align: center; margin-top: 4mm; font-size: 9pt; color: #555; }
+  .sigs { display: flex; justify-content: space-between; margin-top: 10mm; }
+  .sigs > div { width: 70mm; text-align: center; position: relative; }
+{% endblock %}
+{% block body %}
+<div class="page">
+  <div class="lh">
+    {{ m.logo(d.facility.logo.kind, accent, d.facility.logo.initials | default(""), size=54) }}
+    <div>
+      <div class="nm">{{ d.facility.name }}</div>
+      <div class="small">{{ d.facility.address }}</div>
+      <div class="small">Tel {{ d.facility.phone }} &middot; {{ d.facility.email | default("") }}</div>
+    </div>
+    <div class="acc">{{ d.facility.accreditation | default("") }}<br>{{ m.barcode(d.lab_no, width=110, height=22) }}<br>Lab No. {{ d.lab_no }}</div>
+  </div>
+  <div class="ttl">{{ d.title | default("LABORATORY REPORT") }}</div>
+
+  <div class="pi">
+    <div class="l">Patient</div><div class="b">{{ d.patient_name }}</div>
+    <div class="l">Collected</div><div>{{ d.collection_date | fdate(d.collection_fmt | default(df)) }} {{ d.collection_time | default("") }}</div>
+    <div class="l">DOB / Sex</div><div>{{ d.dob }} / {{ d.sex }}</div>
+    <div class="l">Report Date</div><div>{{ d.date | fdate(df) }}</div>
+    <div class="l">Patient ID</div><div>{{ d.patient_id }}</div>
+    <div class="l">Referring Doctor</div><div>{{ d.ordering_physician }}</div>
+    <div class="l">Specimen</div><div>{{ d.specimen }}</div>
+    <div class="l">Clinic</div><div>{{ d.referrer_clinic | default("") }}</div>
+  </div>
+
+  <table class="res">
+    <tr><th>Test</th><th style="width:24mm">Result</th>{% if d.has_flag_column %}<th style="width:12mm" class="ctr">Flag</th>{% endif %}
+        <th style="width:26mm">Units</th><th style="width:34mm">Reference Range</th></tr>
+    {% for sec in d.sections %}
+    <tr class="sec"><td colspan="{{ 5 if d.has_flag_column else 4 }}">{{ sec.name }}</td></tr>
+    {% for t in sec.tests %}
+    <tr><td>{{ t.test_name }}</td><td class="{{ 'ab' if t.printed_flag in ['H', 'L'] else '' }}">{{ t.result }}</td>
+        {% if d.has_flag_column %}<td class="flag">{{ t.printed_flag or "" }}</td>{% endif %}
+        <td>{{ t.unit or "" }}</td><td>{{ t.reference_range or "" }}</td></tr>
+    {% endfor %}
+    {% endfor %}
+  </table>
+  {% if d.has_flag_column %}<div class="tiny muted" style="margin-top:2mm">Flags: H = above reference range, L = below reference range{% if d.flag_legend_n %}, N = within range{% endif %}.</div>{% endif %}
+  <div class="endrep">*** End of Report ***</div>
+
+  <div class="sigs">
+    <div><div class="small muted">Performed by</div>{{ m.signature(1, width=120) }}<div class="b">{{ d.technologist }}</div><div class="small">Medical Technologist</div></div>
+    <div><div class="small muted">Verified by</div>{{ m.signature(0, width=120) }}<div class="b">{{ d.pathologist }}</div><div class="small">Consultant Pathologist</div>
+      {% if d.stamp %}{{ m.stamp(d.stamp.top, d.stamp.bottom, d.stamp.center, color=d.stamp.color | default("#5b2a86"), style="left: 34mm; top: -8mm", size=115, rotate=12) }}{% endif %}</div>
+  </div>
+  <div class="footer"><span>Results relate only to the specimen received. {{ d.facility.name }}</span><span>Page 1 of 1</span></div>
+</div>
+{% endblock %}
