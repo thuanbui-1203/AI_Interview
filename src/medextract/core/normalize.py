@@ -43,7 +43,7 @@ def normalize(extraction: BaseModel, spec: DocTypeSpec, doc: Document | None) ->
         inferred=frozenset(spec.inferred_fields),
     )
     out = Normalized(
-        fields={}, language=language, currency=currency, observed_type=getattr(extraction, "observed_document_type", None)
+        fields={}, language=language, currency=currency, observed_type=_clean_text(getattr(extraction, "observed_document_type", None))
     )
     for name in spec.output_fields:
         out.fields[name] = _normalize_field(name, getattr(extraction, name), ctx, out.issues)

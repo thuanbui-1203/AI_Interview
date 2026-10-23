@@ -77,10 +77,11 @@ class Settings(BaseSettings):
     # Client-side spacing of requests; 0 disables. Kept below the free-tier per-minute quota on purpose:
     # a request rejected with 429/503 still counts against the 20/day quota (observed 2026-10-22).
     gemini_rpm: int = 4
-    gemini_rate_limit_retries: int = 5  # 429 / 5xx retries honouring the API's retryDelay
+    gemini_rate_limit_retries: int = 5  # 429 retries honouring the API's retryDelay
+    gemini_server_error_retries: int = 2  # 5xx retries, 20 s then 40 s apart
 
     # --- record/replay for offline golden tests ---
-    record_mode: Literal["off", "record", "replay"] = "off"
+    record_mode: Literal["off", "record", "replay", "auto"] = "off"
     cassette_dir: Path = Path("tests/cassettes")
 
     # --- validation ---

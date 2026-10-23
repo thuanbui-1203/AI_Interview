@@ -1,0 +1,315 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.3,
+  "fields": {
+    "currency": {
+      "value": "THB",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "TOTAL THB 1,483.02",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "The Copper Ladle Bistro",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "The Copper Ladle Bistro",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-09-06",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "06 Sep 2025",
+      "evidence": "06 Sep 2025 20:41",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Pad Thai with prawns",
+          "quantity": 2.0,
+          "unit_price": null,
+          "total": 440.0,
+          "category": "other"
+        },
+        {
+          "description": "Tom Yum Goong",
+          "quantity": 1.0,
+          "unit_price": null,
+          "total": 280.0,
+          "category": "other"
+        },
+        {
+          "description": "Green curry chicken",
+          "quantity": 1.0,
+          "unit_price": null,
+          "total": 240.0,
+          "category": "other"
+        },
+        {
+          "description": "Thai iced tea",
+          "quantity": 2.0,
+          "unit_price": null,
+          "total": 150.0,
+          "category": "other"
+        },
+        {
+          "description": "Mango sticky rice",
+          "quantity": 1.0,
+          "unit_price": null,
+          "total": 150.0,
+          "category": "other"
+        }
+      ],
+      "confidence": 0.5,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "2 Pad Thai with prawns 440.00",
+        "1 Tom Yum Goong 280.00",
+        "1 Green curry chicken 240.00",
+        "2 Thai iced tea 150.00",
+        "1 Mango sticky rice 150.00"
+      ],
+      "trace": [
+        {
+          "reason": "issue:TOTAL_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    },
+    "grand_total": {
+      "value": 1483.02,
+      "confidence": 0.5,
+      "status": "present",
+      "raw": "1,483.02",
+      "evidence": "TOTAL THB 1,483.02",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "issue:TOTAL_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    },
+    "payment_method": {
+      "value": "card",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "VISA",
+      "evidence": "VISA 1,483.02",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "40719",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Check #40719",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": 1260.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "1,260.00",
+      "evidence": "Subtotal 1,260.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": 97.02,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "97.02",
+      "evidence": "VAT 7% 97.02",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "NOT_MEDICAL_DOCUMENT_SUSPECTED",
+      "severity": "warning",
+      "fields": [],
+      "message": "the document does not look like a medical document; extraction forced into the closest type",
+      "details": {
+        "cues": "Bistro receipt, food items, subtotal, service charge, total THB"
+      }
+    },
+    {
+      "code": "CLASSIFICATION_LOW_CONFIDENCE",
+      "severity": "warning",
+      "fields": [],
+      "message": "document type confidence is low (0.30); route to a human",
+      "details": {}
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "patient_name"
+      ],
+      "message": "Required field 'patient_name' was not found on the document.",
+      "details": {}
+    },
+    {
+      "code": "TOTAL_MISMATCH",
+      "severity": "error",
+      "fields": [
+        "grand_total",
+        "items"
+      ],
+      "message": "Items sum to 1,357.02 but grand total is 1,483.02 (8.5% off).",
+      "details": {
+        "computed": 1357.02,
+        "printed": 1483.02,
+        "rel_diff": 0.084961767
+      }
+    }
+  ],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 1.0
+    },
+    "language": "en",
+    "is_medical_document": false,
+    "cues": "Bistro receipt, food items, subtotal, service charge, total THB"
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "9b9a86d5be3dba76a0ecd1b82ce2e869b93cabedec1f6131b5156436a19f359b",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 110,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 2687,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "nQfbatCGOeOW9tMP06SFqA4"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 475,
+        "output_tokens": 3460,
+        "cache_read_input_tokens": 1702,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 31934,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "rQfbasD2F6fAvr0PvK3OAQ"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 164,
+      "classify": 2766,
+      "extract": 31963,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

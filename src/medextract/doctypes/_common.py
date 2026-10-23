@@ -2,20 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Literal
-
 from pydantic import Field
 
 from medextract.core.fields import DocumentLanguage, LLMModel
-
-DocType = Literal["receipt", "discharge_summary", "lab_report", "prescription"]
 
 
 class ExtractionBase(LLMModel):
     """Every extraction schema starts with these two fields (they are metadata, not output fields)."""
 
-    observed_document_type: DocType = Field(
-        description="What this document actually is, judged from its content. Used to cross-check the classifier."
+    # Free text on purpose: a closed enum of the built-in types would make every new document type
+    # "disagree" with the classifier. The pipeline compares it with the classified type's name.
+    observed_document_type: str = Field(
+        description="What this document actually is, judged from its content: the requested document type name if it fits, "
+        "otherwise the closest of receipt / discharge_summary / lab_report / prescription, or 'other'. Used to cross-check the classifier."
     )
     document_language: DocumentLanguage
 

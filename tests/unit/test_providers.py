@@ -443,3 +443,31 @@ def test_corrupt_cassette_is_a_provider_error(tmp_path: Path) -> None:
     replayer.path_for(make_request()).write_text("{not json", encoding="utf-8")
     with pytest.raises(CassetteMiss, match="unreadable cassette"):
         run(replayer.structured(make_request()))
+
+
+def test_auto_mode_replays_hits_and_records_misses(tmp_path):
+    import asyncio as _asyncio
+
+    from medextract.providers.cassette import RecordReplayProvider as _RRP
+    from medextract.providers.fake import FakeProvider as _Fake
+    from tests.helpers import classification as _cls
+
+    calls = []
+
+    def handler(req):
+        calls.append(req.stage)
+        return _cls()
+
+    from medextract.core.steps import classification_model
+    from medextract.providers.base import StructuredRequest as _Req
+    from medextract.providers.base import TextPart as _Text
+
+    model = classification_model(("receipt", "discharge_summary", "lab_report", "prescription"))
+    req = _Req(stage="classify", model="m", system="s", content=[_Text("doc A")], output_model=model, max_tokens=10)
+    other = _Req(stage="classify", model="m", system="s", content=[_Text("doc B")], output_model=model, max_tokens=10)
+    p = _RRP(_Fake(handler), tmp_path, "auto")
+    _asyncio.run(p.structured(req))  # miss -> provider call + record
+    _asyncio.run(p.structured(req))  # hit -> replay, no call
+    _asyncio.run(p.structured(other))  # different input -> call
+    assert calls == ["classify", "classify"]
+    assert len(list(tmp_path.glob("*.json"))) == 2

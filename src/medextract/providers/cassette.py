@@ -31,7 +31,9 @@ from medextract.providers.base import (
 
 log = logging.getLogger(__name__)
 
-RecordMode = Literal["off", "record", "replay"]
+# auto = replay when a cassette exists, otherwise call the provider and record. The right mode under a
+# tight request quota: re-running an eval only spends requests on inputs/prompts that changed.
+RecordMode = Literal["off", "record", "replay", "auto"]
 
 
 class CassetteMiss(ProviderError):
@@ -84,11 +86,11 @@ class RecordReplayProvider:
         return self._dir / f"{stage}-{cassette_key(req)[:16]}.json"
 
     async def structured[T: BaseModel](self, req: StructuredRequest[T]) -> StructuredResponse[T]:
-        if self._mode == "replay":
+        if self._mode == "replay" or (self._mode == "auto" and self.path_for(req).is_file()):
             return self._load(req)
         assert self._inner is not None  # guaranteed by __init__
         response = await self._inner.structured(req)
-        if self._mode == "record":
+        if self._mode in ("record", "auto"):
             self._save(req, response)
         return response
 

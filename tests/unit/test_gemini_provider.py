@@ -196,7 +196,7 @@ def test_invalid_json_retried_then_schema_error():
 def test_rate_limit_waits_for_retry_delay_then_succeeds(no_sleep):
     p, _ = provider(api_error(429, "12s"), api_error(503), response(json.dumps(GOOD)))
     res = run(p, request())
-    assert res.parsed.name.value == "An" and no_sleep == [12.0, 2.0]
+    assert res.parsed.name.value == "An" and no_sleep == [12.0, 20.0]
     assert res.call.retry_reasons == ["429", "503"] and res.call.attempts == 3
 
 
@@ -253,3 +253,10 @@ def test_settings_switch_default_models_for_gemini():
     s = Settings(provider="gemini")
     assert s.classify_model.startswith("gemini") and s.extract_model.startswith("gemini")
     assert Settings(provider="gemini", extract_model="custom").extract_model == "custom"
+
+
+def test_server_errors_have_their_own_slow_bounded_budget(no_sleep):
+    p, client = provider(api_error(503), api_error(503), api_error(503), gemini_server_error_retries=2)
+    with pytest.raises(ProviderUnavailable):
+        run(p, request())
+    assert no_sleep == [20.0, 40.0] and len(client.calls) == 3

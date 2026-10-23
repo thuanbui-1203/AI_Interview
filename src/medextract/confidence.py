@@ -145,7 +145,7 @@ def document_confidence(cls: ClassificationInfo, observed_type: str | None) -> t
     top = scores[0]
     margin = top - (scores[1] if len(scores) > 1 else 0.0)
     conf = top - 0.5 * max(0.0, 0.3 - margin)  # margin >= 0.3 costs nothing; a coin-flip costs 0.15
-    if observed_type and observed_type != cls.document_type:
+    if observed_type and observed_type.strip().lower() != cls.document_type:
         conf = min(conf, 0.5)
         issues.append(
             ValidationIssue(

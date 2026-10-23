@@ -1,0 +1,165 @@
+{
+  "document_type": "prescription",
+  "confidence": 1.0,
+  "fields": {
+    "doctor_name": {
+      "value": "Dr. Samuel Reyes",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Dr. Samuel Reyes",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Olivia Bennett",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient's name: Olivia Bennett",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2026-07-02",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "02 Jul 2026",
+      "evidence": "Date: 02 Jul 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "medications": {
+      "value": [
+        {
+          "name": "Azithromycin 500 mg",
+          "dosage": "1 tab",
+          "frequency": "once daily",
+          "duration": "3 days",
+          "quantity": 3.0
+        },
+        {
+          "name": "Prednisolone 5 mg",
+          "dosage": null,
+          "frequency": "every morning",
+          "duration": "5 days",
+          "quantity": 30.0
+        },
+        {
+          "name": "Salbutamol inhaler 100 mcg",
+          "dosage": "2 puffs",
+          "frequency": "every 6 hours",
+          "duration": "1 month",
+          "quantity": 1.0
+        }
+      ],
+      "confidence": 0.35,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,low,certain",
+      "row_evidence": [
+        "1. Azithromycin 500 mg - 1 tab once daily x 3 days #3",
+        "2. Prednisolone 5 mg - every morning x 5 days #30",
+        "3. Salbutamol inhaler 100 mcg - 2 puffs every 6 hours as needed x 1 month #1"
+      ],
+      "trace": []
+    },
+    "facility_name": {
+      "value": "Cedar Hollow Family Practice",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Cedar Hollow Family Practice",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Acute bronchitis",
+          "icd10_code": null
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Dx: Acute bronchitis",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "prescription",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 1.0,
+      "receipt": 0.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Rx symbol, list of medications with dosage and frequency, doctor's signature"
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "bdd5342c2f4d2b8762a41f4bfc105e5ad19af946cab1dc26578b92836792fc8c",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "baa1545cb26f",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 109,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 7988,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "H7bZarTYA5Pc9tMP6Oi7uQM"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2070,
+        "output_tokens": 2059,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 12259,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "gAfbapjrGquZ9tMPu9f0iQ8"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 558,
+      "classify": 202,
+      "extract": 12290,
+      "postprocess": 0
+    },
+    "total_cost_usd": 0.0
+  }
+}

@@ -25,6 +25,11 @@ def test_document_confidence_small_margin_and_disagreement():
     assert conf == 0.5 and {i.code for i in issues} >= {"CLASSIFICATION_DISAGREEMENT", "CLASSIFICATION_LOW_CONFIDENCE"}
 
 
+def test_observed_type_comparison_ignores_case_and_spaces():
+    conf, issues = C.document_confidence(cls(), " Receipt ")
+    assert conf == pytest.approx(0.95) and issues == []
+
+
 def test_non_medical_document_is_capped_and_flagged():
     conf, issues = C.document_confidence(cls(medical=False), "receipt")
     assert conf <= 0.3

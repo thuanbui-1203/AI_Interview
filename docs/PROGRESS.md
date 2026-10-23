@@ -91,16 +91,42 @@ Free-tier quota lesson:
   stale replay can never hide a regression. Receipt cassettes need re-recording after the
   `patient_payable` change.
 
+**2026-10-23**
+
+- Changes made offline while waiting for the quota:
+  - Cassette mode `auto`: replay a hit, record a miss.
+  - Golden replay tests, with `tests/golden/known_failures.json`.
+  - An extensibility test that runs a new `insurance_card` type end to end.
+  - That test exposed `observed_document_type` as a closed enum, which made every new type
+    "disagree" with the classifier. It is now free text.
+  - Conversation export script (`tools/export_conversation.py`).
+  - Checkpoint 2 commit (`4fdc515`).
+- Eval v3 (`reports/gemini_all_v3`), 19 of 23 scored:
+  - Classification 100%, hallucination 0%, miss rate 0%.
+  - Validation recall 100%, ECE 0.047.
+  - Accuracy at confidence ≥ 0.9 is 99.3% at 92.5% coverage.
+  - Null precision 100% (45 nulls).
+  - The restaurant bill was flagged NOT_MEDICAL_DOCUMENT_SUSPECTED with confidence 0.3.
+  - The phone photo (s07) and the handwritten prescription (s05) were read correctly, and the
+    smudged dose came back null.
+- **Regression caused by my own fix:** yesterday's `frequency` definition ("exclude timing")
+  dropped "as needed" and "at night" on 2 English prescriptions. The truth convention is "the
+  frequency phrase as printed, including qualifiers in the same phrase; for comma-separated
+  Vietnamese usage sentences, only the frequency clause". The schema was fixed, not the truth.
+- **Quota lesson 2:** 8 of 21 extract attempts were 503 "high demand" retries, and each one is
+  billed against the daily quota. 5xx errors now get their own budget (2 retries, 20 s and 40 s
+  apart).
+- Golden tests: 9 documents replay and pass. 14 are skipped (not run yet, or their prompt changed).
+
 **Next**
 
-1. 2026-10-23, after the 14:00 ICT quota reset: run the 8 remaining stress documents (s05, s07–s13)
-   and re-record the receipts whose prompt changed, with `--resume` and record mode.
-2. Golden tests that replay the recorded cassettes offline.
-3. README writeup: approach, prompt engineering, confidence design, results and limitations.
-4. Export the conversation log into the repo, then push to GitHub (ask first).
+1. 2026-10-24 14:02 ICT (scheduled): full v4 eval into `reports/gemini_all_v4` in auto mode.
+   9 documents replay; 14 call the API (s10–s13, 4 prescriptions, 6 documents with no cassette).
+   Result: 23/23 on one code version, all with cassettes.
+2. Fill in the README results, re-run golden tests, export the conversation log, then commit and
+   push (ask first).
 
 ## API spend log
-
 | Date | Run | Cost |
 |---|---|---|
-| — | none yet | $0.00 |
+| 2026-10-22/23 | Gemini free tier: smoke, eval v1–v3 | $0.00 (free tier) |

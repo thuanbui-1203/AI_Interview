@@ -1,0 +1,263 @@
+{
+  "document_type": "receipt",
+  "confidence": 1.0,
+  "fields": {
+    "currency": {
+      "value": "MYR",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Currency Ringgit Malaysia (RM)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Kinabalu Heights Specialist Centre",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Kinabalu Heights Specialist Centre",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Nur Aisyah binti Rahman",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name Nur Aisyah binti Rahman",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-12-03",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "03 Dec 2025",
+      "evidence": "Date of Issue 03 Dec 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Specialist consultation - ENT",
+          "quantity": 1.0,
+          "unit_price": 180.0,
+          "total": 180.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Diagnostic nasoendoscopy",
+          "quantity": 1.0,
+          "unit_price": 350.0,
+          "total": 350.0,
+          "category": "procedure"
+        },
+        {
+          "description": "Pure tone audiometry",
+          "quantity": 1.0,
+          "unit_price": 120.0,
+          "total": 120.0,
+          "category": "procedure"
+        },
+        {
+          "description": "Amoxicillin/clavulanate 625 mg tablets",
+          "quantity": 14.0,
+          "unit_price": 3.5,
+          "total": 49.0,
+          "category": "drug"
+        },
+        {
+          "description": "Saline nasal spray 30 ml",
+          "quantity": 1.0,
+          "unit_price": 38.5,
+          "total": 38.5,
+          "category": "drug"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "1 Specialist consultation - ENT 1 180.00 180.00",
+        "2 Diagnostic nasoendoscopy 1 350.00 350.00",
+        "3 Pure tone audiometry 1 120.00 120.00",
+        "4 Amoxicillin/clavulanate 625 mg tablets 14 3.50 49.00",
+        "5 Saline nasal spray 30 ml 1 38.50 38.50"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 737.5,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "RM 737.50",
+      "evidence": "TOTAL RM 737.50",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "payment_method": {
+      "value": "e_wallet",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "E-wallet (DuitNow QR)",
+      "evidence": "Payment Method: E-wallet (DuitNow QR)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "KHSC-OR-25-120377",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No. KHSC-OR-25-120377",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 1.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "OFFICIAL RECEIPT, list of items with unit price, amount, total, paid stamp"
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "1e1416a9da7e7bb5e383a2b1754f3ef9e1ce6d487497ce2ca19ec650c54364a3",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1436,
+        "output_tokens": 112,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 11036,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "LrbZasWiBfDjrfcP89HLsQ8"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2149,
+        "output_tokens": 2215,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 16336,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "jwfbaun4CdTf9tMPxaTDoA8"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 261,
+      "classify": 141,
+      "extract": 16365,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

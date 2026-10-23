@@ -48,6 +48,7 @@ log = logging.getLogger(__name__)
 _BLOCKED = {"SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST", "SPII", "RECITATION", "IMAGE_SAFETY", "LANGUAGE", "OTHER"}
 _EFFORT_TO_LEVEL = {"low": "LOW", "medium": "MEDIUM", "high": "HIGH", "xhigh": "HIGH", "max": "HIGH"}
 _EFFORT_TO_BUDGET = {"low": 1024, "medium": 4096, "high": 8192, "xhigh": 16384, "max": 24576}
+SERVER_ERROR_BACKOFF_S = 20.0  # 503 "high demand" clears in tens of seconds, not in 1-2 s
 MAX_RETRY_WAIT_S = 90.0  # a longer requested wait means a daily quota: give up instead
 
 
@@ -179,7 +180,7 @@ class GeminiProvider:
     async def structured[T: BaseModel](self, req: StructuredRequest[T]) -> StructuredResponse[T]:
         tokens = {"input": 0, "output": 0, "cached": 0}
         max_tokens = req.max_tokens
-        attempts = parse_failures = rate_retries = 0
+        attempts = parse_failures = rate_retries = server_retries = 0
         retry_reasons: list[str] = []
         truncation_retried = False
         started = time.perf_counter()
@@ -209,10 +210,20 @@ class GeminiProvider:
                     model=req.model, contents=[to_part(p) for p in req.content], config=build_config(req, max_tokens)
                 )
             except genai_errors.APIError as exc:
-                wait = retry_delay_s(exc) if exc.code == 429 else (2.0**rate_retries if exc.code >= 500 else None)
+                # A rejected request still counts against the free-tier daily quota (observed: 8 of 21
+                # attempts were 503 "high demand" retries), so overload is retried rarely and slowly.
+                if exc.code >= 500:
+                    wait = SERVER_ERROR_BACKOFF_S * 2**server_retries
+                    budget_left = server_retries < self._settings.gemini_server_error_retries
+                else:
+                    wait = retry_delay_s(exc) if exc.code == 429 else None
+                    budget_left = rate_retries < self._settings.gemini_rate_limit_retries
                 retryable = wait is not None and wait <= MAX_RETRY_WAIT_S and not is_daily_quota(exc)
-                if retryable and rate_retries < self._settings.gemini_rate_limit_retries:
-                    rate_retries += 1
+                if retryable and budget_left:
+                    if exc.code >= 500:
+                        server_retries += 1
+                    else:
+                        rate_retries += 1
                     retry_reasons.append(str(exc.code))
                     log.info("%s: Gemini %s, retrying in %.0fs", req.stage, exc.code, wait)
                     await asyncio.sleep(wait or 0)

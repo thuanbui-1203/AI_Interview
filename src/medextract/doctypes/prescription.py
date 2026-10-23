@@ -15,7 +15,7 @@ class Medication(Row):
         description="Amount taken per administration, as printed ('1 viên', '1 capsule', '2 puffs', '5 ml'). The drug strength ('500mg') belongs to name, not here - unless the dose is only given as an amount like '250 mg'."
     )
     frequency: str | None = Field(
-        description="How often only, as printed ('Ngày uống 2 lần', 'three times daily', 'bid'). Exclude dose, timing and other advice ('sau ăn')."
+        description="The frequency phrase as printed, including qualifiers written in the same phrase ('every 6 hours as needed', 'once daily at night', 'bid'). When usage is a comma-separated sentence ('Ngày uống 2 lần, mỗi lần 1 viên, sau ăn'), take only the frequency clause ('Ngày uống 2 lần')."
     )
     duration: str | None = Field(description="As printed ('7 days', 'x5d', '5 ngày').")
     quantity: float | None = Field(description="Total quantity dispensed as a number ('#21', 'SL: 21 viên' -> 21).")

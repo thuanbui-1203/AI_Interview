@@ -1,0 +1,4 @@
+{
+  "_comment": "Fields allowed to be wrong in the replayed Gemini outputs, with the reason. Anything else that goes wrong fails the golden test.",
+  "stress_s06_lab_wrong_flag": {"tests": "model misreads urine glucose '1+' as '1 technique'; the row is flagged for review (confidence < 0.85)"}
+}

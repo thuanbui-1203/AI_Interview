@@ -1,0 +1,193 @@
+{
+  "document_type": "prescription",
+  "confidence": 1.0,
+  "fields": {
+    "doctor_name": {
+      "value": "Dr. Edward Vance",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Dr. Edward Vance",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Chloe Martin",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient: Chloe Martin",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2027-04-03",
+      "confidence": 0.5,
+      "status": "present",
+      "raw": "03/04/2027",
+      "evidence": "Date: 03/04/2027",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "ambiguous_day_month",
+          "before": 0.97,
+          "after": 0.75
+        },
+        {
+          "reason": "issue:DATE_IN_FUTURE",
+          "before": 0.75,
+          "after": 0.5
+        }
+      ]
+    },
+    "medications": {
+      "value": [
+        {
+          "name": "Cetirizine 10 mg tablet",
+          "dosage": "1 tablet",
+          "frequency": "once daily",
+          "duration": "30 days",
+          "quantity": 30.0
+        },
+        {
+          "name": "Mometasone furoate 50 mcg nasal spray",
+          "dosage": "2 sprays each nostril",
+          "frequency": "once daily",
+          "duration": "30 days",
+          "quantity": 1.0
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain",
+      "row_evidence": [
+        "1 | Cetirizine 10 mg tablet | 1 tablet | once daily at night | 30 days | #30",
+        "2 | Mometasone furoate 50 mcg nasal spray | 2 sprays each nostril | once daily | 30 days | #1"
+      ],
+      "trace": []
+    },
+    "facility_name": {
+      "value": "Pennant Lane Surgery",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Pennant Lane Surgery",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Allergic rhinitis",
+          "icd10_code": "J30.4"
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Diagnosis: Allergic rhinitis (J30.4)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "DATE_AMBIGUOUS_ORDER",
+      "severity": "warning",
+      "fields": [
+        "date"
+      ],
+      "message": "date '03/04/2027' could be read day-first or month-first",
+      "details": {
+        "chosen": "2027-04-03",
+        "raw": "03/04/2027"
+      }
+    },
+    {
+      "code": "DATE_IN_FUTURE",
+      "severity": "error",
+      "fields": [
+        "date"
+      ],
+      "message": "'date' 2027-04-03 is in the future.",
+      "details": {
+        "date": "2027-04-03",
+        "today": "2026-10-23"
+      }
+    }
+  ],
+  "classification": {
+    "document_type": "prescription",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 1.0,
+      "receipt": 0.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Rx symbol, list of medications with dose, frequency, duration, quantity, doctor's signature."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "aebad3d2bf40e74896b3ffa9b5f65e7a7d6767d264a51f21dfd7af1b8dc60952",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "baa1545cb26f",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 113,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 2408,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "wAfbauSPB_OT9tMP0ZyJwQg"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2070,
+        "output_tokens": 2361,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 26518,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "0AfbauOoGv_hrfcP-t7y2A0"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 154,
+      "classify": 2488,
+      "extract": 26544,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

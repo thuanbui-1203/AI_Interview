@@ -1,0 +1,209 @@
+{
+  "document_type": "lab_report",
+  "confidence": 1.0,
+  "fields": {
+    "lab_name": {
+      "value": "Meridian Point Pathology",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Meridian Point Pathology",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Robert Chua",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Robert Chua",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "date": {
+      "value": "2025-10-11",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "11 Oct 2025",
+      "evidence": "Report Date 11 Oct 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "tests": {
+      "value": [
+        {
+          "test_name": "Sodium",
+          "result": "141",
+          "unit": "mmol/L",
+          "reference_range": "135 - 145",
+          "flag": "normal",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Potassium",
+          "result": "6.8",
+          "unit": "mmol/L",
+          "reference_range": "3.5 - 5.0",
+          "flag": "normal",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Urea",
+          "result": "9.1",
+          "unit": "mmol/L",
+          "reference_range": "2.5 - 7.1",
+          "flag": "high",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Creatinine",
+          "result": "88",
+          "unit": "umol/L",
+          "reference_range": "60 - 110",
+          "flag": "normal",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "C-Reactive Protein (CRP)",
+          "result": "<0.5",
+          "unit": "mg/L",
+          "reference_range": "< 5.0",
+          "flag": "normal",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Urine Protein",
+          "result": "Negative",
+          "unit": null,
+          "reference_range": "Negative",
+          "flag": null,
+          "flag_source": null
+        },
+        {
+          "test_name": "Urine Glucose",
+          "result": "1 technique",
+          "unit": null,
+          "reference_range": "Negative",
+          "flag": null,
+          "flag_source": null
+        },
+        {
+          "test_name": "Urine Ketones",
+          "result": "Negative",
+          "unit": null,
+          "reference_range": "Negative",
+          "flag": null,
+          "flag_source": null
+        }
+      ],
+      "confidence": 0.75,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain",
+      "trace": [
+        {
+          "reason": "issue:LAB_FLAG_INCONSISTENT",
+          "before": 0.97,
+          "after": 0.75
+        }
+      ]
+    },
+    "ordering_physician": {
+      "value": "Dr. Lim Wei Jie",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Referring Doctor Dr. Lim Wei Jie",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "collection_date": {
+      "value": "2025-10-11",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "11 Oct 2025 09:35",
+      "evidence": "Collected 11 Oct 2025 09:35",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "LAB_FLAG_INCONSISTENT",
+      "severity": "warning",
+      "fields": [
+        "tests[1].flag"
+      ],
+      "message": "Potassium: printed flag 'normal' but 6.8 vs 3.5 - 5.0 is 'high'.",
+      "details": {
+        "printed": "normal",
+        "derived": "high"
+      }
+    }
+  ],
+  "classification": {
+    "document_type": "lab_report",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 1.0,
+      "prescription": 0.0,
+      "receipt": 0.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Laboratory report title, test results table with units and reference ranges, patient details."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "9e808da199f074683eb35ba108ccca1d1074f0f8aaa0e2b1d1e41dfdcd7f4469",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "d862cba1f876",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 111,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 8618,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "e6XZav7sMJnZ1e8Pr4TJ8QM"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2059,
+        "output_tokens": 2418,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 18085,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "g6XZase6Hauz9tMPzrbi4A0"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 158,
+      "classify": 8702,
+      "extract": 18084,
+      "postprocess": 2
+    },
+    "total_cost_usd": 0.0
+  }
+}
