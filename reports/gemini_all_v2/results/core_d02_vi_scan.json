@@ -1,0 +1,207 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 0.98,
+  "fields": {
+    "hospital_name": {
+      "value": "Bệnh viện Đa khoa Phước Hưng Long",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bệnh viện Đa khoa Phước Hưng Long",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Trần Văn Hùng",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên người bệnh: Trần Văn Hùng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2024-03-12",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "12 tháng 03 năm 2024",
+      "evidence": "Vào viện lúc: 08 giờ 30 phút, ngày 12 tháng 03 năm 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_date": {
+      "value": "2024-03-17",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "17 tháng 03 năm 2024",
+      "evidence": "Ra viện lúc: 09 giờ 00 phút, ngày 17 tháng 03 năm 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Viêm ruột thừa cấp",
+          "icd10_code": "K35.8"
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chẩn đoán: K35.8 - Viêm ruột thừa cấp",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": [
+        {
+          "name": "Phẫu thuật nội soi cắt ruột thừa",
+          "date": null,
+          "code": null
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "attending_physician": {
+      "value": "Lê Minh Khoa",
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "TRƯỞNG KHOA Lê Minh Khoa",
+      "page": 1,
+      "model_confidence": "high",
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Kiêng vận động mạnh trong 4 tuần. Thay băng vết mổ cách ngày tại cơ sở y tế gần nhất. Tái khám sau 7 ngày hoặc khi có dấu hiệu bất thường.",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Ghi chú: Kiêng vận động mạnh trong 4 tuần. Thay băng vết mổ cách ngày...",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "department": {
+      "value": "Ngoại tổng hợp",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Khoa: Ngoại tổng hợp",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_status": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "sick_leave_from": {
+      "value": "2024-03-17",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "17/03/2024",
+      "evidence": "Nghỉ ngơi tại nhà từ ngày 17/03/2024 đến ngày 31/03/2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": "2024-03-31",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "31/03/2024",
+      "evidence": "Nghỉ ngơi tại nhà từ ngày 17/03/2024 đến ngày 31/03/2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 0.98,
+    "scores": {
+      "discharge_summary": 0.98,
+      "lab_report": 0.01,
+      "prescription": 0.005,
+      "receipt": 0.005
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "GIẤY RA VIỆN, admission and discharge dates, diagnosis, treatment, doctor's signature."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "ed17d6c5432d79139a18b055153d9971521630199b73f6c9513ff2c66a7226ad",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 123,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 7807,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "lKTZapIQk9z20w_o6Lu5Aw"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 486,
+        "output_tokens": 3552,
+        "cache_read_input_tokens": 1679,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 29804,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "o6TZavrPAbmy2roPza3huA4"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 878,
+      "classify": 8079,
+      "extract": 29803,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

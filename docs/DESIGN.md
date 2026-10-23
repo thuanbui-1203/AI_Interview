@@ -288,3 +288,4 @@ The core 10 and the stress set are reported separately.
 | D6 | SDK version | `anthropic>=1.17,<2` | 2.0.0 was released 2026-10-21 (one day before this work) with an undocumented API-version break. |
 | D7 | Default input mode | Rasterize every page | One path for PDFs and scans, matching real scanned claims. The PDF document block is a switch. |
 | D8 | Lab flag not printed | Derived in code, marked `flag_source: derived` | The model transcribes; code computes. |
+| D9 | LLM backend for development and eval | **Gemini free tier** (`MEDX_PROVIDER=gemini`). Default models: `gemini-3.5-flash-lite` classifies, `gemini-3.5-flash` extracts (2.5 models were probed live: 404 for new users). The Claude provider stays and is tested with fakes. | The candidate's Claude Team seat has no API access. The brief allows "a free tier". A provider swap touches only `providers/`, which proves the abstraction. |

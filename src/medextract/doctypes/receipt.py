@@ -37,13 +37,15 @@ class ReceiptExtraction(ExtractionBase):
     payment_method: ChoiceField[PaymentMethod]
     invoice_number: TextField
     subtotal: MoneyField = Field(description="The amount on a line labelled Subtotal / Sub-total / Cộng tiền hàng (before tax), only if printed as its own line.")
-    discount_total: MoneyField = Field(description="Total discount as a POSITIVE amount, only if printed.")
+    discount_total: MoneyField = Field(
+        description="Total discount as a POSITIVE amount, only if printed as a separate summary line in the totals section. A discount printed only as an item row stays in items (null here)."
+    )
     tax_amount: MoneyField = Field(description="VAT / tax amount, only if printed.")
     insurance_covered_amount: MoneyField = Field(
         description="Amount paid by insurance / BHYT fund / direct billing (VN: 'Quỹ BHYT trả', 'BHYT chi trả'), only if printed."
     )
     patient_payable: MoneyField = Field(
-        description="What the patient owes / paid after insurance and deposits (VN: 'Người bệnh trả', 'Số tiền phải nộp'; EN: 'Amount due', 'Patient pays')."
+        description="What the patient owes / paid after insurance and deposits (VN: 'Người bệnh trả', 'Số tiền phải nộp'; EN: 'Amount due', 'Patient pays'), only if printed as its own line distinct from the grand total. If the document prints a single total line, that is grand_total and this stays null."
     )
     amount_in_words: TextField = Field(description="The total written in words (VN: 'Bằng chữ', 'Số tiền viết bằng chữ'), verbatim.")
 
@@ -68,4 +70,6 @@ SPEC = DocTypeSpec(
     required_fields=("hospital_name", "patient_name", "date", "items", "grand_total", "payment_method"),
     prompt_hints=HINTS,
     classifier_cues=CUES,
+    magnitude_fields=("discount_total", "insurance_covered_amount"),
+    inferred_fields=("currency",),
 )

@@ -1,0 +1,206 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 1.0,
+  "fields": {
+    "hospital_name": {
+      "value": "Bệnh viện Đa khoa Hòa Mỹ Trung",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bệnh viện Đa khoa Hòa Mỹ Trung",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Huỳnh Thị Kim Loan",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên người bệnh: Huỳnh Thị Kim Loan",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2025-11-03",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "03 tháng 11 năm 2025",
+      "evidence": "Vào viện lúc: 14 giờ 15 phút, ngày 03 tháng 11 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_date": {
+      "value": "2025-11-10",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "10 tháng 11 năm 2025",
+      "evidence": "Ra viện lúc: 08 giờ 00 phút, ngày 10 tháng 11 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Viêm phổi",
+          "icd10_code": "J18.9"
+        },
+        "secondary": [
+          {
+            "description": "Đái tháo đường týp 2",
+            "icd10_code": "E11.9"
+          }
+        ]
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chẩn đoán: J18.9 - Viêm phổi; E11.9 - Đái tháo đường týp 2",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": [],
+      "confidence": 0.8,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": null,
+      "trace": []
+    },
+    "attending_physician": {
+      "value": "Phan Thanh Tùng",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "TRƯỞNG KHOA (Ký, ghi rõ họ tên) Phan Thanh Tùng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Uống thuốc theo đơn, kiểm tra đường huyết hằng ngày, tái khám sau 10 ngày.",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Ghi chú: Uống thuốc theo đơn, kiểm tra đường huyết hằng ngày, tái khám sau 10 ngày.",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "department": {
+      "value": "Nội tổng hợp",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Khoa: Nội tổng hợp",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_status": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "sick_leave_from": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 1.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 0.0
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "GIẤY RA VIỆN, admission and discharge dates, diagnosis, treatment, hospital stamps, signatures."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "95de0e37af0ca3383408991e3d129032e9d5cbd79937b3e001bec343b09302d9",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 117,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 15823,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "XqXZapm1BJPc9tMP6Oi7uQM"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2165,
+        "output_tokens": 3268,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 33392,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "cKXZar-1Fema1e8PwI_loA4"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 590,
+      "classify": 16003,
+      "extract": 33392,
+      "postprocess": 0
+    },
+    "total_cost_usd": 0.0
+  }
+}

@@ -11,3 +11,5 @@ dist/
 build/
 # local scratch output (committed results live in results/)
 out/
+# personal editor settings
+.vscode/

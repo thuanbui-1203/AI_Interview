@@ -1,0 +1,206 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 1.0,
+  "fields": {
+    "hospital_name": {
+      "value": "Harbourview Lakes Hospital",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Harbourview Lakes Hospital",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "James O'Connell",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name James O'Connell",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2026-01-14",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "14 Jan 2026",
+      "evidence": "Admission Date 14 Jan 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_date": {
+      "value": "2026-01-16",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "16 Jan 2026",
+      "evidence": "Discharge Date 16 Jan 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Acute gastroenteritis, presumed infectious",
+          "icd10_code": "A09"
+        },
+        "secondary": [
+          {
+            "description": "Dehydration, moderate",
+            "icd10_code": "E86.0"
+          }
+        ]
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Principal Acute gastroenteritis, presumed infectious A09",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": [],
+      "confidence": 0.8,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": null,
+      "trace": []
+    },
+    "attending_physician": {
+      "value": "Dr. Aisha Rahman",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Attending Physician Dr. Aisha Rahman",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Drink at least 2 litres of fluid a day and use oral rehydration salts after each loose stool. Wash hands carefully and avoid preparing food for others for 48 hours after symptoms stop. See your GP if vomiting persists for more than 24 hours or if you notice blood in the stool.",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Discharge Instructions Drink at least 2 litres of fluid a day",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "department": {
+      "value": "General Medicine",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Department General Medicine",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discharge_status": {
+      "value": "improved",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Improved",
+      "evidence": "Condition at Discharge Improved",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "sick_leave_from": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 1.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 0.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "INPATIENT DISCHARGE SUMMARY title, admission and discharge dates, diagnoses, hospital course, and attending physician signature."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "61a666c8792c491a2bbe38b6bcab540a1f3d5925e00887d458617e8a327758b8",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 118,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 6294,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "qaTZav_YKIau9tMPy_3tuQg"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 486,
+        "output_tokens": 2607,
+        "cache_read_input_tokens": 1679,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 31957,
+        "stop_reason": "STOP",
+        "attempts": 2,
+        "request_id": "wKTZatDMJNTf9tMPxaTDoA8"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 187,
+      "classify": 6398,
+      "extract": 31957,
+      "postprocess": 3
+    },
+    "total_cost_usd": 0.0
+  }
+}

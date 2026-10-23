@@ -1,0 +1,285 @@
+{
+  "document_type": "receipt",
+  "confidence": 1.0,
+  "fields": {
+    "currency": {
+      "value": "THB",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Currency Thai Baht (THB)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Chao Phraya Meridian Hospital",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chao Phraya Meridian Hospital",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Pimchanok Srisawat",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name Pimchanok Srisawat",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-08-14",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "14 Aug 2025",
+      "evidence": "Date of Issue 14 Aug 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Consultation fee - Internal Medicine (Dr. Kittipong Wongsuwan)",
+          "quantity": 1.0,
+          "unit_price": 1200.0,
+          "total": 1200.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Ward room - Standard single, per night",
+          "quantity": 2.0,
+          "unit_price": 3500.0,
+          "total": 7000.0,
+          "category": "room"
+        },
+        {
+          "description": "Nursing care fee, per day",
+          "quantity": 2.0,
+          "unit_price": 800.0,
+          "total": 1600.0,
+          "category": "procedure"
+        },
+        {
+          "description": "Complete Blood Count (CBC)",
+          "quantity": 1.0,
+          "unit_price": 450.0,
+          "total": 450.0,
+          "category": "lab"
+        },
+        {
+          "description": "Chest X-ray PA view",
+          "quantity": 1.0,
+          "unit_price": 900.0,
+          "total": 900.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Ceftriaxone 1 g injection",
+          "quantity": 4.0,
+          "unit_price": 380.0,
+          "total": 1520.0,
+          "category": "drug"
+        },
+        {
+          "description": "IV set and medical supplies",
+          "quantity": 1.0,
+          "unit_price": 650.0,
+          "total": 650.0,
+          "category": "consumable"
+        },
+        {
+          "description": "Corporate discount 10% (Siam Northstar Trading Co., Ltd.)",
+          "quantity": null,
+          "unit_price": null,
+          "total": -1332.0,
+          "category": "discount"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "1 OPD-0101 Consultation fee - Internal Medicine (Dr. Kittipong Wongsuwan) 1 1,200.00 1,200.00",
+        "2 IPD-2201 Ward room - Standard single, per night 2 3,500.00 7,000.00",
+        "3 IPD-2310 Nursing care fee, per day 2 800.00 1,600.00",
+        "4 LAB-1001 Complete Blood Count (CBC) 1 450.00 450.00",
+        "5 RAD-3002 Chest X-ray PA view 1 900.00 900.00",
+        "6 PHA-5512 Ceftriaxone 1 g injection 4 380.00 1,520.00",
+        "7 SUP-7004 IV set and medical supplies 1 650.00 650.00",
+        "8 DSC-CORP Corporate discount 10% (Siam Northstar Trading Co., Ltd.) -1,332.00"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 12827.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "12,827.16",
+      "evidence": "TOTAL (incl. VAT) 12,827.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "payment_method": {
+      "value": "card",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Credit card - VISA ending 4821",
+      "evidence": "Payment Method: Credit card - VISA ending 4821",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "INV-CPM-2508-01472",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No. INV-CPM-2508-01472",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": 11988.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "11,988.00",
+      "evidence": "Subtotal (after discount) 11,988.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": 839.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "839.16",
+      "evidence": "VAT 7% 839.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": 10000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "-10,000.00",
+      "evidence": "Less: Direct billing - Pacifica Shield Insurance (Policy PSI-7712094) -10,000.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": 2827.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "2,827.16",
+      "evidence": "Amount Paid by Patient 2,827.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 1.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "RECEIPT / TAX INVOICE, itemized list with prices, quantities, subtotal, VAT, total amount, payment method, cashier stamp."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "7afab40b2acd23d32a7387efa9eac54bc5ede5c5059b1f6b5ea3421526594c94",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 123,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 2420,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "WbXZasapM-ma1e8PwI_loA4"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 470,
+        "output_tokens": 3935,
+        "cache_read_input_tokens": 1707,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 136335,
+        "stop_reason": "STOP",
+        "attempts": 4,
+        "request_id": "1LXZavO7MI_v0-kPh8OIwQg"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 245,
+      "classify": 2536,
+      "extract": 136359,
+      "postprocess": 4
+    },
+    "total_cost_usd": 0.0
+  }
+}

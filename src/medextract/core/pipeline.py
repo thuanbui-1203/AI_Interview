@@ -121,13 +121,23 @@ def _run_rule(rule, fields, ctx) -> list[ValidationIssue]:
 
 
 def build_provider(settings: Settings) -> LLMProvider:
-    from medextract.providers.anthropic_provider import AnthropicProvider
     from medextract.providers.cassette import RecordReplayProvider
 
-    inner = None if settings.record_mode == "replay" else AnthropicProvider(settings, PricingTable())
+    inner = None if settings.record_mode == "replay" else _live_provider(settings)
     if settings.record_mode == "off":
         return inner
     return RecordReplayProvider(inner, settings.cassette_dir, settings.record_mode)
+
+
+def _live_provider(settings: Settings) -> LLMProvider:
+    pricing = PricingTable.from_settings(settings)
+    if settings.provider == "gemini":
+        from medextract.providers.gemini_provider import GeminiProvider
+
+        return GeminiProvider(settings, pricing)
+    from medextract.providers.anthropic_provider import AnthropicProvider
+
+    return AnthropicProvider(settings, pricing)
 
 
 def _ms(t0: float) -> int:

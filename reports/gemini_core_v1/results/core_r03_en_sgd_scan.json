@@ -1,0 +1,234 @@
+{
+  "document_type": "receipt",
+  "confidence": 1.0,
+  "fields": {
+    "currency": {
+      "value": "SGD",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Unit (SGD)",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Larkspur Family Clinic",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Larkspur Family Clinic",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Tan Wei Ling",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient name: Tan Wei Ling",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "date": {
+      "value": "2026-02-09",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "09-Feb-2026",
+      "evidence": "Date: 09-Feb-2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "General consultation",
+          "quantity": 1.0,
+          "unit_price": 45.0,
+          "total": 45.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Rapid strep throat swab test",
+          "quantity": 1.0,
+          "unit_price": 28.0,
+          "total": 28.0,
+          "category": "lab"
+        },
+        {
+          "description": "Amoxicillin 500 mg capsules",
+          "quantity": 21.0,
+          "unit_price": 0.6,
+          "total": 12.6,
+          "category": "drug"
+        },
+        {
+          "description": "Paracetamol 500 mg tablets",
+          "quantity": 20.0,
+          "unit_price": 0.15,
+          "total": 3.0,
+          "category": "drug"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain",
+      "trace": []
+    },
+    "grand_total": {
+      "value": 88.6,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "88.60",
+      "evidence": "TOTAL SGD 88.60",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "payment_method": {
+      "value": "cash",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "CASH",
+      "evidence": "Payment method: CASH",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "LFC-26-00318",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No.: LFC-26-00318",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 1.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Official Receipt, description of service, quantity, unit, amount, total, payment method, cash, signature."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "e19b4f7105721948504295b38f2b581a5c548de5efb2683e44e639dd793d7f2e",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 115,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 3143,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "tKPZapWyDKfgrfcPh_XA8QQ"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 472,
+        "output_tokens": 3602,
+        "cache_read_input_tokens": 1705,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 25627,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "vKPZaoSFAsK12roP1uz7sA4"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 521,
+      "classify": 3321,
+      "extract": 25627,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

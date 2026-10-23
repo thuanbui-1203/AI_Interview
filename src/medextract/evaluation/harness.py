@@ -9,18 +9,19 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import statistics
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from medextract.confidence import REVIEW_THRESHOLD
 from medextract.core.pipeline import Extractor
 from medextract.core.registry import default_registry
-from medextract.errors import MedExtractError
+from medextract.errors import MedExtractError, ProviderUnavailable
 from medextract.evaluation.matchers import Outcome, compare
 
 BINS = [(0.0, 0.2), (0.2, 0.4), (0.4, 0.6), (0.6, 0.8), (0.8, 0.9), (0.9, 1.0001)]
-LOW_CONF = 0.6
 
 
 @dataclass
@@ -30,6 +31,7 @@ class FieldEval:
     outcome: Outcome
     confidence: float
     truth_null: bool
+    pred_null: bool
 
 
 @dataclass
@@ -47,6 +49,8 @@ class DocEval:
     cost_usd: float = 0.0
     latency_ms: int = 0
     error: str | None = None
+    skipped: bool = False
+    resumed: bool = False
 
     @property
     def classified_ok(self) -> bool:
@@ -69,17 +73,29 @@ def load_truths(samples_dir: Path, sets: list[str]) -> list[tuple[Path, dict]]:
 
 
 async def run_eval(
-    samples_dir: Path, out_dir: Path, sets: list[str], extractor: Extractor | None = None, concurrency: int = 4
+    samples_dir: Path,
+    out_dir: Path,
+    sets: list[str],
+    extractor: Extractor | None = None,
+    concurrency: int = 4,
+    resume: bool = False,
 ) -> dict[str, Any]:
+    """Score every document; with ``resume`` reuse results already saved in ``out_dir``.
+
+    Free-tier quotas are tiny (20 requests/day/model), so a run must never waste requests: a
+    daily-quota error stops scheduling new extractions, and ``resume`` re-scores saved results
+    without calling the API, so a run can be finished across quota resets.
+    """
     extractor = extractor or Extractor()
     required = {s.name: set(s.required_fields) for s in default_registry().all()}
     items = load_truths(samples_dir, sets)
     (out_dir / "results").mkdir(parents=True, exist_ok=True)
     sem = asyncio.Semaphore(concurrency)
+    quota_gone = asyncio.Event()
 
     async def one(path: Path, truth: dict) -> DocEval:
         async with sem:
-            return await _eval_doc(extractor, path, truth, out_dir, required)
+            return await _eval_doc(extractor, path, truth, out_dir, required, quota_gone, resume)
 
     docs = await asyncio.gather(*(one(p, t) for p, t in items))
     report = summarize(docs)
@@ -88,7 +104,9 @@ async def run_eval(
     return report
 
 
-async def _eval_doc(extractor: Extractor, path: Path, truth: dict, out_dir: Path, required: dict) -> DocEval:
+async def _eval_doc(
+    extractor: Extractor, path: Path, truth: dict, out_dir: Path, required: dict, quota_gone: asyncio.Event, resume: bool
+) -> DocEval:
     d = DocEval(
         doc_id=truth["doc_id"],
         set=truth["set"],
@@ -96,39 +114,77 @@ async def _eval_doc(extractor: Extractor, path: Path, truth: dict, out_dir: Path
         expected_issues=list(truth.get("expected_issues") or []),
         low_conf_expected=list(truth.get("low_confidence_fields") or []),
     )
-    try:
-        result = await extractor.extract_bytes(path.read_bytes(), source_name=path.name)
-    except MedExtractError as exc:
-        d.error = f"{exc.code}: {exc}"
+    saved = out_dir / "results" / f"{d.doc_id}.json"
+    if resume and saved.exists():
+        out = json.loads(saved.read_text(encoding="utf-8"))
+        d.resumed = True
+    elif quota_gone.is_set():
+        d.error, d.skipped = "skipped: provider daily quota exhausted earlier in this run", True
         return d
-    (out_dir / "results" / f"{d.doc_id}.json").write_text(
-        json.dumps(result.to_public(verbose=True), ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-    d.pred_type, d.doc_confidence = result.document_type, result.confidence
-    d.raised = sorted({i.code for i in result.validation_errors})
-    d.cost_usd = result.meta.total_cost_usd
-    d.latency_ms = sum(c.latency_ms for c in result.meta.calls)
-    if d.truth_type and d.pred_type == d.truth_type:
-        for name, tval in (truth.get("fields") or {}).items():
-            f = result.fields.get(name)
-            pval, conf = (f.value, f.confidence) if f else (None, 0.0)
-            d.fields.append(
-                FieldEval(name, name in required.get(d.truth_type, ()), compare(name, pval, tval), conf, tval is None)
-            )
-        for name in d.low_conf_expected:
-            f = result.fields.get(name)
-            if f is None or f.value is None or f.confidence < LOW_CONF:
-                d.low_conf_ok.append(name)
+    else:
+        try:
+            result = await extractor.extract_bytes(path.read_bytes(), source_name=path.name)
+        except MedExtractError as exc:
+            d.error = f"{exc.code}: {exc}"
+            if isinstance(exc, ProviderUnavailable) and "daily quota" in str(exc):
+                quota_gone.set()
+            return d
+        out = result.to_public(verbose=True)
+        saved.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    score_output(d, out, truth, required)
     return d
 
 
+def score_output(d: DocEval, out: dict[str, Any], truth: dict, required: dict) -> None:
+    """Score one verbose public output (fresh or loaded from disk) against its truth."""
+    fields = out.get("fields", {})
+    d.pred_type, d.doc_confidence = out.get("document_type"), out.get("confidence")
+    d.raised = sorted({i["code"] for i in out.get("validation_errors", [])})
+    meta = out.get("meta") or {}
+    d.cost_usd = meta.get("total_cost_usd", 0.0)
+    d.latency_ms = sum(c.get("latency_ms", 0) for c in meta.get("calls", []))
+    if not (d.truth_type and d.pred_type == d.truth_type):
+        return
+    for name, tval in (truth.get("fields") or {}).items():
+        f = fields.get(name) or {}
+        pval, conf = f.get("value"), f.get("confidence", 0.0)
+        d.fields.append(
+            FieldEval(name, name in required.get(d.truth_type, ()), compare(name, pval, tval), conf, tval is None, pval is None)
+        )
+    d.low_conf_ok = [p for p in d.low_conf_expected if flagged_for_review(fields, p)]
+
+
+def flagged_for_review(fields: dict[str, Any], path: str) -> bool:
+    """Did the output warn a human about this field (null, or confidence below the review threshold)?
+
+    ``path`` may point into a table (``items[3].total``): then a null cell also counts as flagged.
+    """
+    name = re.split(r"[\[.]", path, maxsplit=1)[0]
+    f = fields.get(name)
+    if not f or f.get("value") is None or f.get("confidence", 0.0) < REVIEW_THRESHOLD:
+        return True
+    m = re.fullmatch(r"\w+\[(\d+)\]\.(\w+)", path)
+    if m and isinstance(f["value"], list):
+        i, cell = int(m.group(1)), m.group(2)
+        return i >= len(f["value"]) or f["value"][i].get(cell) is None
+    return False
+
+
 # --- metrics ----------------------------------------------------------------------------------
-def summarize(docs: list[DocEval]) -> dict[str, Any]:
+def summarize(all_docs: list[DocEval]) -> dict[str, Any]:
+    # Metrics cover documents that produced an output; failures are reported, never scored as "wrong".
+    docs = [d for d in all_docs if not d.error]
     fe = [f for d in docs for f in d.fields]
-    pairs = [(f.confidence, f.outcome.correct) for f in fe]
+    # Calibration is measured on extracted values only. A null comes with low confidence by design
+    # (the brief: "null with low confidence"), so including nulls would punish correct abstentions.
+    pairs = [(f.confidence, f.outcome.correct) for f in fe if not f.pred_null]
+    nulls = [f for f in fe if f.pred_null]
     report: dict[str, Any] = {
-        "documents": len(docs),
-        "errors": [{"doc_id": d.doc_id, "error": d.error} for d in docs if d.error],
+        "documents": len(all_docs),
+        "documents_scored": len(docs),
+        "documents_resumed": sum(d.resumed for d in docs),
+        "errors": [{"doc_id": d.doc_id, "error": d.error} for d in all_docs if d.error and not d.skipped],
+        "skipped": [d.doc_id for d in all_docs if d.skipped],
         "classification_accuracy": _ratio(sum(d.classified_ok for d in docs), len(docs)),
         "field_accuracy": _ratio(sum(f.outcome.correct for f in fe), len(fe)),
         "required_field_accuracy": _ratio(sum(f.outcome.correct for f in fe if f.required), sum(f.required for f in fe)),
@@ -136,15 +192,22 @@ def summarize(docs: list[DocEval]) -> dict[str, Any]:
         "hallucination_rate": _ratio(sum(f.outcome.verdict == "hallucinated" for f in fe), sum(f.truth_null for f in fe)),
         "miss_rate": _ratio(sum(f.outcome.verdict == "missed" for f in fe), len(fe)),
         "calibration": calibration(pairs),
+        "null_predictions": len(nulls),
+        "null_precision": _ratio(sum(f.truth_null for f in nulls), len(nulls)),  # nulls that were truly absent
         "validation_recall": _ratio(
             sum(len(d.expected_issues) - len(d.missing_issues) for d in docs), sum(len(d.expected_issues) for d in docs)
+        ),
+        # The point of confidence: of the values we got WRONG, how many did we flag for a human?
+        "error_flag_recall": _ratio(
+            sum(f.confidence < REVIEW_THRESHOLD for f in fe if not f.pred_null and not f.outcome.correct),
+            sum(1 for f in fe if not f.pred_null and not f.outcome.correct),
         ),
         "low_confidence_recall": _ratio(sum(len(d.low_conf_ok) for d in docs), sum(len(d.low_conf_expected) for d in docs)),
         "cost_usd_total": round(sum(d.cost_usd for d in docs), 4),
         "cost_usd_per_doc": round(statistics.mean([d.cost_usd for d in docs]) if docs else 0, 5),
         "latency_ms_p50": _pct([d.latency_ms for d in docs if not d.error], 50),
         "latency_ms_p95": _pct([d.latency_ms for d in docs if not d.error], 95),
-        "per_doc": [_doc_row(d) for d in docs],
+        "per_doc": [_doc_row(d) for d in all_docs],
         "per_field": _per_field(fe),
     }
     return report
@@ -229,7 +292,9 @@ def render_markdown(r: dict[str, Any]) -> str:
     lines = [
         "# Evaluation report",
         "",
-        f"Documents: {r['documents']} - errors: {len(r['errors'])}",
+        f"Documents scored: **{r['documents_scored']} of {r['documents']}** "
+        f"(errors: {len(r['errors'])}, skipped after quota exhaustion: {len(r['skipped'])}, re-scored from saved results: {r['documents_resumed']}). "
+        "All metrics below cover scored documents only.",
         "",
         "| Metric | Value |",
         "|---|---|",
@@ -240,8 +305,10 @@ def render_markdown(r: dict[str, Any]) -> str:
         f"| Hallucination rate (value where truth is null) | {pct(r['hallucination_rate'])} |",
         f"| Miss rate (null where truth has a value) | {pct(r['miss_rate'])} |",
         f"| Validation recall (seeded defects caught) | {pct(r['validation_recall'])} |",
-        f"| Low-confidence recall (blank/smudged fields flagged) | {pct(r['low_confidence_recall'])} |",
-        f"| ECE / Brier | {cal.get('ece')} / {cal.get('brier')} |",
+        f"| Error flag recall (wrong values with confidence < {REVIEW_THRESHOLD}) | {pct(r['error_flag_recall'])} |",
+        f"| Degraded-field flag rate (blank/smudged/implicated fields flagged; informational) | {pct(r['low_confidence_recall'])} |",
+        f"| ECE / Brier (on extracted values) | {cal.get('ece')} / {cal.get('brier')} |",
+        f"| Null precision (null answers that were truly absent) | {pct(r['null_precision'])} of {r['null_predictions']} |",
         f"| Accuracy at confidence >= 0.9 (coverage) | {pct(cal.get('accuracy_at_0.9'))} ({pct(cal.get('coverage_at_0.9'))}) |",
         f"| Cost per document | ${r['cost_usd_per_doc']:.4f} (total ${r['cost_usd_total']:.4f}) |",
         f"| Latency p50 / p95 | {r['latency_ms_p50']} ms / {r['latency_ms_p95']} ms |",

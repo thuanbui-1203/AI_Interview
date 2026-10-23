@@ -1,0 +1,262 @@
+{
+  "document_type": "receipt",
+  "confidence": 1.0,
+  "fields": {
+    "currency": {
+      "value": "THB",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Currency Thai Baht (THB)",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Chao Phraya Meridian Hospital",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chao Phraya Meridian Hospital",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Pimchanok Srisawat",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name Pimchanok Srisawat",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "date": {
+      "value": "2025-08-14",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "14 Aug 2025",
+      "evidence": "Date of Issue 14 Aug 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Consultation fee - Internal Medicine (Dr. Kittipong Wongsuwan)",
+          "quantity": 1.0,
+          "unit_price": 1200.0,
+          "total": 1200.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Ward room - Standard single, per night",
+          "quantity": 2.0,
+          "unit_price": 3500.0,
+          "total": 7000.0,
+          "category": "room"
+        },
+        {
+          "description": "Nursing care fee, per day",
+          "quantity": 2.0,
+          "unit_price": 800.0,
+          "total": 1600.0,
+          "category": "room"
+        },
+        {
+          "description": "Complete Blood Count (CBC)",
+          "quantity": 1.0,
+          "unit_price": 450.0,
+          "total": 450.0,
+          "category": "lab"
+        },
+        {
+          "description": "Chest X-ray PA view",
+          "quantity": 1.0,
+          "unit_price": 900.0,
+          "total": 900.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Ceftriaxone 1 g injection",
+          "quantity": 4.0,
+          "unit_price": 380.0,
+          "total": 1520.0,
+          "category": "drug"
+        },
+        {
+          "description": "IV set and medical supplies",
+          "quantity": 1.0,
+          "unit_price": 650.0,
+          "total": 650.0,
+          "category": "consumable"
+        },
+        {
+          "description": "Corporate discount 10% (Siam Northstar Trading Co., Ltd.)",
+          "quantity": null,
+          "unit_price": null,
+          "total": -1332.0,
+          "category": "discount"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain",
+      "trace": []
+    },
+    "grand_total": {
+      "value": 12827.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "12,827.16",
+      "evidence": "TOTAL (incl. VAT) 12,827.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "payment_method": {
+      "value": "card",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Credit card - VISA ending 4821",
+      "evidence": "Payment Method: Credit card - VISA ending 4821",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "INV-CPM-2508-01472",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No. INV-CPM-2508-01472",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "subtotal": {
+      "value": 11988.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "11,988.00",
+      "evidence": "Subtotal (after discount) 11,988.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "discount_total": {
+      "value": 1332.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "-1,332.00",
+      "evidence": "8 DSC-CORP Corporate discount 10% (Siam Northstar Trading Co., Ltd.) -1,332.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "tax_amount": {
+      "value": 839.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "839.16",
+      "evidence": "VAT 7% 839.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": 10000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "-10,000.00",
+      "evidence": "Less: Direct billing - Pacifica Shield Insurance (Policy PSI-7712094) -10,000.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_payable": {
+      "value": 2827.16,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "2,827.16",
+      "evidence": "Amount Paid by Patient 2,827.16",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.0,
+      "receipt": 1.0
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "RECEIPT / TAX INVOICE, itemized table with prices, quantities, subtotal, VAT, total amount, payment method, cashier stamp"
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "7afab40b2acd23d32a7387efa9eac54bc5ede5c5059b1f6b5ea3421526594c94",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 123,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 1936,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "jKPZapuDLs7erfcPv9m0oAk"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 472,
+        "output_tokens": 5448,
+        "cache_read_input_tokens": 1705,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 36869,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "lKPZatalHMDOrfcPqfi4gA4"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 166,
+      "classify": 2023,
+      "extract": 36869,
+      "postprocess": 4
+    },
+    "total_cost_usd": 0.0
+  }
+}

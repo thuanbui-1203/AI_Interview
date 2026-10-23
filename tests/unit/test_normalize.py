@@ -128,3 +128,54 @@ def test_list_confidence_is_min_of_rows():
         {"evidence": "B 1 ?? 5", "page": 1, "description": "B", "quantity": 1, "unit_price": None, "total": 5, "category": "other", "confidence": "low"},
     )
     assert run(receipt_payload(items=items)).fields["items"].confidence == 0.35
+
+
+def test_magnitude_fields_drop_the_printed_sign():
+    # Live finding (Gemini, core_r01): "Less: AIA direct billing  -10,000.00" - the model correctly
+    # read 10000, and keeping the printed minus caused AMOUNT_NOT_POSITIVE + PAYABLE_CHAIN false alarms.
+    n = run(receipt_payload(
+        insurance_covered_amount=money("-10,000.00", 10000.0, evidence="Less: AIA direct billing -10,000.00"),
+        discount_total=money("(1.332.000)", -1332000.0, evidence="Giảm giá (1.332.000)"),
+    ))  # fmt: skip
+    assert n.fields["insurance_covered_amount"].value == 10000.0
+    assert n.fields["discount_total"].value == 1332000.0
+    assert not any(i.code == "VALUE_RAW_MISMATCH" for i in n.issues)
+    assert n.fields["insurance_covered_amount"].confidence > 0.9
+
+
+def test_sign_still_matters_for_other_money_fields():
+    n = run(receipt_payload(grand_total=money("-500.000 ₫", 500000.0, evidence="Tổng cộng: -500.000 ₫")))
+    assert n.fields["grand_total"].value == -500000.0  # a negative total is a real anomaly: keep it visible
+
+
+def test_normalized_values_are_checked_against_printed_wording():
+    # Live finding: 'cash' / 'VND' are normalizations - never verbatim in the quote.
+    n = run(receipt_payload(currency=text("VND", evidence="Đơn giá (đồng)")))
+    f = n.fields
+    assert f["currency"].confidence > 0.9 and f["payment_method"].confidence > 0.9
+    assert not any(a.reason == "value_not_in_evidence" for x in f.values() for a in x.trace)
+
+
+def test_row_cell_not_in_row_evidence_lowers_row_confidence():
+    # Live finding (Gemini, stress_s06): result '1+' came back as '1 technique'.
+    from tests.helpers import rows as _rows
+
+    payload = {
+        "observed_document_type": "lab_report",
+        "document_language": "en",
+        "lab_name": text("Central Lab"),
+        "patient_name": text("Mai Linh"),
+        "date": date_("12/03/2024", "2024-03-12"),
+        "tests": _rows(
+            {"evidence": "Urine Glucose 1+ Negative", "page": 1, "test_name": "Urine Glucose", "result": "1 technique", "unit": None, "reference_range": "Negative", "flag": None, "confidence": "certain"},
+            {"evidence": "Abbreviated very long test na... 5.1 mmol/L 3.9-6.1", "page": 1, "test_name": "Abbreviated very long test name for glucose", "result": "5.1", "unit": "mmol/L", "reference_range": "3.9-6.1", "flag": None, "confidence": "certain"},
+        ),
+        "ordering_physician": text(None),
+        "collection_date": date_(None, None),
+    }  # fmt: skip
+    f = run(payload, LabReportExtraction, "lab_report").fields["tests"]
+    assert f.confidence < 0.85
+    reasons = [a.reason for a in f.trace]
+    assert "row0:result_not_in_evidence" in reasons
+    assert not any(r.startswith("row1:") for r in reasons)  # abbreviated name is not penalized
+    assert f.row_evidence == ["Urine Glucose 1+ Negative", "Abbreviated very long test na... 5.1 mmol/L 3.9-6.1"]

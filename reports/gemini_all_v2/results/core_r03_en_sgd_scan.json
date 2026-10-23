@@ -1,0 +1,253 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.95,
+  "fields": {
+    "currency": {
+      "value": "SGD",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Unit (SGD)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Larkspur Family Clinic",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Larkspur Family Clinic",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Tan Wei Ling",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient name: Tan Wei Ling",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2026-02-09",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "09-Feb-2026",
+      "evidence": "Date: 09-Feb-2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "General consultation",
+          "quantity": 1.0,
+          "unit_price": 45.0,
+          "total": 45.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Rapid strep throat swab test",
+          "quantity": 1.0,
+          "unit_price": 28.0,
+          "total": 28.0,
+          "category": "lab"
+        },
+        {
+          "description": "Amoxicillin 500 mg capsules",
+          "quantity": 21.0,
+          "unit_price": 0.6,
+          "total": 12.6,
+          "category": "drug"
+        },
+        {
+          "description": "Paracetamol 500 mg tablets",
+          "quantity": 20.0,
+          "unit_price": 0.15,
+          "total": 3.0,
+          "category": "drug"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain",
+      "row_evidence": [
+        "General consultation 1 45.00 45.00",
+        "Rapid strep throat swab test 1 28.00 28.00",
+        "Amoxicillin 500 mg capsules 21 0.60 12.60",
+        "Paracetamol 500 mg tablets 20 0.15 3.00"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 88.6,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "88.60",
+      "evidence": "TOTAL SGD 88.60",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "payment_method": {
+      "value": "cash",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "CASH",
+      "evidence": "Payment method: CASH",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "LFC-26-00318",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No.: LFC-26-00318",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.95,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 0.05,
+      "receipt": 0.95
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "OFFICIAL RECEIPT, description of service, quantity, unit price, total amount, payment method cash, authorised signature."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "e19b4f7105721948504295b38f2b581a5c548de5efb2683e44e639dd793d7f2e",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 119,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 2715,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "mrXZaurWHN-W9tMP2vzJuQM"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 470,
+        "output_tokens": 2259,
+        "cache_read_input_tokens": 1707,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 31064,
+        "stop_reason": "STOP",
+        "attempts": 2,
+        "request_id": "sbXZatzICa-q9tMPnv7HuAg"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 809,
+      "classify": 3008,
+      "extract": 31091,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

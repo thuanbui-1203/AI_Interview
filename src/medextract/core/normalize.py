@@ -8,7 +8,7 @@ bucket plus those signals. Output values follow docs/OUTPUT_CONTRACT.md.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date
 from typing import Any
 
@@ -35,7 +35,13 @@ def normalize(extraction: BaseModel, spec: DocTypeSpec, doc: Document | None) ->
     language = getattr(extraction, "document_language", None)
     currency_field = getattr(extraction, "currency", None)
     currency = _clean_text(currency_field.value).upper() if currency_field and currency_field.value else None
-    ctx = _Ctx(language=language, currency=currency, doc=doc)
+    ctx = _Ctx(
+        language=language,
+        currency=currency,
+        doc=doc,
+        magnitudes=frozenset(spec.magnitude_fields),
+        inferred=frozenset(spec.inferred_fields),
+    )
     out = Normalized(
         fields={}, language=language, currency=currency, observed_type=getattr(extraction, "observed_document_type", None)
     )
@@ -49,6 +55,8 @@ class _Ctx:
     language: str | None
     currency: str | None
     doc: Document | None
+    magnitudes: frozenset[str] = frozenset()
+    inferred: frozenset[str] = frozenset()
 
     def page_text(self, page: int | None) -> str | None:
         if self.doc is None or not self.doc.has_text_layer:
@@ -67,19 +75,34 @@ def _normalize_field(name: str, f: Any, ctx: _Ctx, issues: list[ValidationIssue]
         return _date_field(name, f, ctx, issues)
     if isinstance(f, MoneyField):
         return _money_field(name, f, ctx, issues)
-    if isinstance(f, (TextField, ChoiceField)):
-        value = _clean_text(f.value) if isinstance(f, TextField) else f.value
-        return _scalar(f, value, getattr(f, "raw", None), ctx)
+    if isinstance(f, ChoiceField):
+        # The value is a normalized enum ("cash"); the printed wording ("Tiền mặt") is what the quote must hold.
+        return _scalar(f, f.value, f.raw, ctx, support=f.raw)
+    if isinstance(f, TextField):
+        value = _clean_text(f.value)
+        # Inferred fields (an ISO code read off a "₫" sign) are never verbatim in the quote: skip that check.
+        return _scalar(f, value, None, ctx, support=None if name in ctx.inferred else value)
     raise TypeError(f"unsupported field type for {name}: {type(f).__name__}")
 
 
 # --- scalar kinds -----------------------------------------------------------------------------
-def _scalar(f: Any, value: Any, raw: str | None, ctx: _Ctx, scorer: C.Scorer | None = None) -> FieldResult:
-    """Common scoring for scalar fields once the final value is known."""
+# Row cells not checked against the row's evidence quote: names/descriptions may be abbreviated in the
+# quote ("Amoxicillin/Clav..."), and enums/derived cells are normalizations, never verbatim text.
+UNCHECKED_ROW_CELLS = {"description", "name", "test_name", "category", "flag", "flag_source"}
+
+_VALUE = object()  # sentinel: "check the final value itself against the evidence"
+
+
+def _scalar(f: Any, value: Any, raw: str | None, ctx: _Ctx, scorer: C.Scorer | None = None, support: Any = _VALUE) -> FieldResult:
+    """Common scoring for scalar fields once the final value is known.
+
+    ``support`` is what the evidence quote must contain: the value by default, the printed wording
+    for normalized values, or None to skip the check.
+    """
     if f.status in (Status.not_found, Status.illegible) and value is not None and not f.evidence:
         value = None  # the model said it isn't there; don't keep a dangling value
     s = scorer or C.Scorer(C.base_of(f.confidence))
-    _score_common(s, f.status, value, f.evidence, f.page, ctx)
+    _score_common(s, f.status, value, f.evidence, f.page, ctx, value if support is _VALUE else support)
     return FieldResult(
         value=value,
         confidence=round(s.value, 3),
@@ -92,7 +115,9 @@ def _scalar(f: Any, value: Any, raw: str | None, ctx: _Ctx, scorer: C.Scorer | N
     )
 
 
-def _score_common(s: C.Scorer, status: str, value: Any, evidence: str | None, page: int | None, ctx: _Ctx) -> None:
+def _score_common(
+    s: C.Scorer, status: str, value: Any, evidence: str | None, page: int | None, ctx: _Ctx, support: Any = _VALUE
+) -> None:
     if value is None:
         s.cap(C.NULL_CAP, "null_value")
         return
@@ -101,7 +126,8 @@ def _score_common(s: C.Scorer, status: str, value: Any, evidence: str | None, pa
     if not evidence:
         s.cap(C.UNGROUNDED_CAP, "no_evidence")
         return
-    if not C.value_supported_by(value, evidence):
+    support = value if support is _VALUE else support
+    if support is not None and not C.value_supported_by(support, evidence):
         s.mul(C.VALUE_NOT_IN_EVIDENCE_FACTOR, "value_not_in_evidence")
     text = ctx.page_text(page)
     if text is not None and not C.evidence_in_text(evidence, text):
@@ -162,13 +188,17 @@ def _money_field(name: str, f: MoneyField, ctx: _Ctx, issues: list[ValidationIss
     if not f.raw:
         return _scalar(f, f.value, None, ctx, s)
     p = parse_money(f.raw, currency=ctx.currency)
+    model_value = f.value
+    if name in ctx.magnitudes:  # sign is presentation for these fields ("Less: insurer (10,000)")
+        model_value = abs(model_value) if model_value is not None else None
+        p = replace(p, value=abs(p.value) if p.value is not None else None)
     if p.value is None:
         s.cap(0.6, "raw_unparseable")
-        return _scalar(f, f.value, f.raw, ctx, s)
+        return _scalar(f, model_value, f.raw, ctx, s)
     value = p.value
-    if f.value is not None and not _close(f.value, value):
+    if model_value is not None and not _close(model_value, value):
         s.cap(C.RAW_MISMATCH_CAP, "model_value_differs_from_raw")
-        issues.append(_raw_mismatch(name, f.raw, f.value, value))
+        issues.append(_raw_mismatch(name, f.raw, model_value, value))
     return _scalar(f, value, f.raw, ctx, s)
 
 
@@ -188,6 +218,9 @@ def _list_field(name: str, f: ListField, ctx: _Ctx, issues: list[ValidationIssue
         if not row.evidence:
             s.cap(C.UNGROUNDED_CAP, "no_evidence")
         else:
+            for cell, v in cells.items():
+                if cell not in UNCHECKED_ROW_CELLS and v is not None and not C.value_supported_by(v, row.evidence):
+                    s.mul(C.VALUE_NOT_IN_EVIDENCE_FACTOR, f"{cell}_not_in_evidence")
             text = ctx.page_text(row.page)
             if text is not None and not C.evidence_in_text(row.evidence, text):
                 s.mul(C.NOT_IN_TEXT_LAYER_FACTOR, "evidence_not_in_text_layer")
@@ -203,6 +236,7 @@ def _list_field(name: str, f: ListField, ctx: _Ctx, issues: list[ValidationIssue
         confidence=round(conf, 3),
         status=str(f.status),
         page=f.rows[0].page,
+        row_evidence=[r.evidence for r in f.rows],
         trace=trace,
         model_confidence=",".join(str(r.confidence) for r in f.rows),
     )

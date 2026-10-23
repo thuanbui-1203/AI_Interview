@@ -1,0 +1,153 @@
+{
+  "document_type": "prescription",
+  "confidence": 1.0,
+  "fields": {
+    "doctor_name": {
+      "value": "Võ Thị Thanh Hà",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Võ Thị Thanh Hà",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Phạm Gia Huy",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên: Phạm Gia Huy",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "date": {
+      "value": "2026-05-20",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Ngày 20 tháng 05 năm 2026",
+      "evidence": "Ngày 20 tháng 05 năm 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "medications": {
+      "value": [
+        {
+          "name": "Cefuroxim 500mg (Zinnat)",
+          "dosage": "500mg",
+          "frequency": "Ngày uống 2 lần, mỗi lần 1 viên, sau ăn sáng và tối",
+          "duration": "7 ngày",
+          "quantity": 14.0
+        },
+        {
+          "name": "Paracetamol 500mg (Panadol)",
+          "dosage": "500mg",
+          "frequency": "Ngày uống 3 lần, mỗi lần 1 viên, khi sốt trên 38.5 độ hoặc đau",
+          "duration": null,
+          "quantity": 10.0
+        },
+        {
+          "name": "Alpha chymotrypsin 4200 IU",
+          "dosage": "4200 IU",
+          "frequency": "Ngày ngậm 2 lần, mỗi lần 2 viên",
+          "duration": "5 ngày",
+          "quantity": 20.0
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain",
+      "trace": []
+    },
+    "facility_name": {
+      "value": "Phòng khám Đa khoa Vạn Lộc Xanh",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Phòng khám Đa khoa Vạn Lộc Xanh",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Viêm họng cấp",
+          "icd10_code": "J02.9"
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chẩn đoán: J02.9 - Viêm họng cấp",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "prescription",
+    "confidence": 1.0,
+    "scores": {
+      "discharge_summary": 0.0,
+      "lab_report": 0.0,
+      "prescription": 1.0,
+      "receipt": 0.0
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Title 'ĐƠN THUỐC', list of prescribed medications with dosage, frequency, quantity, and doctor's signature."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "1a62bc547142e900eb41a8c19d70d7ba9cddec7eabac506db55e98ec717f3493",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "6c9f5ca1a376",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 120,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 4727,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "cqPZasesJ7-52roP_4fN2AY"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 2041,
+        "output_tokens": 2058,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 30690,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "eqPZav2MLMParfcPnsSF0A4"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 174,
+      "classify": 4813,
+      "extract": 30690,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

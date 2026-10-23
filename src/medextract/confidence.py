@@ -30,7 +30,10 @@ RAW_MISMATCH_CAP = 0.5  # model's value disagrees with code's parse of the print
 AMBIGUOUS_DATE_CAP = 0.75
 STATUS_CAPS = {"partial": 0.7, "ambiguous": 0.6, "illegible": 0.35}
 ISSUE_CAPS = {"error": 0.5, "warning": 0.75}
-EMPTY_TABLE_CONF = 0.8  # section present but no rows (e.g. no procedures performed)
+EMPTY_TABLE_CONF = 0.8
+# Below this a field should be checked by a human (the UI paints it amber/red; the eval uses it for
+# "did we flag the blank/smudged/implicated field").
+REVIEW_THRESHOLD = 0.85  # section present but no rows (e.g. no procedures performed)
 
 
 class Scorer:
@@ -74,7 +77,10 @@ def token_coverage(needle: str, haystack: str) -> float:
     return sum(1 for tok in n if tok in hay) / len(n)
 
 
-_NUMBER = re.compile(r"\d[\d.,\s]*\d|\d")
+# Numbers without spaces ("150.000", "1,234.50"), plus space-grouped thousands ("1 250 000"). Two
+# separate patterns: allowing spaces inside one pattern glued "1 10 10" (qty, price, total) into 11010.
+_NUMBER = re.compile(r"\d[\d.,]*\d|\d")
+_SPACED_NUMBER = re.compile(r"(?<![\d.,])\d{1,3}(?: \d{3})+(?:[.,]\d{1,2})?(?![\d])")
 
 
 def _number_readings(token: str) -> set[float]:
@@ -101,13 +107,18 @@ def value_supported_by(value: object, evidence: str) -> bool:
         return True
     if isinstance(value, (int, float)):
         v = abs(float(value))
-        return any(abs(r - v) <= 0.005 for tok in _NUMBER.findall(evidence) for r in _number_readings(tok))
+        tokens = _NUMBER.findall(evidence) + _SPACED_NUMBER.findall(evidence)
+        return any(abs(r - v) <= 0.005 for tok in tokens for r in _number_readings(tok))
     text = str(value)
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):  # ISO date: day digits must appear in the quote
         d = text.split("-")[2]
         digits_ev = re.sub(r"\D", " ", evidence).split()
         return str(int(d)) in {str(int(x)) for x in digits_ev if x}
-    return token_coverage(text, evidence) >= 0.6
+    if token_coverage(text, evidence) >= 0.6:
+        return True
+    # Long free text: the quote (max ~80 chars) is only a slice of the value, so check the other way.
+    quote = evidence.split(":", 1)[-1] if ":" in evidence[:40] else evidence
+    return len(canon(quote).split()) >= 4 and token_coverage(quote, text) >= 0.8
 
 
 # --- field-level and document-level scoring ---------------------------------------------------

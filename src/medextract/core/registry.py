@@ -28,6 +28,12 @@ class DocTypeSpec:
     prompt_hints: str = ""  # type-specific extraction guidance (incl. Vietnamese label cues)
     classifier_cues: str = ""  # what distinguishes this type from the others
     rules: Sequence[Rule] = field(default_factory=tuple)
+    # Money fields that are magnitudes by definition (a discount, an insurer's share). Documents print
+    # them as "-10,000.00" or "(10,000)"; the sign is presentation, so the value is stored as abs().
+    magnitude_fields: Sequence[str] = ()
+    # Text fields whose value is a normalization of what is printed (an ISO currency code read off a
+    # "₫" sign), so the value is not expected verbatim inside the evidence quote.
+    inferred_fields: Sequence[str] = ()
     version: str = "1"
 
     @property

@@ -17,6 +17,9 @@ from medextract.confidence import canon
 Verdict = Literal["correct", "wrong", "hallucinated", "missed"]
 
 LONG_TEXT_FIELDS = {"discharge_instructions", "amount_in_words"}
+# Not scored: flag_source is bookkeeping; item category is an optional, subjective extra (is a
+# "nursing care fee" room or other?) and must not make a correctly transcribed table "wrong".
+UNSCORED_CELLS = {"flag_source", "category"}
 ROW_KEY = {"items": "description", "tests": "test_name", "medications": "name", "procedures_performed": "name"}
 
 
@@ -92,7 +95,7 @@ def _compare_rows(name: str, pred: list[dict], truth: list[dict]) -> Outcome:
     total = correct = 0
     problems: list[str] = []
     for t in truth:
-        cells = [c for c in t if c != "flag_source"]
+        cells = [c for c in t if c not in UNSCORED_CELLS]
         total += len(cells)
         j = _best_row(t, pred, remaining, key)
         if j is None:

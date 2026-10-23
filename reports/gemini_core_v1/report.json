@@ -1,0 +1,453 @@
+{
+  "documents": 10,
+  "errors": [],
+  "classification_accuracy": 1.0,
+  "field_accuracy": 0.9714,
+  "required_field_accuracy": 0.9655,
+  "cell_accuracy": 0.9763,
+  "hallucination_rate": 0.0556,
+  "miss_rate": 0.0,
+  "calibration": {
+    "ece": 0.1709,
+    "brier": 0.1642,
+    "bins": [
+      {
+        "range": "0.0-0.2",
+        "n": 17,
+        "accuracy": 1.0,
+        "mean_conf": 0.1
+      },
+      {
+        "range": "0.2-0.4",
+        "n": 0,
+        "accuracy": null,
+        "mean_conf": null
+      },
+      {
+        "range": "0.4-0.6",
+        "n": 0,
+        "accuracy": null,
+        "mean_conf": null
+      },
+      {
+        "range": "0.6-0.8",
+        "n": 5,
+        "accuracy": 1.0,
+        "mean_conf": 0.679
+      },
+      {
+        "range": "0.8-0.9",
+        "n": 3,
+        "accuracy": 1.0,
+        "mean_conf": 0.853
+      },
+      {
+        "range": "0.9-1.0",
+        "n": 80,
+        "accuracy": 0.963,
+        "mean_conf": 0.97
+      }
+    ],
+    "accuracy_at_0.9": 0.9625,
+    "coverage_at_0.9": 0.7619
+  },
+  "validation_recall": null,
+  "low_confidence_recall": null,
+  "cost_usd_total": 0.0,
+  "cost_usd_per_doc": 0.0,
+  "latency_ms_p50": 35417,
+  "latency_ms_p95": 52953,
+  "per_doc": [
+    {
+      "doc_id": "core_d01_en",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "13/13",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 29009,
+      "error": null
+    },
+    {
+      "doc_id": "core_d02_vi_scan",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.99,
+      "classified_ok": true,
+      "fields_correct": "13/13",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 52953,
+      "error": null
+    },
+    {
+      "doc_id": "core_d03_en_conservative",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.98,
+      "classified_ok": true,
+      "fields_correct": "13/13",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 30699,
+      "error": null
+    },
+    {
+      "doc_id": "core_l01_en",
+      "set": "core",
+      "truth_type": "lab_report",
+      "pred_type": "lab_report",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 17753,
+      "error": null
+    },
+    {
+      "doc_id": "core_l02_vi",
+      "set": "core",
+      "truth_type": "lab_report",
+      "pred_type": "lab_report",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 36719,
+      "error": null
+    },
+    {
+      "doc_id": "core_p01_en",
+      "set": "core",
+      "truth_type": "prescription",
+      "pred_type": "prescription",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 52807,
+      "error": null
+    },
+    {
+      "doc_id": "core_p02_vi",
+      "set": "core",
+      "truth_type": "prescription",
+      "pred_type": "prescription",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "5/6",
+      "wrong_fields": [
+        "medications: wrong 'Cefuroxim 500mg (Zinnat)'.dosage: pred='500mg' truth='1 viên'; 'Cefuroxim 500mg (Zinnat)'.frequency: pred='Ngày uống 2 lần, mỗi lần 1 viên, sau ăn sáng và tối' truth='Ngày uống 2 lần'; 'Paracetamol 500mg (Panadol)'.dosage: pred='500mg' truth='1 viên'; 'Paracetamol 500mg (Panadol)'.frequency: pred='Ngày uống 3 lần, mỗi lần 1 viên, khi sốt trên 38.5 độ ho... truth='Ngày uống 3 lần'; 'Alpha chymotrypsin 4200 IU'.dosage: pred='4200 IU' truth='2 viên'; 'Alpha chymotrypsin 4200 IU'.frequency: pred='Ngày ngậm 2 lần, mỗi lần 2 viên' truth='Ngày ngậm 2 lần'"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 35417,
+      "error": null
+    },
+    {
+      "doc_id": "core_r01_en_thb",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "12/14",
+      "wrong_fields": [
+        "items: wrong 'Nursing care fee, per day'.category: pred='room' truth='other'",
+        "discount_total: hallucinated pred=1332.0"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 38805,
+      "error": null
+    },
+    {
+      "doc_id": "core_r02_vi_vnd",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.8,
+      "classified_ok": true,
+      "fields_correct": "14/14",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 52154,
+      "error": null
+    },
+    {
+      "doc_id": "core_r03_en_sgd_scan",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "14/14",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 28770,
+      "error": null
+    }
+  ],
+  "per_field": {
+    "admission_date": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "amount_in_words": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "attending_physician": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.94
+    },
+    "collection_date": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "currency": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.873
+    },
+    "date": {
+      "n": 7,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "department": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "diagnosis": {
+      "n": 5,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "discharge_date": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "discharge_instructions": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.679
+    },
+    "discharge_status": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.68
+    },
+    "discount_total": {
+      "n": 3,
+      "accuracy": 0.6667,
+      "hallucinated": 1,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "doctor_name": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "facility_name": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "follow_up_date": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "grand_total": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "hospital_name": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "insurance_covered_amount": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.68
+    },
+    "invoice_number": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.94
+    },
+    "items": {
+      "n": 3,
+      "accuracy": 0.6667,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "lab_name": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "medications": {
+      "n": 2,
+      "accuracy": 0.5,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "ordering_physician": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "patient_name": {
+      "n": 10,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "patient_payable": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.68
+    },
+    "payment_method": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.873
+    },
+    "procedures_performed": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.913
+    },
+    "sick_leave_from": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "sick_leave_to": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "subtotal": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "tax_amount": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "tests": {
+      "n": 2,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    }
+  }
+}

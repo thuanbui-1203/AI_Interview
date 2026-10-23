@@ -19,7 +19,19 @@ def test_defaults() -> None:
     assert s.strategy == "two_stage"
     assert (s.classify_effort, s.extract_effort, s.thinking) == ("low", "medium", "adaptive")
     assert s.record_mode == "off"
-    assert not any("key" in name.lower() for name in Settings.model_fields)
+    # Secrets may only live in SecretStr fields, so model_dump()/logging never reveal them.
+    from pydantic import SecretStr
+
+    for name, field in Settings.model_fields.items():
+        if "key" in name.lower():
+            assert SecretStr in getattr(field.annotation, "__args__", (field.annotation,)), name
+
+
+def test_api_key_never_appears_in_dumps(monkeypatch) -> None:
+    monkeypatch.setenv("GEMINI_API_KEY", "sk-very-secret")
+    s = Settings()
+    assert s.gemini_api_key.get_secret_value() == "sk-very-secret"
+    assert "sk-very-secret" not in s.model_dump_json() and "sk-very-secret" not in repr(s)
 
 
 def test_env_override(monkeypatch: pytest.MonkeyPatch) -> None:

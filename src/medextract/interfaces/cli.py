@@ -58,16 +58,30 @@ def eval_cmd(
     out: Annotated[Path, typer.Option(help="Report directory")] = Path("reports/latest"),
     sets: Annotated[str, typer.Option(help="Comma-separated sets: core,stress")] = "core,stress",
     concurrency: Annotated[int, typer.Option(min=1, max=16)] = 4,
+    resume: Annotated[bool, typer.Option(help="Re-score results already saved in --out instead of calling the API again")] = False,
 ) -> None:
     """Run the extractor over the sample set and write report.md / report.json (spends API money unless replaying)."""
     _utf8_stdio()
     from medextract.evaluation.harness import run_eval
 
-    report = asyncio.run(run_eval(samples, out, [s.strip() for s in sets.split(",") if s.strip()], concurrency=concurrency))
-    keys = ["documents", "classification_accuracy", "field_accuracy", "required_field_accuracy", "hallucination_rate",
+    report = asyncio.run(run_eval(samples, out, [s.strip() for s in sets.split(",") if s.strip()], concurrency=concurrency, resume=resume))
+    keys = ["documents", "documents_scored", "classification_accuracy", "field_accuracy", "required_field_accuracy", "hallucination_rate",
             "validation_recall", "cost_usd_total", "cost_usd_per_doc", "latency_ms_p50"]  # fmt: skip
     typer.echo(json.dumps({k: report[k] for k in keys} | {"ece": report["calibration"]["ece"]}, indent=2))
     typer.echo(f"report: {out / 'report.md'}", err=True)
+
+
+@app.command()
+def models() -> None:
+    """List the Gemini models this GEMINI_API_KEY can call with generateContent."""
+    _utf8_stdio()
+    from medextract.config import Settings
+    from medextract.providers.gemini_provider import GeminiProvider
+
+    client = GeminiProvider(Settings(provider="gemini")).client
+    for m in client.models.list():
+        if "generateContent" in (getattr(m, "supported_actions", None) or []):
+            typer.echo(f"{m.name.removeprefix('models/')}\t{getattr(m, 'display_name', '')}")
 
 
 @app.command()

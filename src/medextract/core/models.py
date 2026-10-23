@@ -42,6 +42,7 @@ class FieldResult(BaseModel):
     evidence: str | None = None
     page: int | None = None
     model_confidence: str | None = None  # the bucket the model chose
+    row_evidence: list[str | None] | None = None  # tables: the verbatim printed line behind each row
     trace: list[Adjustment] = Field(default_factory=list)
 
 
@@ -56,6 +57,7 @@ class CallRecord(BaseModel):
     latency_ms: int = 0
     stop_reason: str | None = None
     attempts: int = 1
+    retry_reasons: list[str] = Field(default_factory=list)  # e.g. ["429", "503", "MAX_TOKENS", "parse"]
     request_id: str | None = None
 
 

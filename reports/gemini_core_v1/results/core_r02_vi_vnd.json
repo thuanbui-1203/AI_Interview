@@ -1,0 +1,288 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.8,
+  "fields": {
+    "currency": {
+      "value": "VND",
+      "confidence": 0.679,
+      "status": "present",
+      "raw": null,
+      "evidence": "Đơn giá (đồng)",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": [
+        {
+          "reason": "value_not_in_evidence",
+          "before": 0.97,
+          "after": 0.679
+        }
+      ]
+    },
+    "hospital_name": {
+      "value": "Bệnh viện Đa khoa Thanh Trúc Lâm",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bệnh viện Đa khoa Thanh Trúc Lâm",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Nguyễn Thị Hồng Nhung",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "(1) Họ tên người bệnh: Nguyễn Thị Hồng Nhung",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "date": {
+      "value": "2024-03-18",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "18 tháng 03 năm 2024",
+      "evidence": "TP. Hồ Chí Minh, ngày 18 tháng 03 năm 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Khám Nội tổng quát",
+          "quantity": 1.0,
+          "unit_price": 150000.0,
+          "total": 150000.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "quantity": 1.0,
+          "unit_price": 95000.0,
+          "total": 95000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Định lượng Glucose [Máu]",
+          "quantity": 1.0,
+          "unit_price": 30000.0,
+          "total": 30000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Định lượng HbA1c [Máu]",
+          "quantity": 1.0,
+          "unit_price": 350000.0,
+          "total": 350000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Siêu âm ổ bụng tổng quát",
+          "quantity": 1.0,
+          "unit_price": 250000.0,
+          "total": 250000.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Chụp X-quang ngực thẳng",
+          "quantity": 1.0,
+          "unit_price": 180000.0,
+          "total": 180000.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Điện tim thường",
+          "quantity": 1.0,
+          "unit_price": 72000.0,
+          "total": 72000.0,
+          "category": "procedure"
+        },
+        {
+          "description": "Metformin 500mg",
+          "quantity": 28.0,
+          "unit_price": 1500.0,
+          "total": 42000.0,
+          "category": "drug"
+        },
+        {
+          "description": "Omeprazol 20mg",
+          "quantity": 14.0,
+          "unit_price": 3500.0,
+          "total": 49000.0,
+          "category": "drug"
+        },
+        {
+          "description": "Bơm tiêm nhựa 5ml",
+          "quantity": 2.0,
+          "unit_price": 4000.0,
+          "total": 8000.0,
+          "category": "consumable"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain,certain,certain",
+      "trace": []
+    },
+    "grand_total": {
+      "value": 1226000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "1.226.000",
+      "evidence": "Tổng chi phí lần khám bệnh: 1.226.000 đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "payment_method": {
+      "value": "cash",
+      "confidence": 0.679,
+      "status": "present",
+      "raw": "Tiền mặt",
+      "evidence": "Hình thức thanh toán: Tiền mặt",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": [
+        {
+          "reason": "value_not_in_evidence",
+          "before": 0.97,
+          "after": 0.679
+        }
+      ]
+    },
+    "invoice_number": {
+      "value": "BK-2403-005812",
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "Số khám bệnh: BK-2403-005812",
+      "page": 1,
+      "model_confidence": "high",
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": "none",
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": 980800.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "980.800",
+      "evidence": "Quỹ BHYT trả: 980.800 đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "patient_payable": {
+      "value": 245200.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "245.200",
+      "evidence": "Người bệnh trả: 245.200 đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": "Hai trăm bốn mươi lăm nghìn hai trăm đồng",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bằng chữ: Hai trăm bốn mươi lăm nghìn hai trăm đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.8,
+    "scores": {
+      "discharge_summary": 0.05,
+      "lab_report": 0.05,
+      "prescription": 0.1,
+      "receipt": 0.8
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "BẢNG KÊ CHI PHÍ KHÁM CHỮA BỆNH NGOẠI TRÚ, items with prices, quantities, and total amount, Kiêm hóa đơn viện phí."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "5e40f697e9a5c11bc8e2edec659afdc4352d68c8d505e771806088e435922395",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "gemini-3.5-flash-lite",
+        "input_tokens": 1464,
+        "output_tokens": 135,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 10695,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "nKPZar24CeCd0-kP5-WXiQg"
+      },
+      {
+        "stage": "extract",
+        "model": "gemini-3.5-flash",
+        "input_tokens": 472,
+        "output_tokens": 5957,
+        "cache_read_input_tokens": 1705,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 41459,
+        "stop_reason": "STOP",
+        "attempts": 1,
+        "request_id": "o6PZar7VIYuh2roP9t3g0Q8"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 284,
+      "classify": 10806,
+      "extract": 41459,
+      "postprocess": 4
+    },
+    "total_cost_usd": 0.0
+  }
+}

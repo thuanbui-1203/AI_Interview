@@ -49,6 +49,10 @@ def test_issue_caps_apply_to_named_fields_only():
         ("2024-03-12", "Date: 15/03/2024", False),
         ("NGUYỄN VĂN AN", "Họ tên: Nguyễn Văn An", True),
         ("Lê Thị Hoa", "Patient: John Smith", False),
+        (10.0, "A 1 10 10", True),  # separate numbers must not be glued together
+        (1250000.0, "Tổng: 1 250 000 đ", True),  # space-grouped thousands
+        (150000.0, "Khám bệnh 1 150.000 150.000", True),
+        (1150000.0, "Khám bệnh 1 150.000 150.000", False),
     ],
 )
 def test_value_supported_by_evidence(value, evidence, ok):
@@ -95,3 +99,34 @@ def test_calibration_perfect_and_overconfident():
     assert perfect["ece"] == pytest.approx(0.075, abs=1e-6)
     over = calibration([(0.95, False)] * 10)
     assert over["ece"] == pytest.approx(0.95) and over["accuracy_at_0.9"] == 0.0
+
+
+def test_calibration_excludes_null_predictions():
+    from medextract.evaluation.harness import DocEval, FieldEval, summarize
+    from medextract.evaluation.matchers import Outcome
+
+    d = DocEval(doc_id="x", set="core", truth_type="receipt", pred_type="receipt")
+    d.fields = [
+        FieldEval("a", True, Outcome("correct", cells_correct=1), 0.97, False, False),
+        FieldEval("b", False, Outcome("correct", cells_correct=1), 0.10, True, True),  # correct abstention
+        FieldEval("c", False, Outcome("missed"), 0.10, False, True),  # wrong abstention
+    ]
+    r = summarize([d])
+    assert r["calibration"]["bins"][-1]["n"] == 1 and sum(b["n"] for b in r["calibration"]["bins"]) == 1
+    assert r["null_predictions"] == 2 and r["null_precision"] == 0.5
+
+
+def test_category_is_not_scored():
+    truth = [{"description": "Nursing care", "total": 10.0, "category": "other"}]
+    assert compare("items", [{"description": "Nursing care", "total": 10.0, "category": "room"}], truth).correct
+
+
+@pytest.mark.parametrize(
+    ("value", "evidence"),
+    [
+        ("Complete the full course of antibiotics. Rest at home and drink plenty of water for 7 days.",
+         "Instructions: Complete the full course of antibiotics. Rest at home"),
+    ],
+)  # fmt: skip
+def test_long_text_quote_is_a_slice_of_the_value(value, evidence):
+    assert C.value_supported_by(value, evidence)
