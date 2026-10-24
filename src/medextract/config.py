@@ -42,6 +42,9 @@ DEFAULT_PRICES: dict[str, ModelPrice] = {
     # prices. Add them via MEDX_PRICE_OVERRIDES to get production cost estimates; tokens are always logged.
 }
 
+# qwen3.8-27b is Groq's generally available vision model with strict structured outputs (Groq docs, 2026-10).
+GROQ_DEFAULT_MODELS = {"classify_model": "qwen/qwen3.8-27b", "extract_model": "qwen/qwen3.8-27b"}
+
 # Used when MEDX_PROVIDER=gemini and the models were not set explicitly.
 # Verified live on 2026-10-22 (2.5 models return 404 "no longer available to new users").
 GEMINI_DEFAULT_MODELS = {"classify_model": "gemini-3.5-flash-lite", "extract_model": "gemini-3.5-flash"}
@@ -51,7 +54,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="MEDX_", env_file=".env", extra="ignore")
 
     # --- models and call strategy ---
-    provider: Literal["anthropic", "gemini"] = "anthropic"
+    provider: Literal["anthropic", "gemini", "groq"] = "anthropic"
     classify_model: str = "claude-haiku-5-5"
     extract_model: str = "claude-sonnet-5-5"
     strategy: Literal["two_stage", "single_call"] = "two_stage"
@@ -80,6 +83,13 @@ class Settings(BaseSettings):
     gemini_rate_limit_retries: int = 5  # 429 retries honouring the API's retryDelay
     gemini_server_error_retries: int = 2  # 5xx retries, 20 s then 40 s apart
 
+    # --- Groq ---
+    groq_api_key: SecretStr | None = Field(default=None, validation_alias=AliasChoices("GROQ_API_KEY", "MEDX_GROQ_API_KEY"))
+    groq_max_images: int = 3  # qwen3.8-27b accepts at most 3 images per request
+    groq_image_max_px: int = 1600  # Groq budgets ~2k tokens per image; larger uploads only cost payload
+    groq_output_tpm: int = 1000  # free-tier output tokens/minute for qwen3.8-27b; 0 disables pacing
+    groq_rate_limit_retries: int = 4  # 429 retries, each waiting for the API's retry-after
+
     # --- record/replay for offline golden tests ---
     record_mode: Literal["off", "record", "replay", "auto"] = "off"
     cassette_dir: Path = Path("tests/cassettes")
@@ -100,10 +110,10 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _provider_model_defaults(self) -> Settings:
         """Switching provider switches the default models, but never overrides explicit choices."""
-        if self.provider == "gemini":
-            for name, model in GEMINI_DEFAULT_MODELS.items():
-                if name not in self.model_fields_set:
-                    setattr(self, name, model)
+        defaults = {"gemini": GEMINI_DEFAULT_MODELS, "groq": GROQ_DEFAULT_MODELS}.get(self.provider, {})
+        for name, model in defaults.items():
+            if name not in self.model_fields_set:
+                setattr(self, name, model)
         return self
 
 

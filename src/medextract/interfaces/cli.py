@@ -72,14 +72,25 @@ def eval_cmd(
 
 
 @app.command()
-def models() -> None:
-    """List the Gemini models this GEMINI_API_KEY can call with generateContent."""
+def models(
+    provider: Annotated[str, typer.Option(help="gemini | groq")] = "gemini",
+) -> None:
+    """List the models this provider's API key can call (verify names before setting MEDX_*_MODEL)."""
     _utf8_stdio()
     from medextract.config import Settings
+
+    settings = Settings(provider=provider)
+    if provider == "groq":
+        import groq
+
+        secret = settings.groq_api_key
+        client = groq.Groq(api_key=secret.get_secret_value() if secret else None)
+        for m in client.models.list().data:
+            typer.echo(f"{m.id}\t{m.owned_by}")
+        return
     from medextract.providers.gemini_provider import GeminiProvider
 
-    client = GeminiProvider(Settings(provider="gemini")).client
-    for m in client.models.list():
+    for m in GeminiProvider(settings).client.models.list():
         if "generateContent" in (getattr(m, "supported_actions", None) or []):
             typer.echo(f"{m.name.removeprefix('models/')}\t{getattr(m, 'display_name', '')}")
 

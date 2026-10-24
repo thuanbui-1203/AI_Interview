@@ -131,6 +131,10 @@ def build_provider(settings: Settings) -> LLMProvider:
 
 def _live_provider(settings: Settings) -> LLMProvider:
     pricing = PricingTable.from_settings(settings)
+    if settings.provider == "groq":
+        from medextract.providers.groq_provider import GroqProvider
+
+        return GroqProvider(settings, pricing)
     if settings.provider == "gemini":
         from medextract.providers.gemini_provider import GeminiProvider
 
