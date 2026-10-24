@@ -1,0 +1,305 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.8,
+  "fields": {
+    "currency": {
+      "value": "VND",
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "Tổng chi phí lần khám bệnh: 1.226.000 đồng",
+      "page": 1,
+      "model_confidence": "high",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Bệnh viện Đa khoa Thanh Trúc Lâm",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bệnh viện Đa khoa Thanh Trúc Lâm",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Nguyễn Thị Hồng Nhung",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên người bệnh: Nguyễn Thị Hồng Nhung",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2024-03-18",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "18/03/2024",
+      "evidence": "TP. Hồ Chí Minh, ngày 18 tháng 03 năm 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Khám Nội tổng quát",
+          "quantity": 1.0,
+          "unit_price": 150000.0,
+          "total": 150000.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "quantity": 1.0,
+          "unit_price": 95000.0,
+          "total": 95000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Định lượng Glucose [Máu]",
+          "quantity": 1.0,
+          "unit_price": 30000.0,
+          "total": 30000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Định lượng HbA1c [Máu]",
+          "quantity": 1.0,
+          "unit_price": 350000.0,
+          "total": 350000.0,
+          "category": "lab"
+        },
+        {
+          "description": "Siêu âm ổ bụng tổng quát",
+          "quantity": 1.0,
+          "unit_price": 250000.0,
+          "total": 250000.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Chụp X-quang ngực thẳng",
+          "quantity": 1.0,
+          "unit_price": 180000.0,
+          "total": 180000.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Điện tâm thường",
+          "quantity": 1.0,
+          "unit_price": 72000.0,
+          "total": 72000.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Metformin 500mg",
+          "quantity": 28.0,
+          "unit_price": 1500.0,
+          "total": 42000.0,
+          "category": "drug"
+        },
+        {
+          "description": "Omeprazol 20mg",
+          "quantity": 14.0,
+          "unit_price": 3500.0,
+          "total": 49000.0,
+          "category": "drug"
+        },
+        {
+          "description": "Bơm tiêm nhựa 5ml",
+          "quantity": 2.0,
+          "unit_price": 4000.0,
+          "total": 8000.0,
+          "category": "drug"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "1 Khám Nội tổng quát | Lần | 1 | 150.000 | 150.000",
+        "2 Tổng phân tích tế bào máu ngoại vi (bằng máy ... | Lần | 1 | 95.000 | 95.000",
+        "3 Định lượng Glucose [Máu] | Lần | 1 | 30.000 | 30.000",
+        "4 Định lượng HbA1c [Máu] | Lần | 1 | 350.000 | 350.000",
+        "5 Siêu âm ổ bụng tổng quát | Lần | 1 | 250.000 | 250.000",
+        "6 Chụp X-quang ngực thẳng | Lần | 1 | 180.000 | 180.000",
+        "7 Điện tâm thường | Lần | 1 | 72.000 | 72.000",
+        "8 Metformin 500mg | Viên | 28 | 1.500 | 42.000",
+        "9 Omeprazol 20mg | Viên | 14 | 3.500 | 49.000",
+        "10 Bơm tiêm nhựa 5ml | Cái | 2 | 4.000 | 8.000"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 1226000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "1.226.000 đồng",
+      "evidence": "Tổng chi phí lần khám bệnh: 1.226.000 đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "payment_method": {
+      "value": "cash",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Tiền mặt",
+      "evidence": "Hình thức thanh toán: Tiền mặt",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "BK-2403-005812",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Số khám bệnh: BK-2403-005812",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": 1226000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "1.226.000",
+      "evidence": "Tổng cộng 1.226.000",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": 980800.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "980.800 đồng",
+      "evidence": "Quỹ BHYT trả: 980.800 đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": 245200.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "245.200 đồng",
+      "evidence": "Người bệnh trả: 245.200",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": "Hai trăm bốn mươi lăm nghìn hai trăm đồng",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bằng chữ: Hai trăm bốn mươi lăm nghìn hai trăm đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.8,
+    "scores": {
+      "discharge_summary": 0.05,
+      "lab_report": 0.05,
+      "prescription": 0.1,
+      "receipt": 0.8
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Title \"BẢNG KÊ CHI PHÍ KHÁM CHỮA BỆNH NGOẠI TRÚ\" (itemized outpatient cost list); table of services/drugs with unit price, quantity and amount columns, total 1.226.000 đồng, insurance-patient split, payment form, date and signatures — all hallmarks of a hospital invoice/bill."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "5e40f697e9a5c11bc8e2edec659afdc4352d68c8d505e771806088e435922395",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 350,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 99237,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-aae055aa-34ae-4f2a-87ef-45f7fcc5d086"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2869,
+        "output_tokens": 2521,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 57826,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-aa66ce20-66db-4631-9ec2-26e55dff35d6"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 181,
+      "classify": 99329,
+      "extract": 57854,
+      "postprocess": 5
+    },
+    "total_cost_usd": 0.0
+  }
+}

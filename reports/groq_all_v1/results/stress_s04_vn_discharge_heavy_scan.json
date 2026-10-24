@@ -1,0 +1,235 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 0.98,
+  "fields": {
+    "hospital_name": {
+      "value": "Bệnh viện Đa Khoa Hòa Mỹ Trung",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Bệnh viện Đa Khoa Hòa Mỹ Trung",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Huỳnh Thị Kim Loan",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên người bệnh: Huỳnh Thị Kim Loan",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2025-11-03",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "14 giờ 15 phút, ngày 03 tháng 11 năm 2025",
+      "evidence": "Vào viện lúc: 14 giờ 15 phút, ngày 03 tháng 11 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_date": {
+      "value": "2025-11-10",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "08 giờ 00 phút, ngày 10 tháng 11 năm 2025",
+      "evidence": "Ra viện lúc: 08 giờ 00 phút, ngày 10 tháng 11 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Viêm phổi",
+          "icd10_code": "J15.9"
+        },
+        "secondary": [
+          {
+            "description": "Đái tháo đường type 2",
+            "icd10_code": "E11.9"
+          }
+        ]
+      },
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chẩn đoán: J15.9 - Viêm phổi ; E11.9 - Đái th",
+      "page": 1,
+      "model_confidence": "high",
+      "row_evidence": null,
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": null,
+      "confidence": 0.15,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": null,
+      "row_evidence": null,
+      "trace": []
+    },
+    "attending_physician": {
+      "value": "Phan Thanh Tùng",
+      "confidence": 0.65,
+      "status": "present",
+      "raw": null,
+      "evidence": "TRƯỞNG KHOA ... Phan Thanh Tùng",
+      "page": 1,
+      "model_confidence": "medium",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Dùng thuốc theo đơn, kiểm tra đường huyết hàng ngày, tái khám sau 10 ngày.",
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "Ghi chú: Dùng thuốc theo đơn, kiểm tra đường",
+      "page": 1,
+      "model_confidence": "high",
+      "row_evidence": null,
+      "trace": []
+    },
+    "department": {
+      "value": "Nội tổng hợp",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Khoa: Nội tổng hợp",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_status": {
+      "value": "deceased",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Ra viện",
+      "evidence": "Ra viện lúc: 08 giờ 00 phút, ngày 10 tháng 11 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "sick_leave_from": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "procedures_performed"
+      ],
+      "message": "Required field 'procedures_performed' was not found on the document.",
+      "details": {}
+    }
+  ],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 0.98,
+    "scores": {
+      "discharge_summary": 0.98,
+      "lab_report": 0.01,
+      "prescription": 0.005,
+      "receipt": 0.005
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Document titled 'GIẤY RA VIỆN' (discharge certificate) from Bệnh viện Đa Khoa Hòa Mỹ Trung. Contains patient identity (Huỳnh Thị Kim Loan, DOB 21/05/1956, female), admission time/date (14:15, 03/11/2025), discharge time/date (08:00, 10/11/2025), diagnosis (viêm phổi - E11.9 Đái tháo đường type 2), treatment method (điều trị nội khoa), and nurse's note. Signed and stamped by the head of department (Trần Đình Nghĩa) and head of nursing (Phan Thanh Tùng)."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "95de0e37af0ca3383408991e3d129032e9d5cbd79937b3e001bec343b09302d9",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 400,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 142020,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-2c989b15-aabe-4b46-a521-40571313da16"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2861,
+        "output_tokens": 1818,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 59632,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-ba0294b5-b837-4b8c-b7e7-9073e8e1027c"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 550,
+      "classify": 142204,
+      "extract": 59666,
+      "postprocess": 0
+    },
+    "total_cost_usd": 0.0
+  }
+}

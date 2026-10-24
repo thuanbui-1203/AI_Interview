@@ -1,0 +1,740 @@
+{
+  "documents": 23,
+  "documents_scored": 16,
+  "documents_resumed": 0,
+  "errors": [
+    {
+      "doc_id": "stress_s07_receipt_photo",
+      "error": "provider_unavailable: Groq rate limited after retries: Error code: 429 - {'error': {'message': \"Request too large for model `qwen/qwen3.8-27b` in organization `org_01m5nkt7k9et5v14vpdmdsyrjn` service tier `on_demand` on output tokens per minute (OTPM): Limit 1000, Requested 1582. The request's expected output tokens exceed the enforced limit; reduce max_tokens (or the request's expected output) and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\", 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "doc_id": "stress_s08_restaurant",
+      "error": "provider_unavailable: Groq daily quota exhausted: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m5nkt7k9et5v14vpdmdsyrjn` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199677, Requested 3482. Please try again in 22m44.688s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "skipped": [
+    "stress_s09_rx_future_date",
+    "stress_s10_discharge_before_admission",
+    "stress_s11_prompt_injection",
+    "stress_s12_multipage_discharge",
+    "stress_s13_lab_invalid_date"
+  ],
+  "classification_accuracy": 1.0,
+  "field_accuracy": 0.8721,
+  "required_field_accuracy": 0.8696,
+  "cell_accuracy": 0.9523,
+  "hallucination_rate": 0.1538,
+  "miss_rate": 0.0291,
+  "calibration": {
+    "ece": 0.1056,
+    "brier": 0.1225,
+    "bins": [
+      {
+        "range": "0.0-0.2",
+        "n": 0,
+        "accuracy": null,
+        "mean_conf": null
+      },
+      {
+        "range": "0.2-0.4",
+        "n": 0,
+        "accuracy": null,
+        "mean_conf": null
+      },
+      {
+        "range": "0.4-0.6",
+        "n": 7,
+        "accuracy": 0.714,
+        "mean_conf": 0.474
+      },
+      {
+        "range": "0.6-0.8",
+        "n": 5,
+        "accuracy": 1.0,
+        "mean_conf": 0.666
+      },
+      {
+        "range": "0.8-0.9",
+        "n": 6,
+        "accuracy": 0.833,
+        "mean_conf": 0.88
+      },
+      {
+        "range": "0.9-1.0",
+        "n": 116,
+        "accuracy": 0.879,
+        "mean_conf": 0.97
+      }
+    ],
+    "accuracy_at_0.9": 0.8793,
+    "coverage_at_0.9": 0.8657
+  },
+  "null_predictions": 38,
+  "null_precision": 0.8684,
+  "validation_recall": 1.0,
+  "error_flag_recall": 0.1176,
+  "low_confidence_recall": 0.8182,
+  "cost_usd_total": 0.0,
+  "cost_usd_per_doc": 0.0,
+  "latency_ms_p50": 169417,
+  "latency_ms_p95": 201652,
+  "per_doc": [
+    {
+      "doc_id": "core_d01_en",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.98,
+      "classified_ok": true,
+      "fields_correct": "13/13",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 21478,
+      "error": null
+    },
+    {
+      "doc_id": "core_d02_vi_scan",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.5,
+      "classified_ok": true,
+      "fields_correct": "4/13",
+      "wrong_fields": [
+        "hospital_name: wrong pred='B\\x00nh vi\\x00n \\x01a khoa Ph\\x00c H\\x00ng Long' truth='Bệnh viện Đa khoa Phước Hưng Long'",
+        "patient_name: wrong pred='Tr\\x00n V\\x00n H\\x00ng' truth='Trần Văn Hùng'",
+        "diagnosis: wrong pred={'primary': {'description': 'Vi\\x00m ru\\x00t th\\x00a c\\x0...",
+        "procedures_performed: wrong 'Phẫu thuật nội soi cắt ruột thừa'.name: pred='Ph\\x01u thu\\x01t n\\x00i soi c\\x01t ru\\x00t th\\x00a' truth='Phẫu thuật nội soi cắt ruột thừa'",
+        "attending_physician: missed truth='Lê Minh Khoa'",
+        "discharge_instructions: wrong pred='Ki\\x00ng v\\x00n \\x01ng m\\x00nh trong 4 tu\\x00n. Thay b\\x... truth='Kiêng vận động mạnh trong 4 tuần. Thay băng vết mổ cách ...",
+        "department: wrong pred='Ngo\\x00i t\\x00ng h\\x00p' truth='Ngoại tổng hợp'",
+        "discharge_status: hallucinated pred='recovered'",
+        "follow_up_date: hallucinated pred='2024-03-24'"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "CLASSIFICATION_DISAGREEMENT",
+        "CLASSIFICATION_LOW_CONFIDENCE",
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 177667,
+      "error": null
+    },
+    {
+      "doc_id": "core_d03_en_conservative",
+      "set": "core",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.5,
+      "classified_ok": true,
+      "fields_correct": "12/13",
+      "wrong_fields": [
+        "procedures_performed: missed truth=[]"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "CLASSIFICATION_DISAGREEMENT",
+        "CLASSIFICATION_LOW_CONFIDENCE",
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 169417,
+      "error": null
+    },
+    {
+      "doc_id": "core_l01_en",
+      "set": "core",
+      "truth_type": "lab_report",
+      "pred_type": "lab_report",
+      "doc_confidence": 0.95,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 184406,
+      "error": null
+    },
+    {
+      "doc_id": "core_l02_vi",
+      "set": "core",
+      "truth_type": "lab_report",
+      "pred_type": "lab_report",
+      "doc_confidence": 0.98,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 196208,
+      "error": null
+    },
+    {
+      "doc_id": "core_p01_en",
+      "set": "core",
+      "truth_type": "prescription",
+      "pred_type": "prescription",
+      "doc_confidence": 0.92,
+      "classified_ok": true,
+      "fields_correct": "5/6",
+      "wrong_fields": [
+        "diagnosis: missed truth={'primary': {'description': 'Acute bacterial sinusitis', ..."
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 31178,
+      "error": null
+    },
+    {
+      "doc_id": "core_p02_vi",
+      "set": "core",
+      "truth_type": "prescription",
+      "pred_type": "prescription",
+      "doc_confidence": 0.95,
+      "classified_ok": true,
+      "fields_correct": "5/6",
+      "wrong_fields": [
+        "medications: wrong 'Cefuroxim 500mg (Zinnat)'.duration: pred='Dùng 7 ngày' truth='7 ngày'; 'Alpha chymotrypsin 4200 IU'.duration: pred='Dùng 5 ngày' truth='5 ngày'"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 122060,
+      "error": null
+    },
+    {
+      "doc_id": "core_r01_en_thb",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 1.0,
+      "classified_ok": true,
+      "fields_correct": "12/14",
+      "wrong_fields": [
+        "items: wrong 'Corporate discount 10% (Siam Northstar Trading Co., Ltd.)'.total: pred=None truth=-1332.0",
+        "discount_total: hallucinated pred=1332.0"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 10716,
+      "error": null
+    },
+    {
+      "doc_id": "core_r02_vi_vnd",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.8,
+      "classified_ok": true,
+      "fields_correct": "13/14",
+      "wrong_fields": [
+        "subtotal: hallucinated pred=1226000.0"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 157063,
+      "error": null
+    },
+    {
+      "doc_id": "core_r03_en_sgd_scan",
+      "set": "core",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.95,
+      "classified_ok": true,
+      "fields_correct": "14/14",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 305190,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s01_total_mismatch",
+      "set": "stress",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.97,
+      "classified_ok": true,
+      "fields_correct": "12/14",
+      "wrong_fields": [
+        "currency: wrong pred='US Dollar (USD)' truth='USD'",
+        "patient_payable: hallucinated pred=2580.0"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "LINE_MATH_MISMATCH",
+        "TOTAL_MISMATCH"
+      ],
+      "low_conf_ok": "2/2",
+      "cost_usd": 0.0,
+      "latency_ms": 108606,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s02_blank_fields",
+      "set": "stress",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.92,
+      "classified_ok": true,
+      "fields_correct": "14/14",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "low_conf_ok": "2/2",
+      "cost_usd": 0.0,
+      "latency_ms": 156578,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s03_vn_einvoice_words",
+      "set": "stress",
+      "truth_type": "receipt",
+      "pred_type": "receipt",
+      "doc_confidence": 0.95,
+      "classified_ok": true,
+      "fields_correct": "13/14",
+      "wrong_fields": [
+        "payment_method: wrong pred='other' truth='bank_transfer'"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "AMOUNT_IN_WORDS_MISMATCH"
+      ],
+      "low_conf_ok": "2/2",
+      "cost_usd": 0.0,
+      "latency_ms": 193423,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s04_vn_discharge_heavy_scan",
+      "set": "stress",
+      "truth_type": "discharge_summary",
+      "pred_type": "discharge_summary",
+      "doc_confidence": 0.98,
+      "classified_ok": true,
+      "fields_correct": "10/13",
+      "wrong_fields": [
+        "diagnosis: wrong pred={'primary': {'description': 'Viêm phổi', 'icd10_code': 'J...",
+        "procedures_performed: missed truth=[]",
+        "discharge_status: hallucinated pred='deceased'"
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "low_conf_ok": "1/3",
+      "cost_usd": 0.0,
+      "latency_ms": 201652,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s05_handwritten_rx",
+      "set": "stress",
+      "truth_type": "prescription",
+      "pred_type": "prescription",
+      "doc_confidence": 0.98,
+      "classified_ok": true,
+      "fields_correct": "5/6",
+      "wrong_fields": [
+        "diagnosis: missed truth={'primary': {'description': 'Acute bronchitis', 'icd10_co..."
+      ],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "1/1",
+      "cost_usd": 0.0,
+      "latency_ms": 200572,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s06_lab_wrong_flag",
+      "set": "stress",
+      "truth_type": "lab_report",
+      "pred_type": "lab_report",
+      "doc_confidence": 0.96,
+      "classified_ok": true,
+      "fields_correct": "6/6",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [
+        "LAB_FLAG_INCONSISTENT"
+      ],
+      "low_conf_ok": "1/1",
+      "cost_usd": 0.0,
+      "latency_ms": 82996,
+      "error": null
+    },
+    {
+      "doc_id": "stress_s07_receipt_photo",
+      "set": "stress",
+      "truth_type": "receipt",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "provider_unavailable: Groq rate limited after retries: Error code: 429 - {'error': {'message': \"Request too large for model `qwen/qwen3.8-27b` in organization `org_01m5nkt7k9et5v14vpdmdsyrjn` service tier `on_demand` on output tokens per minute (OTPM): Limit 1000, Requested 1582. The request's expected output tokens exceed the enforced limit; reduce max_tokens (or the request's expected output) and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\", 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "doc_id": "stress_s08_restaurant",
+      "set": "stress",
+      "truth_type": null,
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [
+        "NOT_MEDICAL_DOCUMENT_SUSPECTED"
+      ],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "provider_unavailable: Groq daily quota exhausted: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m5nkt7k9et5v14vpdmdsyrjn` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199677, Requested 3482. Please try again in 22m44.688s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "doc_id": "stress_s09_rx_future_date",
+      "set": "stress",
+      "truth_type": "prescription",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [
+        "DATE_IN_FUTURE",
+        "DATE_AMBIGUOUS_ORDER"
+      ],
+      "raised_issues": [],
+      "low_conf_ok": "0/1",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "skipped: provider daily quota exhausted earlier in this run"
+    },
+    {
+      "doc_id": "stress_s10_discharge_before_admission",
+      "set": "stress",
+      "truth_type": "discharge_summary",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [
+        "DISCHARGE_BEFORE_ADMISSION"
+      ],
+      "raised_issues": [],
+      "low_conf_ok": "0/2",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "skipped: provider daily quota exhausted earlier in this run"
+    },
+    {
+      "doc_id": "stress_s11_prompt_injection",
+      "set": "stress",
+      "truth_type": "receipt",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [],
+      "raised_issues": [],
+      "low_conf_ok": "0/0",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "skipped: provider daily quota exhausted earlier in this run"
+    },
+    {
+      "doc_id": "stress_s12_multipage_discharge",
+      "set": "stress",
+      "truth_type": "discharge_summary",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [
+        "PROCEDURE_DATE_OUT_OF_STAY"
+      ],
+      "raised_issues": [],
+      "low_conf_ok": "0/1",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "skipped: provider daily quota exhausted earlier in this run"
+    },
+    {
+      "doc_id": "stress_s13_lab_invalid_date",
+      "set": "stress",
+      "truth_type": "lab_report",
+      "pred_type": null,
+      "doc_confidence": null,
+      "classified_ok": false,
+      "fields_correct": "0/0",
+      "wrong_fields": [],
+      "missing_expected_issues": [
+        "DATE_INVALID",
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "raised_issues": [],
+      "low_conf_ok": "0/1",
+      "cost_usd": 0.0,
+      "latency_ms": 0,
+      "error": "skipped: provider daily quota exhausted earlier in this run"
+    }
+  ],
+  "per_field": {
+    "admission_date": {
+      "n": 4,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.833
+    },
+    "amount_in_words": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.312
+    },
+    "attending_physician": {
+      "n": 4,
+      "accuracy": 0.75,
+      "hallucinated": 0,
+      "missed": 1,
+      "mean_conf": 0.672
+    },
+    "collection_date": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "currency": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.925
+    },
+    "date": {
+      "n": 12,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.963
+    },
+    "department": {
+      "n": 4,
+      "accuracy": 0.75,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "diagnosis": {
+      "n": 7,
+      "accuracy": 0.4286,
+      "hallucinated": 0,
+      "missed": 2,
+      "mean_conf": 0.723
+    },
+    "discharge_date": {
+      "n": 4,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.877
+    },
+    "discharge_instructions": {
+      "n": 4,
+      "accuracy": 0.75,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.948
+    },
+    "discharge_status": {
+      "n": 4,
+      "accuracy": 0.5,
+      "hallucinated": 2,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "discount_total": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 1,
+      "missed": 0,
+      "mean_conf": 0.245
+    },
+    "doctor_name": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "facility_name": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "follow_up_date": {
+      "n": 4,
+      "accuracy": 0.75,
+      "hallucinated": 1,
+      "missed": 0,
+      "mean_conf": 0.397
+    },
+    "grand_total": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.813
+    },
+    "hospital_name": {
+      "n": 10,
+      "accuracy": 0.9,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "insurance_covered_amount": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "invoice_number": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "items": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.809
+    },
+    "lab_name": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "medications": {
+      "n": 3,
+      "accuracy": 0.6667,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.863
+    },
+    "ordering_physician": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.97
+    },
+    "patient_name": {
+      "n": 16,
+      "accuracy": 0.9375,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.916
+    },
+    "patient_payable": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 1,
+      "missed": 0,
+      "mean_conf": 0.535
+    },
+    "payment_method": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.825
+    },
+    "procedures_performed": {
+      "n": 4,
+      "accuracy": 0.25,
+      "hallucinated": 0,
+      "missed": 2,
+      "mean_conf": 0.56
+    },
+    "sick_leave_from": {
+      "n": 4,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.318
+    },
+    "sick_leave_to": {
+      "n": 4,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.318
+    },
+    "subtotal": {
+      "n": 6,
+      "accuracy": 0.8333,
+      "hallucinated": 1,
+      "missed": 0,
+      "mean_conf": 0.535
+    },
+    "tax_amount": {
+      "n": 6,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.39
+    },
+    "tests": {
+      "n": 3,
+      "accuracy": 1.0,
+      "hallucinated": 0,
+      "missed": 0,
+      "mean_conf": 0.8
+    }
+  }
+}

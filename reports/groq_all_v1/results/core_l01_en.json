@@ -1,0 +1,235 @@
+{
+  "document_type": "lab_report",
+  "confidence": 0.95,
+  "fields": {
+    "lab_name": {
+      "value": "Clearwater Diagnostics Laboratory",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Clearwater Diagnostics Laboratory",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Emily Tran",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Emily Tran",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-09-22",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "22-Sep-2025",
+      "evidence": "Report Date 22-Sep-2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tests": {
+      "value": [
+        {
+          "test_name": "Haemoglobin",
+          "result": "11.2",
+          "unit": "g/dL",
+          "reference_range": "12.0 - 15.5",
+          "flag": "low",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Haematocrit",
+          "result": "34.1",
+          "unit": "%",
+          "reference_range": "36.0 - 46.0",
+          "flag": "low",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "White Blood Cell Count",
+          "result": "12.8",
+          "unit": "x10^9/L",
+          "reference_range": "4.0 - 11.0",
+          "flag": "high",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Platelet Count",
+          "result": "265",
+          "unit": "x10^9/L",
+          "reference_range": "150 - 450",
+          "flag": "normal",
+          "flag_source": "derived"
+        },
+        {
+          "test_name": "MCV",
+          "result": "82",
+          "unit": "fL",
+          "reference_range": "80 - 100",
+          "flag": "normal",
+          "flag_source": "derived"
+        },
+        {
+          "test_name": "Glucose, fasting",
+          "result": "6.4",
+          "unit": "mmol/L",
+          "reference_range": "3.9 - 5.6",
+          "flag": "high",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Creatinine",
+          "result": "78",
+          "unit": "umol/L",
+          "reference_range": "45 - 90",
+          "flag": "normal",
+          "flag_source": "derived"
+        },
+        {
+          "test_name": "ALT (SGPT)",
+          "result": "52",
+          "unit": "U/L",
+          "reference_range": "7 - 35",
+          "flag": "high",
+          "flag_source": "printed"
+        },
+        {
+          "test_name": "Sodium",
+          "result": "139",
+          "unit": "mmol/L",
+          "reference_range": "135 - 145",
+          "flag": "normal",
+          "flag_source": "derived"
+        },
+        {
+          "test_name": "Total Cholesterol",
+          "result": "5.1",
+          "unit": "mmol/L",
+          "reference_range": "< 5.2",
+          "flag": "normal",
+          "flag_source": "derived"
+        }
+      ],
+      "confidence": 0.679,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain,certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "Haemoglobin 11.2 L g/dL 12.0 - 15.5",
+        "Haematocrit 34.1 L % 36.0 - 46.0",
+        "White Blood Cell Count 12.8 H x10^9/L 4.0 - 11.0",
+        "Platelet Count 265 x10^9/L 150 - 450",
+        "MCV 82 fL 80 - 100",
+        "Glucose, fasting 6.4 H mmol/L 3.9 - 5.6",
+        "Creatinine 78 umol/L 45 - 90",
+        "ALT (SGPT) 52 H U/L 7 - 35",
+        "Sodium 139 mmol/L 135 - 145",
+        "Total Cholesterol 5.1 mmol/L < 5.2"
+      ],
+      "trace": [
+        {
+          "reason": "row1:unit_not_in_evidence",
+          "before": 0.97,
+          "after": 0.679
+        }
+      ]
+    },
+    "ordering_physician": {
+      "value": "Dr. Michael Grant",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Referring Doctor Dr. Michael Grant",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "collection_date": {
+      "value": "2025-09-21",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "21-Sep-2025 08:10",
+      "evidence": "Collected 21-Sep-2025 08:10",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "lab_report",
+    "confidence": 0.95,
+    "scores": {
+      "discharge_summary": 0.02,
+      "lab_report": 0.95,
+      "prescription": 0.02,
+      "receipt": 0.01
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Title banner reads 'LABORATORY REPORT'; table of tests (Haematology – Complete Blood Count, Clinical Biochemistry) each with Result, Flag (H/L), Units, and Reference Range columns; patient/lab header info; performed/verified signatures."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "ce35096f19f37e0bc576e5ba15080495fb5eadaf758fec8fb2357a87d77cf81e",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "d862cba1f876",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 206,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 1012,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-1131473d-a875-478d-b06c-d2f0e8b6dca5"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2756,
+        "output_tokens": 1719,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 183394,
+        "stop_reason": "stop",
+        "attempts": 4,
+        "retry_reasons": [
+          "429",
+          "429",
+          "429"
+        ],
+        "request_id": "chatcmpl-ecaf6403-6e8f-4022-886b-dbecef631bbe"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 175,
+      "classify": 85,
+      "extract": 183410,
+      "postprocess": 2
+    },
+    "total_cost_usd": 0.0
+  }
+}

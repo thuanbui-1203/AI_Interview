@@ -1,0 +1,302 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.97,
+  "fields": {
+    "currency": {
+      "value": "US Dollar (USD)",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Currency  US Dollar (USD)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Kestrel Bay Medical Center",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Kestrel Bay Medical Center",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Carlos Mendoza",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name  Carlos Mendoza",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-04-17",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "April 17, 2025",
+      "evidence": "Date of Issue  April 17, 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Orthopaedic consultation",
+          "quantity": 1.0,
+          "unit_price": 150.0,
+          "total": 150.0,
+          "category": "consultation"
+        },
+        {
+          "description": "Comprehensive metabolic panel",
+          "quantity": 1.0,
+          "unit_price": 220.0,
+          "total": 220.0,
+          "category": "lab"
+        },
+        {
+          "description": "MRI right knee without contrast",
+          "quantity": 1.0,
+          "unit_price": 1450.0,
+          "total": 1450.0,
+          "category": "imaging"
+        },
+        {
+          "description": "Physiotherapy session (45 min)",
+          "quantity": 3.0,
+          "unit_price": 85.0,
+          "total": 285.0,
+          "category": "procedure"
+        },
+        {
+          "description": "Hinged knee brace",
+          "quantity": 1.0,
+          "unit_price": 120.0,
+          "total": 120.0,
+          "category": "other"
+        }
+      ],
+      "confidence": 0.5,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain,certain",
+      "row_evidence": [
+        "1  Orthopaedic consultation  1  150.00  150.00",
+        "2  Comprehensive metabolic panel  1  220.00  220.00",
+        "3  MRI right knee without contrast  1  1,450.00  1,450.00",
+        "4  Physiotherapy session (45 min)  3  85.00  285.00",
+        "5  Hinged knee brace  1  120.00  120.00"
+      ],
+      "trace": [
+        {
+          "reason": "issue:TOTAL_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    },
+    "grand_total": {
+      "value": 2580.0,
+      "confidence": 0.5,
+      "status": "present",
+      "raw": "$2,580.00",
+      "evidence": "TOTAL DUE  $2,580.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "issue:TOTAL_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    },
+    "payment_method": {
+      "value": "card",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Debit card - Mastercard ending 0457",
+      "evidence": "Payment Method: Debit card - Mastercard ending 0457",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "KB-OP-250417-0093",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No.  KB-OP-250417-0093",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": 2580.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "$2,580.00",
+      "evidence": "TOTAL DUE  $2,580.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "TOTAL_MISMATCH",
+      "severity": "error",
+      "fields": [
+        "grand_total",
+        "items"
+      ],
+      "message": "Items sum to 2,225 but grand total is 2,580 (13.8% off).",
+      "details": {
+        "computed": 2225.0,
+        "printed": 2580.0,
+        "rel_diff": 0.137596899
+      }
+    },
+    {
+      "code": "LINE_MATH_MISMATCH",
+      "severity": "warning",
+      "fields": [
+        "items[3].total"
+      ],
+      "message": "Row 3: 3 x 85 = 255, printed total 285.",
+      "details": {
+        "expected": 255.0,
+        "printed": 285.0
+      }
+    }
+  ],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.97,
+    "scores": {
+      "discharge_summary": 0.005,
+      "lab_report": 0.02,
+      "prescription": 0.005,
+      "receipt": 0.97
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Title 'PATIENT RECEIPT', hospital name, table of billed services (Orthopaedic consultation, metabolic panel, MRI, physiotherapy, knee brace) with Qty/Unit Price/Amount, TOTAL DUE $2,580.00, payment method and cashier signature; footer 'retain for insurance claims'."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "9847a6523f27dd455b0c80be0894981c43c839a431f1df000e30239fcbb520f4",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 301,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 85478,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-31f8a399-2d9e-45cb-9833-cc8928960b4b"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2869,
+        "output_tokens": 2009,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 23128,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-327ad871-50be-4ae9-8812-fdf6749a2bc3"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 127,
+      "classify": 85563,
+      "extract": 23158,
+      "postprocess": 2
+    },
+    "total_cost_usd": 0.0
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "document_type": "prescription",
+  "confidence": 0.95,
+  "fields": {
+    "doctor_name": {
+      "value": "Võ Thị Thanh Hà",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "BÁC SĨ KHÁM BỆNH ... Võ Thị Thanh Hà",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Phạm Gia Huy",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên: Phạm Gia Huy",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2026-05-20",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Ngày 20 tháng 05 năm 2026",
+      "evidence": "Ngày 20 tháng 05 năm 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "medications": {
+      "value": [
+        {
+          "name": "Cefuroxim 500mg (Zinnat)",
+          "dosage": "1 viên",
+          "frequency": "Ngày uống 2 lần",
+          "duration": "Dùng 7 ngày",
+          "quantity": 14.0
+        },
+        {
+          "name": "Paracetamol 500mg (Panadol)",
+          "dosage": "1 viên",
+          "frequency": "Ngày uống 3 lần",
+          "duration": null,
+          "quantity": 10.0
+        },
+        {
+          "name": "Alpha chymotrypsin 4200 IU",
+          "dosage": "2 viên",
+          "frequency": "Ngày ngậm 2 lần",
+          "duration": "Dùng 5 ngày",
+          "quantity": 20.0
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain",
+      "row_evidence": [
+        "1. Cefuroxim 500mg (Zinnat) ... Ngày uống 2 lần, mỗi lần 1 viên, sau ăn sáng và tối. Dùng 7 ngày. ... SL: 14 Viên",
+        "2. Paracetamol 500mg (Panadol) ... Ngày uống 3 lần, mỗi lần 1 viên, khi sốt trên 38,5 độ hoặc đau. ... SL: 10 Viên",
+        "3. Alpha chymotrypsin 4200 IU ... Ngày ngậm 2 lần, mỗi lần 2 viên. Dùng 5 ngày. ... SL: 20 Viên"
+      ],
+      "trace": []
+    },
+    "facility_name": {
+      "value": "Phòng khám Đa khoa Vạn Lực Xanh",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Phòng khám Đa khoa Vạn Lực Xanh",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Viêm họng cấp",
+          "icd10_code": "J02.9"
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Chẩn đoán: J02.9 - Viêm họng cấp",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "prescription",
+    "confidence": 0.95,
+    "scores": {
+      "discharge_summary": 0.05,
+      "lab_report": 0.0,
+      "prescription": 0.95,
+      "receipt": 0.0
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Title 'ĐƠN THUỐC' (prescription); lists medications (Cefuroxim, Paracetamol, Alpha chymotrypsin) with dosage frequency and duration and quantity (SL: ... Viên); diagnosis 'Viêm họng cấp'; signed by 'BÁC SĨ KHÁM BỆNH' with advice and follow-up note."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "1a62bc547142e900eb41a8c19d70d7ba9cddec7eabac506db55e98ec717f3493",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "baa1545cb26f",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 285,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 100674,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-75a8ca04-a9dd-4ec0-aecd-091ae33e2795"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2770,
+        "output_tokens": 1637,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 21386,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-69f79f9d-e6be-43eb-a55a-c21c150d285b"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 142,
+      "classify": 100763,
+      "extract": 21410,
+      "postprocess": 2
+    },
+    "total_cost_usd": 0.0
+  }
+}

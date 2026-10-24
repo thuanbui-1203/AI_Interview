@@ -1,0 +1,284 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.95,
+  "fields": {
+    "currency": {
+      "value": "VND",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Đồng tiền thanh toán: VND",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Bệnh viện Mắt Ánh Dương Xanh",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Đơn vị bán hàng: Bệnh viện Mắt Ánh Dương Xanh",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Đỗ Minh Quân",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Họ tên người mua hàng: Đỗ Minh Quân",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2025-07-25",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "25 tháng 07 năm 2025",
+      "evidence": "Ngày 25 tháng 07 năm 2025",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Khám chuyên khoa mắt",
+          "quantity": 1.0,
+          "unit_price": 300000.0,
+          "total": 300000.0,
+          "category": "other"
+        },
+        {
+          "description": "Do khúc xạ máy",
+          "quantity": 1.0,
+          "unit_price": 150000.0,
+          "total": 150000.0,
+          "category": "other"
+        },
+        {
+          "description": "Chụp cắt lớp võng mạc (OCT)",
+          "quantity": 1.0,
+          "unit_price": 600000.0,
+          "total": 600000.0,
+          "category": "other"
+        },
+        {
+          "description": "Thuốc nhỏ mắt Natri hyaluronat 0,18% 10ml",
+          "quantity": 2.0,
+          "unit_price": 95000.0,
+          "total": 190000.0,
+          "category": "other"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain,certain",
+      "row_evidence": [
+        "1 | Khám chuyên khoa mắt | Lần | 1 | 300.000 | 300.000",
+        "2 | Đo khúc xạ máy | Lần | 1 | 150.000 | 150.000",
+        "3 | Chụp cắt lớp võng mạc (OCT) | Lần | 1 | 600.000 | 600.000",
+        "4 | Thuốc nhỏ mắt Natri hyaluronat 0,18% 10ml | Lọ | 2 | 95.000 | 190.000"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 1302000.0,
+      "confidence": 0.5,
+      "status": "present",
+      "raw": "1.302.000",
+      "evidence": "Tổng tiền thanh toán: 1.302.000",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "issue:AMOUNT_IN_WORDS_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    },
+    "payment_method": {
+      "value": "other",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Chuyển khoản",
+      "evidence": "Hình thức thanh toán: Chuyển khoản",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "00004127",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Số: 00004127",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": 1240000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "1.240.000",
+      "evidence": "Cộng tiền hàng: 1.240.000",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": 62000.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "62.000",
+      "evidence": "Tiền thuế GTGT: 62.000",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": "Một triệu ba trăm hai mươi nghìn đồng",
+      "confidence": 0.5,
+      "status": "present",
+      "raw": null,
+      "evidence": "Số tiền viết bằng chữ: Một triệu ba trăm hai mươi nghìn đồng",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "issue:AMOUNT_IN_WORDS_MISMATCH",
+          "before": 0.97,
+          "after": 0.5
+        }
+      ]
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "AMOUNT_IN_WORDS_MISMATCH",
+      "severity": "error",
+      "fields": [
+        "amount_in_words",
+        "grand_total"
+      ],
+      "message": "Amount in words reads 1,320,000 but printed totals are grand_total=1,302,000.",
+      "details": {
+        "words_value": 1320000,
+        "grand_total": 1302000.0
+      }
+    }
+  ],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.95,
+    "scores": {
+      "discharge_summary": 0.02,
+      "lab_report": 0.02,
+      "prescription": 0.01,
+      "receipt": 0.95
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Title 'HÓA ĐƠN GIÁ TRỊ GIA TĂNG' (VAT invoice); lines of billed services (exam, OCT, eye drops) with unit prices, quantities, VAT 5% and 'Tổng tiền thanh toán' total of 1,302,000 VND — a hospital bill/receipt."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "e4ee36bda6ebd2f80a45292309c2891ed992f64bdfab5f6ff31d2cc78093d3c4",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 305,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 170361,
+        "stop_reason": "stop",
+        "attempts": 3,
+        "retry_reasons": [
+          "429",
+          "429"
+        ],
+        "request_id": "chatcmpl-d659f7b6-3926-4e44-8aa4-bebb5f06de77"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2869,
+        "output_tokens": 1845,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 23062,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-578e453d-3a91-4b5a-9cc5-e2d54336fe3a"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 232,
+      "classify": 170467,
+      "extract": 23087,
+      "postprocess": 3
+    },
+    "total_cost_usd": 0.0
+  }
+}

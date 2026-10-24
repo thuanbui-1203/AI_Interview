@@ -1,0 +1,283 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 0.5,
+  "fields": {
+    "hospital_name": {
+      "value": "B\u0000nh vi\u0000n \u0001a khoa Ph\u0000c H\u0000ng Long",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "B\u0000nh vi\u0000n \u0001a khoa Ph\u0000c H\u0000ng Long",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Tr\u0000n V\u0000n H\u0000ng",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "H\u0000 t\u0000n ng\u0000\u0001i b\u0000nh: Tr\u0000n V\u0000n H\u0000ng",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2024-03-12",
+      "confidence": 0.42,
+      "status": "present",
+      "raw": "12 th\u0000ng 03 n\u0000m 2024",
+      "evidence": "V\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "raw_unparseable",
+          "before": 0.97,
+          "after": 0.6
+        },
+        {
+          "reason": "value_not_in_evidence",
+          "before": 0.6,
+          "after": 0.42
+        }
+      ]
+    },
+    "discharge_date": {
+      "value": "2024-03-17",
+      "confidence": 0.6,
+      "status": "present",
+      "raw": "17 th\u0000ng 03 n\u0000m 2024",
+      "evidence": "Ra vi\u0000n l\u0000c: 09 gi\u0000 00 ph\u0000t, ng\u0000y 17 th\u0000ng 03 n\u0000m 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "raw_unparseable",
+          "before": 0.97,
+          "after": 0.6
+        }
+      ]
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Vi\u0000m ru\u0000t th\u0000a c\u0001p",
+          "icd10_code": "K35.8"
+        },
+        "secondary": []
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Ch\u0001n \u0000o\u0000n: K35.8 - Vi\u0000m ru\u0000t th\u0000a c\u0001p",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": [
+        {
+          "name": "Ph\u0001u thu\u0001t n\u0000i soi c\u0001t ru\u0000t th\u0000a",
+          "date": null,
+          "code": null
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": [
+        "Ph\u0001u thu\u0001t n\u0000i soi c\u0001t ru\u0000t th\u0000a"
+      ],
+      "trace": []
+    },
+    "attending_physician": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Ki\u0000ng v\u0000n \u0001ng m\u0000nh trong 4 tu\u0000n. Thay b\u0000ng v\u0000t m\u0003 c\u0000ch ng\u0000y t\u0000i c s\u0001 y t\u0000 g\u0000n nh\u0001t. T\u0001i kh\u0001m sau 7 ng\u0000y ho\u0001c khi c d\u0000u hi\u0000u b\u0001t th\u0000ng.",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Ghi ch\u0000: Ki\u0000ng v\u0000n \u0001ng m\u0000nh trong 4 tu\u0000n...",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "department": {
+      "value": "Ngo\u0000i t\u0000ng h\u0000p",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Khoa: Ngo\u0000i t\u0000ng h\u0000p",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_status": {
+      "value": "recovered",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Ngh\u0000 ng\ni t\u0000i nh\u0000 t\u0000 ng\u0000y 17/03/2024 \u0001n ng\u0000y 31/03/2024",
+      "evidence": "Ngh\u0000 ng\ni t\u0000i nh\u0000 t\u0000 ng\u0000y 17/03/2024 \u0001n ng\u0000y 31/03/2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": "2024-03-24",
+      "confidence": 0.42,
+      "status": "present",
+      "raw": "t\u0001i kh\u0001m sau 7 ng\u0000y",
+      "evidence": "T\u0001i kh\u0001m sau 7 ng\u0000y ho\u0001c khi c\r d\u0000u hi\u0000u b\u0001t th\u0000ng",
+      "page": 1,
+      "model_confidence": "high",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "raw_unparseable",
+          "before": 0.88,
+          "after": 0.6
+        },
+        {
+          "reason": "value_not_in_evidence",
+          "before": 0.6,
+          "after": 0.42
+        }
+      ]
+    },
+    "sick_leave_from": {
+      "value": "2024-03-17",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "17/03/2024",
+      "evidence": "Ngh\u0000 ng\ni t\u0000i nh\u0000 t\u0000 ng\u0000y 17/03/2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": "2024-03-31",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "31/03/2024",
+      "evidence": "\u0001n ng\u0000y 31/03/2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "CLASSIFICATION_DISAGREEMENT",
+      "severity": "warning",
+      "fields": [],
+      "message": "classifier said 'discharge_summary' but the extractor observed 'dịch'",
+      "details": {
+        "classified": "discharge_summary",
+        "observed": "dịch"
+      }
+    },
+    {
+      "code": "CLASSIFICATION_LOW_CONFIDENCE",
+      "severity": "warning",
+      "fields": [],
+      "message": "document type confidence is low (0.50); route to a human",
+      "details": {}
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "attending_physician"
+      ],
+      "message": "Required field 'attending_physician' was not found on the document.",
+      "details": {}
+    }
+  ],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 0.98,
+    "scores": {
+      "discharge_summary": 0.98,
+      "lab_report": 0.01,
+      "prescription": 0.0,
+      "receipt": 0.01
+    },
+    "language": "vi",
+    "is_medical_document": true,
+    "cues": "Title 'GIẤY RA VIỆN' (Discharge Certificate); admission (vào viện) and discharge (ra viện) dates; diagnosis (K35.8 acute appendicitis); treatment (laparoscopic appendectomy); follow-up notes; signed by hospital dean (Thủ trưởng đơn vị) and department head (Trưởng khoa) with official red stamp."
+  },
+  "meta": {
+    "source_name": "document.png",
+    "sha256": "ed17d6c5432d79139a18b055153d9971521630199b73f6c9513ff2c66a7226ad",
+    "mime": "image/png",
+    "page_count": 1,
+    "has_text_layer": false,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 266,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 124593,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-a330d630-5de5-406c-9a65-c04ab4953879"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2861,
+        "output_tokens": 2745,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 53074,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-79c07a1d-18a4-472e-bd65-6008d7f87a09"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 594,
+      "classify": 124786,
+      "extract": 53115,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

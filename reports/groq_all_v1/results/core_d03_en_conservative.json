@@ -1,0 +1,248 @@
+{
+  "document_type": "discharge_summary",
+  "confidence": 0.5,
+  "fields": {
+    "hospital_name": {
+      "value": "Harbourview Lakes Hospital",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Harbourview Lakes Hospital",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "James O'Connell",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient Name | James O'Connell",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "admission_date": {
+      "value": "2026-01-14",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "14 Jan 2026",
+      "evidence": "Admission Date | 14 Jan 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_date": {
+      "value": "2026-01-16",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "16 Jan 2026",
+      "evidence": "Discharge Date | 16 Jan 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": {
+        "primary": {
+          "description": "Acute gastroenteritis, presumed infectious",
+          "icd10_code": "A09"
+        },
+        "secondary": [
+          {
+            "description": "Dehydration, moderate",
+            "icd10_code": "E86.0"
+          }
+        ]
+      },
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Principal | Acute gastroenteritis, presumed infectious | A09",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "procedures_performed": {
+      "value": null,
+      "confidence": 0.15,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": null,
+      "model_confidence": null,
+      "row_evidence": null,
+      "trace": []
+    },
+    "attending_physician": {
+      "value": "Dr. Aisha Rahman",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Attending Physician ... Dr. Aisha Rahman",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_instructions": {
+      "value": "Drink at least 2 litres of fluid a day and use oral rehydration salts after each loose stool. Wash hands carefully and avoid preparing food for others for 48 hours after symptoms stop. See your GP if vomiting persists for more than 24 hours or if you notice blood in the stool.",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Discharge Instructions | Drink at least 2 litres of fluid a day and use oral rehydration salts",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "department": {
+      "value": "General Medicine",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Department | General Medicine",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discharge_status": {
+      "value": "improved",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Improved — tolerating diet, normal urine output",
+      "evidence": "Condition at Discharge | Improved — tolerating diet, normal urine output",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "follow_up_date": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": "within one week if symptoms persist",
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "sick_leave_from": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "sick_leave_to": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "CLASSIFICATION_DISAGREEMENT",
+      "severity": "warning",
+      "fields": [],
+      "message": "classifier said 'discharge_summary' but the extractor observed 'discharge'",
+      "details": {
+        "classified": "discharge_summary",
+        "observed": "discharge"
+      }
+    },
+    {
+      "code": "CLASSIFICATION_LOW_CONFIDENCE",
+      "severity": "warning",
+      "fields": [],
+      "message": "document type confidence is low (0.50); route to a human",
+      "details": {}
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "procedures_performed"
+      ],
+      "message": "Required field 'procedures_performed' was not found on the document.",
+      "details": {}
+    }
+  ],
+  "classification": {
+    "document_type": "discharge_summary",
+    "confidence": 0.97,
+    "scores": {
+      "discharge_summary": 0.97,
+      "lab_report": 0.01,
+      "prescription": 0.01,
+      "receipt": 0.01
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Title reads 'INPATIENT DISCHARGE SUMMARY'; includes admission date (14 Jan 2026) and discharge date (16 Jan 2026), principal/secondary diagnoses with ICD‑10 codes, procedures performed, hospital course, condition at discharge, discharge medications, instructions and an attending physician signature — all hallmarks of a discharge summary."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "61a666c8792c491a2bbe38b6bcab540a1f3d5925e00887d458617e8a327758b8",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "96f20b047de6",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 285,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 1133,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-03ede881-1065-4203-b254-ecd403da3592"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2861,
+        "output_tokens": 1455,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 168284,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-76e73803-7e33-4fb6-96cf-25bcb6c71580"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 185,
+      "classify": 86,
+      "extract": 168311,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

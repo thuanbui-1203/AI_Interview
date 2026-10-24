@@ -1,0 +1,165 @@
+{
+  "document_type": "prescription",
+  "confidence": 0.92,
+  "fields": {
+    "doctor_name": {
+      "value": "Dr. Hannah Okafor",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Dr. Hannah Okafor \n MBChB, MRCGP - General Practitioner",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": "Liam Patel",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Patient: Liam Patel",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2026-03-11",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "11 March 2026",
+      "evidence": "Date: 11 March 2026",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "medications": {
+      "value": [
+        {
+          "name": "Amoxicillin 500 mg capsule",
+          "dosage": "1 capsule",
+          "frequency": "three times daily",
+          "duration": "7 days",
+          "quantity": 21.0
+        },
+        {
+          "name": "Ibuprofen 400 mg tablet",
+          "dosage": "1 tablet",
+          "frequency": "every 8 hours as needed for pain",
+          "duration": "5 days",
+          "quantity": 15.0
+        },
+        {
+          "name": "Fluticasone propionate 50 mcg nasal spray",
+          "dosage": "2 sprays each nostril",
+          "frequency": "once daily",
+          "duration": "14 days",
+          "quantity": 1.0
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain",
+      "row_evidence": [
+        "Amoxicillin 500 mg capsule | 1 capsule | three times daily | 7 days | #21",
+        "Ibuprofen 400 mg tablet | 1 tablet | every 8 hours as needed for pain | 5 days | #15",
+        "Fluticasone propionate 50 mcg nasal spray | 2 sprays each nostril | once daily | 14 days | #1"
+      ],
+      "trace": []
+    },
+    "facility_name": {
+      "value": "Willowmere Medical Centre",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Willowmere Medical Centre",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "diagnosis": {
+      "value": null,
+      "confidence": 0.15,
+      "status": "present",
+      "raw": null,
+      "evidence": "Diagnosis: Acute bacterial sinusitis (J01.90)",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": [
+        {
+          "reason": "null_value",
+          "before": 0.97,
+          "after": 0.15
+        }
+      ]
+    }
+  },
+  "validation_errors": [],
+  "classification": {
+    "document_type": "prescription",
+    "confidence": 0.92,
+    "scores": {
+      "discharge_summary": 0.02,
+      "lab_report": 0.04,
+      "prescription": 0.92,
+      "receipt": 0.02
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Large 'Rx' symbol at top of medication table; columns titled Medication, Dose, Frequency, Duration, Qty; medication names (Amoxicillin 500 mg capsule, Ibuprofen 400 mg tablet, Fluticasone propionate 50 mcg nasal spray) with dosing instructions; 'Substitution permitted' and 'Refills' notes; prescriber signature line and 'Prescription valid for 30 days from date of issue'; header shows GP practice details."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "faf1666cf705f4f30e6d0be75a0dab4e581df52ee8b63166b5e1f9d33966f274",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "baa1545cb26f",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 266,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 1267,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-61556725-da2f-43cb-b4e2-60c07173aa7a"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2770,
+        "output_tokens": 1314,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 29911,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-a5c78104-ec47-4d58-9b79-d590974c63be"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 126,
+      "classify": 84,
+      "extract": 10,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}

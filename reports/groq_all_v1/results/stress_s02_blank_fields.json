@@ -1,0 +1,268 @@
+{
+  "document_type": "receipt",
+  "confidence": 0.92,
+  "fields": {
+    "currency": {
+      "value": "USD",
+      "confidence": 0.88,
+      "status": "present",
+      "raw": null,
+      "evidence": "Unit (USD) / Amount (USD) / TOTAL USD",
+      "page": 1,
+      "model_confidence": "high",
+      "row_evidence": null,
+      "trace": []
+    },
+    "hospital_name": {
+      "value": "Brightwater Walk-in Clinic",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Brightwater Walk-in Clinic",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_name": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": "Patient name:    ________________",
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "date": {
+      "value": "2024-11-26",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "Nov 26, 2024",
+      "evidence": "Date:    Nov 26, 2024",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "items": {
+      "value": [
+        {
+          "description": "Urgent care visit - level 2",
+          "quantity": 1.0,
+          "unit_price": 125.0,
+          "total": 125.0,
+          "category": "other"
+        },
+        {
+          "description": "Wound cleaning and dressing",
+          "quantity": 1.0,
+          "unit_price": 40.0,
+          "total": 40.0,
+          "category": "other"
+        },
+        {
+          "description": "Tetanus booster (Tdap) vaccine",
+          "quantity": 1.0,
+          "unit_price": 65.0,
+          "total": 65.0,
+          "category": "other"
+        }
+      ],
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "certain,certain,certain",
+      "row_evidence": [
+        "Urgent care visit - level 2 | 1 | 125.00 | 125.00",
+        "Wound cleaning and dressing | 1 | 40.00 | 40.00",
+        "Tetanus booster (Tdap) vaccine | 1 | 65.00 | 65.00"
+      ],
+      "trace": []
+    },
+    "grand_total": {
+      "value": 230.0,
+      "confidence": 0.97,
+      "status": "present",
+      "raw": "230.00",
+      "evidence": "TOTAL USD   230.00",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "payment_method": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": "Payment method:                ________________",
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "invoice_number": {
+      "value": "BW-24-11873",
+      "confidence": 0.97,
+      "status": "present",
+      "raw": null,
+      "evidence": "Receipt No.:    BW-24-11873",
+      "page": 1,
+      "model_confidence": "certain",
+      "row_evidence": null,
+      "trace": []
+    },
+    "subtotal": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "discount_total": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "tax_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "insurance_covered_amount": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "patient_payable": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    },
+    "amount_in_words": {
+      "value": null,
+      "confidence": 0.1,
+      "status": "not_found",
+      "raw": null,
+      "evidence": null,
+      "page": 1,
+      "model_confidence": "none",
+      "row_evidence": null,
+      "trace": []
+    }
+  },
+  "validation_errors": [
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "patient_name"
+      ],
+      "message": "Required field 'patient_name' was not found on the document.",
+      "details": {}
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "severity": "warning",
+      "fields": [
+        "payment_method"
+      ],
+      "message": "Required field 'payment_method' was not found on the document.",
+      "details": {}
+    }
+  ],
+  "classification": {
+    "document_type": "receipt",
+    "confidence": 0.92,
+    "scores": {
+      "discharge_summary": 0.02,
+      "lab_report": 0.02,
+      "prescription": 0.04,
+      "receipt": 0.92
+    },
+    "language": "en",
+    "is_medical_document": true,
+    "cues": "Title 'RECEIPT', table of billed services (Urgent care visit, Wound cleaning and dressing, Tetanus booster) with Qty, Unit (USD), Amount (USD) and TOTAL USD 230.00, plus Payment method / Received by / Authorised signature fields."
+  },
+  "meta": {
+    "source_name": "document.pdf",
+    "sha256": "67ddbc85dd565dfff44a3cc16aae093297a4ca211b551b0422fc02fc49960374",
+    "mime": "application/pdf",
+    "page_count": 1,
+    "has_text_layer": true,
+    "strategy": "two_stage",
+    "prompt_version": "23c2d5cfe71c",
+    "spec_version": "1",
+    "calls": [
+      {
+        "stage": "classify",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2205,
+        "output_tokens": 245,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 963,
+        "stop_reason": "stop",
+        "attempts": 1,
+        "retry_reasons": [],
+        "request_id": "chatcmpl-78d86c65-f4b2-43f7-92da-f257c011f2da"
+      },
+      {
+        "stage": "extract",
+        "model": "qwen/qwen3.8-27b",
+        "input_tokens": 2869,
+        "output_tokens": 1803,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 155615,
+        "stop_reason": "stop",
+        "attempts": 2,
+        "retry_reasons": [
+          "429"
+        ],
+        "request_id": "chatcmpl-ee558955-6416-4c68-8d18-e863e056a999"
+      }
+    ],
+    "timings_ms": {
+      "ingest": 120,
+      "classify": 73,
+      "extract": 155644,
+      "postprocess": 1
+    },
+    "total_cost_usd": 0.0
+  }
+}
